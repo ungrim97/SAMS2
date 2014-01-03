@@ -1,0 +1,24 @@
+<!-- -->
+<%method title>Log in</%method>
+<%method hide_nav>1</%method>
+<& "/comps/login.frag", errormessage => $errormessage &>
+
+
+<%args>
+$authstatuscode => ''
+$sessionexpired => ''
+</%args>
+
+<%init>
+my ($errormessage) = '';
+my $authstatustext = '';#$SAMS::Strings::string->{admin}->{acs_client}->{$authstatuscode};
+
+if ($authstatuscode && $authstatuscode != 400 && $authstatustext)   {
+    $errormessage = "$authstatuscode: $authstatustext";
+}
+
+if ($sessionexpired)    {
+#    $errormessage .= $SAMS::Strings::string->{acs}->{sessionnotvalidwarning};
+}
+
+</%init>

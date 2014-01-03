@@ -1,0 +1,133 @@
+/* Parent / Child Account Modal DIVs */
+
+div#parent_account,
+div#child_accounts{
+    height:30em;
+    *height: 32em;
+    width:55em;
+}
+
+div#parent_account div.modal_top,
+div#child_accounts div.modal_top{
+    width:55em;
+}
+
+div#parent_account div.modal_left,
+div#child_accounts div.modal_left{
+    width:25em;
+    padding-right:1.5em;
+}
+
+div#parent_account div.modal_right,
+div#child_accounts div.modal_right{
+    width:25em;
+}
+
+div#parent_account div.modal_middle,
+div#child_accounts div.modal_middle{
+    height:22em;
+    width:55em;
+}
+
+div#parent_account div.modal_bottom,
+div#child_accounts div.modal_bottom{
+    width:55em;
+    height: 3em;
+}
+
+div#parent_account div#search_results_summary,
+div#child_accounts div#search_results_summary,
+div#child_accounts div#child_account_update_summary{
+    float:left;
+    clear:left;
+    width:25em;
+    height:1.5em;
+}
+
+div#parent_account ul#parent_account_search_results,
+div#child_accounts select#child_account_search_results,
+div#child_accounts select#child_account_current_children{
+    border: solid 1px gray;
+    background-color: white;
+    overflow-y: scroll;
+    height:17em;
+    *height:16em;
+    width: 25em;
+    margin: 0;
+    padding: 0;
+}
+
+div#parent_account ul#parent_account_search_results{
+    float:left;
+}
+
+div#child_accounts select#child_account_search_results,
+div#child_accounts select#child_account_current_children{
+    height:14em;
+    width: 23em;
+}
+
+input#adopt_selected_accounts{
+    float:left;
+    clear:left;
+    margin-top:-1em;
+}
+
+input#remove_child_accounts{
+    margin-top: 0.5em;
+    *margin-top: -1em;
+}
+
+div#parent_account ul#parent_account_search_results li.search_result{
+    cursor: pointer;
+}
+
+div#parent_account ul#parent_account_search_results li.selected{
+    background-color:LightGrey;
+}
+
+div#child_accounts select#child_account_search_results option.has_parent{
+    color: orange;
+}
+
+div#parent_account ul#parent_account_search_results li.is_ancestor,
+div#child_accounts select#child_account_search_results option.is_ancestor{
+    color: red;
+}
+
+div#parent_account ul#parent_account_search_results li.is_ancestor{
+    cursor: default;
+}
+
+
+
+div#parent_account strong.search_results_page_link,
+div#child_accounts strong.search_results_page_link{
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+div#parent_account div.search_results_pagination,
+div#child_accounts div.search_results_pagination{
+    width:auto;
+    height:1.5em;
+    float:left;
+}
+
+
+div#parent_account div#current_parent,
+div#parent_account div#new_parent{
+    margin-top:3em;
+}
+
+div#parent_account_help,
+div#child_accounts_help{
+    z-index: 8000;
+    width: 50em;
+    top: 24%;
+    left: 52%;
+}
+
+input#remove_parent_account{
+    margin-top: 3em;
+}
