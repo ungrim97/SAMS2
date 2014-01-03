@@ -1,19 +1,19 @@
 <%args>
     $problems
+    $account_search_fields  => {}
+    $account_types  => {}
+    $subscription_types => {}
+    $subscription_status => {}
 </%args>
 <%init>
 
 </%init>
 <h4>Type in your query below:</h4>
 <form class="fieldedEntry" name="main" id="searchForm" method="get">
-    <& "/comps/account_search/field_choose.frag", problems => $problems, query => '', field => '' &>
-    <& "/comps/account_search/field_product.frag", problems => $problems &>
-    <& "/comps/account_search/field_subscription_type.frag", problems => $problems &>
-    <& "/comps/account_search/field_status.frag", problems => $problems, &>
-    <& "/comps/account_search/field_account_type.frag", problems => $problems &>
-    <& "/comps/account_search/advanced.frag", problems => $problems &>
-    <& "/comps/account_search/field_account_attribute.frag", problems => $problems &>
-    <& "/comps/account_search/field_subscription_attribute.frag", problems => $problems &>
+    <& "/comps/account_search/field_choose.frag", problems => $problems, query => '', field => '', account_search_fields => $account_search_fields &>
+    <& "/comps/account_search/field_subscription_type.frag", problems => $problems, subscription_types => $subscription_types &>
+    <& "/comps/account_search/field_status.frag", problems => $problems, subscription_status => $subscription_status &>
+    <& "/comps/account_search/field_account_type.frag", problems => $problems, account_types => $account_types &>
     <div class="label">
         <& /comps/submit.frag,
             problems => $problems,

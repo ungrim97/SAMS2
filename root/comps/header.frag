@@ -24,7 +24,7 @@
 <%perl>
 #Give the body some classes so we can show & hide stuff using css and js
 #to add a class to the body, implement a body_class method in a called frag
-my $bodyClass = "noNav";
+my $bodyClass = "withNav";
 if($m->comp_exists('REQUEST:body_class')){
     $bodyClass = "$bodyClass " . $m->scomp('REQUEST:body_class');
 }
@@ -39,7 +39,7 @@ $bodyClass = "class=\"$bodyClass\"" if $bodyClass;
 </div>
 
 <& header_title.frag &>
-
+<& navbar.frag &>
 <!-- /////////////////////////////////////////////////// -->
 <!-- start main content here -->
 <!-- /////////////////////////////////////////////////// -->

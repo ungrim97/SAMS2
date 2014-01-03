@@ -1,3 +1,38 @@
+<select
+    <% $disabled |n %>
+    <% $javascript |n %>
+    id="<% $id %>"
+    name="<% $name %>"
+    class="<% $class %>"
+    <% $onkeypress |n %>
+    title="<% $title %>"
+    <%$onchange |n %>
+    <%$style |n %>
+    <% $multiple ? "multiple='multiple'" : "" |n %>
+    <% $multiple ? "size='$size'" : "" |n %>
+    <% $required_attr |n%>
+>
+
+% if (@$option_groups){
+<& .option_groups,
+    option_groups   => $option_groups,
+    options         => $options,
+    selectedlabel   => $selectedlabel,
+    multiple        => $multiple,
+    selectedlabels  => $selectedlabels
+&>
+% } else {
+<& .options,
+    options         => $options,
+    selectedlabel   => $selectedlabel,
+    multiple        => $multiple,
+    selectedlabels  => $selectedlabels
+&>
+% }
+
+</select>
+<& '/comps/contextual_help.frag', id => $id &>
+
 <%doc>
 Display a select list. 
 The contents of the list are constructed from $options, which is an array of hashrefs where the value is the key and the label is the
@@ -58,44 +93,35 @@ if ( $required ) {
     $required_attr = q{ required="required" };
 }
 </%init>
-<select <% $disabled |n %> <% $javascript |n %> id="<% $id %>" name="<% $name %>" class="<% $class %>" <% $onkeypress |n %> title="<% $title %>" 
-    <%$onchange |n %> <%$style |n %> <% $multiple ? "multiple='multiple'" : "" |n %> <% $multiple ? "size='$size'" : "" |n %>
-    <% $required_attr |n%>
-    >
-
-% if ( @$option_groups ) {
-<& .option_groups , option_groups => $option_groups, options => $options, selectedlabel => $selectedlabel, multiple => $multiple, selectedlabels => $selectedlabels &>
-%} else{
-<& .options , options => $options, selectedlabel => $selectedlabel, multiple => $multiple, selectedlabels => $selectedlabels&>
-%}
-</select>
-<& '/comps/contextual_help.frag', id => $id &>
-
 <%def .options>
 <%args>
     $options
-    $selectedlabel => ''
+    $selected_label => ''
     $multiple => 0
-    $selectedlabels => []
+    $selected_labels => []
 </%args>
 <%init>
-my $selected;
 foreach my $option (@{$options}) {
     # $option is a hashref. It should contain one key which is used as the value, while the value
     # is used as the label.
-    my @keys = keys(%{$option});
-    die "More than one key for option" if scalar(@keys) > 1;
-    my $value = $keys[0];
-    my $label = $option->{$value};
-    $value = '' if $value eq "empty";
-    my $selected_attribute = '';
-    if (($selectedlabel && $selectedlabel eq $value)
-        || ($multiple && scalar(@{$selectedlabels}) > 0 && grep(/^$value$/, @{$selectedlabels}))) {
-        $selected_attribute = 'selected="selected" ';
+
+    # Sort keys to ensure that the drop down options are always in the same order
+    for my $value (sort $a <=> $b, keys %$option){
+        my $selected_attribute;
+        $value = '' if $value eq 'empty';
+        next unless $value;
+        my $label = $option->{$value};
+
+        if (($selected_label && $selected_label eq $value) ||
+            ($multiple && scalar(@{$selected_labels}) > 0 && grep(/^$value$/, @$selected_labels))
+        ){
+            $selected_attribute = 'selected="selected"';
+        }
+
+        $value = $m->interp()->apply_escapes($value, 'h');
+        $label = $m->interp()->apply_escapes($label, 'h'); # starting to regret using print in an init block...
+        $m->print(qq!<option ${selected_attribute}value="$value">$label</option>!);
     }
-    $value = $m->interp()->apply_escapes($value, 'h');
-    $label = $m->interp()->apply_escapes($label, 'h'); # starting to regret using print in an init block...
-    $m->print(qq!<option ${selected_attribute}value="$value">$label</option>!);
 }
 </%init>
 </%def>
@@ -116,7 +142,7 @@ foreach my $option_group (@$option_groups) {
     my $value = $keys[0];
     my $options = $option_group->{$value};
     $m->print(qq{<optgroup label="$value">});
-    $m->comp(".options", options => $options, selectedlabel => $selectedlabel, multiple => $multiple, selectedlabels => $selectedlabels);
+    $m->comp(".options", options => $options, selected_label => $selectedlabel, multiple => $multiple, selected_labels => $selectedlabels);
     $m->print(qq{</optgroup>});
 }
 </%init>

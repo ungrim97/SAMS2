@@ -31,8 +31,7 @@ The root page (/)
 sub index :Path(/) Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash(
-        account_search_fields => {
+    $c->stash->{account_search_fields} = {
             organisation        => $self->translate('organisation'),
             acc_id              => $self->translate('acc_id'),
             subs_id             => $self->translate('subs_id'),
@@ -52,9 +51,20 @@ sub index :Path(/) Args(0) {
             username            => $self->translate('username'),
             ip_address          => $self->translate('ip_address'),
             referrer            => $self->translate('referrer'),
-        },
-        template => 'index.html',
-    )
+    };
+    $c->stash->{account_types} = {
+            institution     => $self->translate('institution'),
+    };
+    $c->stash->{subscription_types} = {
+            trial       => $self->translate('trial'),
+            full        => $self->translate('full'),
+            gratis      => $self->translate('gratis'),
+    };
+    $c->stash->{subscription_status} = {
+            ok          => $self->translate('ok'),
+            expired     => $self->translate('expired'),
+    };
+    $c->stash->{template} = 'index.html';;
 }
 
 =head2 translate
@@ -66,7 +76,7 @@ TODO: This need to be a) moved to a translation role. and b) connected to a mode
 =cut
 
 sub translate :Private {
-    my ($self, $c, $label) = @_;
+    my ($self, $label) = @_;
 
     # should call $c->model('DB')->search({$label}) probably but the model isn't set up yet
     # for now just use the label we recieved

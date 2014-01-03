@@ -5,6 +5,7 @@ use warnings;
 
 use parent 'Catalyst::View::Mason';
 use SAMS::Problems;
+use Data::Dumper;
 
 __PACKAGE__->config(use_match => 0);
 

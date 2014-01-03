@@ -8,7 +8,7 @@
     submitonenter => $submitonenter,
 &>
 <&| /comps/label.frag, for => "field", problems => $problems &>Choose a field:</&>
-<& /comps/select.frag, 
+<& /comps/select.frag,
     problems => $problems,
     class => "drop ui-widget ui-corner-all",
     name => "field",
@@ -24,4 +24,3 @@
     $submitonenter          => 0
     $account_search_fields  => {}
 </%args>
-

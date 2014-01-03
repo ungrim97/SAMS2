@@ -1,4 +1,4 @@
-<script src="static/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="static/js/jquery-1.4.4.min.js" type="text/javascript"></script>
 <script src="static/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="static/js/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
 <script src="static/js/jqModal-r14.js" type="text/javascript"></script>
