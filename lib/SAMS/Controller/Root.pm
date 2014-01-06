@@ -22,9 +22,33 @@ SAMS::Controller::Root - Root Controller for SAMS
 
 =head1 METHODS
 
+=cut
+
+sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
+    my ($self, $c) = @_;
+
+    $c->log->warn('RUNNING AUTH');
+    # $c->stash->{user} should always be the logged in user.
+    # $c->stash->{account} will contain the account being modified/looked at
+
+    unless ($c->stash->{user} && $c->stash->{is_authorised}){
+        #$c->forward('Controller::Auth');
+        $c->stash->{user} = $c->model('DB')->resultset('Account')->find({account_id => 1});
+        $c->stash->{is_readonly} = 0;
+    }
+}
+
 =head2 index
 
-The root page (/)
+=cut
+
+sub index :Path :Chained('auth') :PathPart('') :Args(0) {
+   my ($self, $c) = @_;
+
+    $c->go('/account_details');
+}
+
+=head2 account_details
 
 =cut
 
