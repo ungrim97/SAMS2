@@ -28,62 +28,6 @@ The root page (/)
 
 =cut
 
-sub index :Path(/) Args(0) {
-    my ( $self, $c ) = @_;
-
-    $c->stash->{account_search_fields} = {
-            organisation        => $self->translate('organisation'),
-            acc_id              => $self->translate('acc_id'),
-            subs_id             => $self->translate('subs_id'),
-            organisation_id     => $self->translate('organisation_id'),
-            entity_id           => $self->translate('entity_id'),
-            contact_name        => $self->translate('contact_name'),
-            contact_forename    => $self->translate('contact_forename'),
-            alternative_subs_id => $self->translate('alternative_subs_id'),
-            msd_order_id        => $self->translate('msd_order_id'),
-            if_acc_id           => $self->translate('if_acc_id'),
-            notes               => $self->translate('notes'),
-            city                => $self->translate('city'),
-            county              => $self->translate('county'),
-            msd_customer_id     => $self->translate('msd_customer_id'),
-            oed_sid             => $self->translate('oed_sid'),
-            email               => $self->translate('email'),
-            username            => $self->translate('username'),
-            ip_address          => $self->translate('ip_address'),
-            referrer            => $self->translate('referrer'),
-    };
-    $c->stash->{account_types} = {
-            institution     => $self->translate('institution'),
-    };
-    $c->stash->{subscription_types} = {
-            trial       => $self->translate('trial'),
-            full        => $self->translate('full'),
-            gratis      => $self->translate('gratis'),
-    };
-    $c->stash->{subscription_status} = {
-            ok          => $self->translate('ok'),
-            expired     => $self->translate('expired'),
-    };
-    $c->stash->{template} = 'index.html';;
-}
-
-=head2 translate
-
-A private routine for getting text from a database to allow for translatable lables
-
-TODO: This need to be a) moved to a translation role. and b) connected to a model
-
-=cut
-
-sub translate :Private {
-    my ($self, $label) = @_;
-
-    # should call $c->model('DB')->search({$label}) probably but the model isn't set up yet
-    # for now just use the label we recieved
-
-    return $label;
-}
-
 =head2 default
 
 Standard 404 error page

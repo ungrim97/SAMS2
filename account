@@ -1,0 +1,7 @@
+\password sitebuild 
+\password sitebuild 
+\q
+select * from credential_userpass;
+select * from account;
+select * from account limit 1;
+\s account

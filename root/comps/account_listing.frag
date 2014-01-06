@@ -45,20 +45,19 @@ $(document).ready(function () {
             $(oSettings.nTableWrapper).find('div.dataTables_paginate a')
                 .addClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only")
                 .removeClass("ui-state-highlight ui-state-disabled");
-
             $(oSettings.nTableWrapper).find('div.dataTables_paginate a.paginate_active')
                 .addClass("ui-state-highlight")
                 .removeClass("ui-state-default ui-state-disabled");
-    
             $(oSettings.nTableWrapper).find('div.dataTables_paginate a.paginate_button_disabled')
                 .addClass("ui-state-disabled")
                 .removeClass("ui-state-default ui-state-highlight");
         },
-        "sAjaxSource": '/ajax_widgets/find_account.json',
+        "sAjaxSource": '/ajax_widgets/find_accounts',
         "fnServerParams": function (aoData) {
             addSearchParams(aoData);
         },
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            alert(aData);
             rowCallbackAddActionLinks(nRow, aData);
         },
         "fnCreatedRow" : function(nRow, aData, iDataIndex) {
