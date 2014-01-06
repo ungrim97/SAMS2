@@ -45,12 +45,8 @@ sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
 sub index :Path :Chained('auth') :PathPart('') :Args(0) {
    my ($self, $c) = @_;
 
-    $c->go('/account_details');
+    $c->go('account/account_details');
 }
-
-=head2 account_details
-
-=cut
 
 =head2 default
 
