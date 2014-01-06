@@ -8,8 +8,25 @@ __PACKAGE__->add_columns(
         is_auto_increment   => 1,
         is_numeric          => 1,
     },
+    alt_account_id_1 => {
+        data_type   => 'text',
+        is_nullable => 1,
+    },
+    alt_account_id_2 => {
+        data_type => 'text',
+        is_nullable => 1,
+    },
+    legacy_account_id => {
+        data_type => 'text',
+        is_nullable => 1,
+    },
     account_name    => {
         data_type   => 'text',
+    },
+    account_type_id => {
+        data_type       => 'int',
+        is_foreign_key  => 1,
+        is_numeric      => 1,
     },
     contact_name => {
         data_type   => 'text',
@@ -34,6 +51,15 @@ __PACKAGE__->add_columns(
         data_type   => 'int',
         is_foreign_key  => 1,
         is_numeric  => 1,
+    },
+    contact_title_id => {
+        data_type => 'int',
+        is_numeric => 1,
+        is_foreign_key => 1,
+    },
+    contact_job_title => {
+        data_type => 'text',
+        is_nullable => 1,
     },
     contact_number => {
         data_type   => 'text',
@@ -69,5 +95,6 @@ __PACKAGE__->set_primary_key('account_id');
 __PACKAGE__->belongs_to('update_user', 'SAMS::Schema::Result::Account', 'last_update_user');
 __PACKAGE__->has_many('update_accounts', 'SAMS::Schema::Result::Account', 'account_id');
 __PACKAGE__->belongs_to('country', 'SAMS::Schema::Result::Country', 'country_id');
-
+__PACKAGE__->belongs_to('account_type', 'SAMS::Schema::Result::AccountType', 'account_type_id');
+__PACKAGE__->belongs_to('contact_title', 'SAMS::Schema::Result::ContactTitle', 'contact_title_id');
 1;
