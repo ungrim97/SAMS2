@@ -16,39 +16,40 @@ Catalyst Controller.
 
 =cut
 
+=head2 account
+
+This is the root action for the account/ namespace. Its main use is as a chain
+base for actions in the account/* namespace. Should contain handling of
+stash population for all actions in this namespace.
+
+=cut
+
+sub account :Chained('/web') PathPart('account') CaptureArgs(0){
+    my ($self, $c) = @_;
+
+    if (!defined $c->stash->{account} && (my $account_id = $c->req->param('account_id'))){
+        $c->stash->{account} = $c->model('DB')->resultset('Account')->find($account_id);
+    } else {
+        $c->stash->{account} = $c->stash->{user};
+    }
+
+    # Populate contact dropdowns
+    $c->forward('populate_contact_dropdowns');
+
+    # All account/* pages are linked from index.html
+    $c->stash->{template} = 'index.html',
+}
+
 =head2 account_details
 
 =cut
 
-sub account_details :Local Chained('/web') Args(0) {
+sub account_details :Path('account/account_details') Chained('account') :PathPart('account_details') Args(0) {
     my ($self, $c) = @_;
 
-    $c->log->warn('Getting Account Details');
+    my $user = $c->stash->{user};
 
-    my @countries = $c->model('DB')->resultset('Country')->all;
-    my @contact_titles = $c->model('DB')->resultset('ContactTitle')->all;
-    $c->stash(
-        # Subs only allows us to modify the current logged in user
-        account     => $c->stash->{user},
-        countries   => [
-            map +{ $_->country_code => $_->country_name}, @countries
-        ],
-        template => 'index.html',
-        contact_titles => [
-            map +{$_->title_id, $_->description}, @contact_titles,
-        ],
-    );
-}
-
-=head2 update_account
-
-=cut
-
-sub update_account :Local Chained('/web') Args(0) {
-    my ($self, $c) = @_;
-
-    $c->log->warn('UPDATING ACCOUNT');
-    $c->model('DB')->resultset('Account')->update_account($c->req->params);
+    $c->log->info('Preparing account details for '.$user->account_name.' ('.$user->account_id.')');
 }
 
 =head2 index
@@ -61,7 +62,28 @@ sub index :Path :Args(0) {
     $c->response->body('Matched SAMS::Controller::Account in Account.');
 }
 
+=head2 populate_contact_dropdowns
 
+This sub should populate the stash with all data needed for the various dropdowns needed on all
+account/* pages
+
+=cut
+
+sub populate_contact_dropdowns :Private {
+    my ($self, $c) = @_;
+
+    my @countries = $c->model('DB')->resultset('Country')->all;
+    my @contact_titles = $c->model('DB')->resultset('ContactTitle')->all;
+
+    $c->stash(
+        countries   => [
+            map +{ $_->country_id => $_->country_name}, @countries
+        ],
+        contact_titles => [
+            map +{$_->title_id, $_->description}, @contact_titles,
+        ],
+    );
+}
 
 =encoding utf8
 
