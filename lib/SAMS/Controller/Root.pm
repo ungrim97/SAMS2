@@ -72,15 +72,6 @@ sub load_translations :Private {
     $c->stash->{labels} = $labels;
 }
 
-=head2 index
-
-=cut
-
-sub index :Path :Chained('web') :PathPart('') :Args(0) {
-   my ($self, $c) = @_;
-
-    $c->go('account/account_details');
-}
 
 =head2 default
 
@@ -100,7 +91,14 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {}
+sub end : ActionClass('RenderView') {
+    my ($self, $c) = @_;
+
+    if (@{$c->error}){
+        $c->stash->{errors} = SAMS::Error->new('level' => 'Critical', 'error_message' => 'unkown error',);
+        $c->stash->{template} = 'error.html';
+    }
+}
 
 =head1 AUTHOR
 
