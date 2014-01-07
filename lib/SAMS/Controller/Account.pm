@@ -24,20 +24,36 @@ stash population for all actions in this namespace.
 
 =cut
 
-sub account :Chained('/web') PathPart('account') CaptureArgs(0){
-    my ($self, $c) = @_;
+sub account :Chained('/web') PathPart('account') CaptureArgs(1){
+    my ($self, $c, $account_id) = @_;
 
-    if (!defined $c->stash->{account} && (my $account_id = $c->req->param('account_id'))){
-        $c->stash->{account} = $c->model('DB')->resultset('Account')->find($account_id);
+    my $user = $c->stash->{user};
+    my $account;
+
+    if ($user->account_id != $account_id){
+        $account = $c->model('DB')->resultset('Account')->find($account_id);
     } else {
-        $c->stash->{account} = $c->stash->{user};
+        $account = $user;
     }
+
+    unless ($account){
+        $c->error(
+            SAMS::Error->new(level => 'Error', error_message => 'No Account found')
+        );
+        $c->detach;
+    };
+
+    $c->log->info("Editing details for ".$account->account_name." (".$account->account_id.")");
+    $c->stash->{account} = $account;
 
     # Populate contact dropdowns
     $c->forward('populate_contact_dropdowns');
 
     # All account/* pages are linked from index.html
-    $c->stash->{template} = 'index.html',
+    $c->stash(
+        template    => 'index.html',
+        update_uri  => '/account/'.$account->account_id.'/update_account',
+    );
 }
 
 =head2 account_details
@@ -47,9 +63,8 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(0){
 sub account_details :Path('account/account_details') Chained('account') :PathPart('account_details') Args(0) {
     my ($self, $c) = @_;
 
-    my $user = $c->stash->{user};
+    # MAIN PAGE FOR SUBSCRIBER SERVICE ACCOUNTS PAGES.
 
-    $c->log->info('Preparing account details for '.$user->account_name.' ('.$user->account_id.')');
 }
 
 =head2 index
