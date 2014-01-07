@@ -67,14 +67,28 @@ sub account_details :Path('account/account_details') Chained('account') :PathPar
 
 }
 
-=head2 index
+=head2 update_account
 
 =cut
 
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
+sub update_account :Path('account/update_account') Chained('account') :PathPart('update_account') Args(0) {
+    my ($self, $c) = @_;
 
-    $c->response->body('Matched SAMS::Controller::Account in Account.');
+    $c->log->info('Updating account '.$c->req->param('account_id'));
+    my $account_rs = $c->model('DB')->resultset('Account');
+
+    my $result = $account_rs->update_account(
+        action  => 'update_'.($c->req->param('action')//'contact_details'),
+        account => $c->stash->{account},
+        user    => $c->stash->{user},
+        params  => $c->req->params,
+    );
+
+    if (ref $result eq 'SAMS::Error'){
+        $c->errors($result);
+    } else {
+        $c->stash->{account} = $result;
+    }
 }
 
 =head2 populate_contact_dropdowns
