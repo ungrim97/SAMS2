@@ -14,25 +14,25 @@
         hidden      => 1,
     &>
 
+    <&| /comps/label.frag, for => "contact_title_id" &><% $labels->{contact}{title} %></&>
+    <& /comps/select.frag,
+        problems        => $problems,
+        class           => "drop",
+        name            => 'contact_title_id',
+        options         => $contact_titles,
+        selectedlabel   => $account->contact_title->title_id,
+        readonly        => $is_readonly,
+        disabled        => $is_readonly,
+    &>
+
     <&| /comps/label.frag, for => "account_name" &><% $labels->{account}{name} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
         name        => 'account_name',
-        value       => $account->account_name,
+        value       => $account->contact_name,
         readonly    => $is_readonly,
         disabled    => $is_readonly
-    &>
-
-    <&| /comps/label.frag, for => "contact_title" &><% $labels->{contact}{title} %></&>
-    <& /comps/select.frag,
-        problems        => $problems,
-        class           => "drop",
-        name            => 'contact_title',
-        options         => $contact_titles,
-        selectedlabel   => $account->contact_title->description,
-        readonly        => $is_readonly,
-        disabled        => $is_readonly,
     &>
 
     <&| /comps/label.frag, for => "contact_job_title" &><% $labels->{contact}{job_title} %></&>
@@ -95,13 +95,13 @@
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "country_code", required => 1 &><% $labels->{contact}{country} %></&>
+    <&| /comps/label.frag, for => "country_id", required => 1 &><% $labels->{contact}{country} %></&>
     <& /comps/select.frag ,
         title           => 'Country',
-        name            => 'country_code',
+        name            => 'country_id',
         class           => 'drop',
         options         => $countries,
-        selectedlabel   => $account->country->country_code,
+        selectedlabel   => $account->country->country_id,
         problems        => $problems,
         readonly        => $is_readonly,
         disabled        => $is_readonly,
