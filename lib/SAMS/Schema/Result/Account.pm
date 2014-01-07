@@ -48,17 +48,17 @@ __PACKAGE__->add_columns(
         data_type   => 'text',
     },
     country_id => {
-        data_type   => 'int',
+        data_type       => 'int',
         is_foreign_key  => 1,
-        is_numeric  => 1,
+        is_numeric      => 1,
     },
     contact_title_id => {
-        data_type => 'int',
-        is_numeric => 1,
-        is_foreign_key => 1,
+        data_type       => 'int',
+        is_numeric      => 1,
+        is_foreign_key  => 1,
     },
     contact_job_title => {
-        data_type => 'text',
+        data_type   => 'text',
         is_nullable => 1,
     },
     contact_number => {
@@ -76,15 +76,15 @@ __PACKAGE__->add_columns(
         data_type   => 'text',
     },
     last_update_date    => {
-        data_type   => 'timestamp with time zone',
-        is_nullable => 1,
-        default_value  => \'now()',
+        data_type       => 'timestamp with time zone',
+        is_nullable     => 1,
+        default_value   => \'now()',
     },
     last_update_user    => {
-        data_type   => 'int',
-        is_numeric  => 1,
-        is_nullable => 1,
-        is_foreign_key => 1,
+        data_type       => 'int',
+        is_numeric      => 1,
+        is_nullable     => 1,
+        is_foreign_key  => 1,
     },
 );
 
