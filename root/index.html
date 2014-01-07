@@ -4,22 +4,24 @@
 
 <form method="post" action="account/update_account">
 
-
 <div class="tab_wrapper">
 
 % # Define tab elements
 <& "/comps/subnavbar.frag", livepage => $sub_page, submenu_items => \@submenu_items &>
 
-<& /comps/account/account_details.frag, account => $account, is_readonly => $is_readonly &>
-<& /comps/account/contact_details.frag, account => $account, countries => $countries, is_readonly => $is_readonly &>
+<& /comps/account/account_details.frag, %ARGS &>
+<& /comps/account/contact_details.frag, %ARGS &>
+
 </div>
 
 % unless( $is_readonly ) {
 <div class="action-toolbar ui-widget ui-widget-header ui-corner-all" id="save_changes">
-    <& "/comps/submit.frag", class => "submit", value => "Save Changes", name=>"update" &>
+    <& "/comps/submit.frag",
+        class => "submit",
+        value => $labels->{buttons}{submit_changes} // "Save"
+    &>
 </div>
 % }
-
 
 </form>
 
@@ -27,6 +29,7 @@
     $account        => undef
     $countries      => []
     $is_readonly    => 1
+    $labels         => {}
     $sub_page       => 'account_details'
 </%args>
 <%init>
@@ -34,70 +37,8 @@
 
     my $problems = SAMS::Problems->new;
 
-#    my $account = $ams->account( $acc_id );
-
-    my $message = '';
-
-#    if ( $update && !$is_ss_limited ) {
-#
-#        # This page only allows update of contact details.
-#        ( $problems, my $updated_account ) = $ams->update_account(
-#            {
-#                acc_id           => $acc_id,
-#
- #               whois            => 1, # Convince SAMS::Admin that we've done a whois check.
-#
-#                contact_given_name => $contact_given_name, 
-#                contact_family_name => $contact_family_name, 
-#                contact_title => $contact_title, 
-#                contact_job_title => $contact_job_title, 
-#                contact_address_1 => $contact_address_1, 
-##                contact_address_2 => $contact_address_2, 
-#                contact_city => $contact_city, 
-#                contact_county => $contact_county, 
-#                contact_postcode => $contact_postcode,
-#                contact_country_id => $contact_country_id, 
- #               contact_telephone => $contact_telephone, 
- #               contact_mobile_telephone => $contact_mobile_telephone, 
- #               contact_fax => $contact_fax, 
- ##               contact_email => $contact_email, 
- #           },
- ##           {
-  #              ignorecreds => 1,
-  ##              ignoreprefs => 1,
-  #          }
-  ##      );
-#
- #       if ( $problems->ok ) {
- #           $account = $updated_account;
- ##           $message = "Your account has been updated.";
- #       }
- #   }
-
-  #  if ( $problems->ok ) {
-#
-#        $contact_given_name = $account->contact_given_name();
- #       $contact_family_name = $account->contact_family_name();
- #       $contact_title = $account->contact_title();
- #       $contact_job_title = $account->contact_job_title();
- #       $contact_address_1 = $account->contact_address_1();
- #       $contact_address_2 = $account->contact_address_2();
- ##       $contact_city = $account->contact_city();
- #       $contact_county = $account->contact_county();
- #       $contact_postcode = $account->contact_postcode();
- #       $contact_country_id = $account->contact_country_id();
- #       $contact_telephone = $account->contact_telephone();
- #       $contact_mobile_telephone = $account->contact_mobile_telephone();
-  #      $contact_fax = $account->contact_fax();
-  #      $contact_email = $account->contact_email();
-##
-#    }
-
-#    my @countries = ( { empty => '' }, map { {$_->id => $_->name} } $ams->countries() );
-#
     my @submenu_items;
-    push @submenu_items, [ 'Account Details'    => "#account_details" ];
-    push @submenu_items, [ 'Contact Details'    => "#contact_details" ];
+    push @submenu_items, [ 'Account Details'    => "#account_details" ], [ 'Contact Details'    => "#contact_details" ];
 </%init>
 
 %# vim: set ai et sw=4 syntax=mason :

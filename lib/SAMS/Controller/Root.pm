@@ -4,6 +4,8 @@ use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
 
+with 'SAMS::Roles::Translate';
+
 #
 # Sets the actions in this controller to be registered with no prefix
 # so they function identically to actions created in MyApp.pm
@@ -27,7 +29,6 @@ SAMS::Controller::Root - Root Controller for SAMS
 sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
     my ($self, $c) = @_;
 
-    $c->log->warn('RUNNING AUTH');
     # $c->stash->{user} should always be the logged in user.
     # $c->stash->{account} will contain the account being modified/looked at
 
@@ -38,11 +39,44 @@ sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
     }
 }
 
+=head2 web
+
+Actions that need to be populated prior to *every* request such as auth and translations
+
+=cut
+
+sub web :Chained('auth') :PathPart('') :CaptureArgs(0) {
+    my ($self, $c) = @_;
+
+    $c->forward('load_translations');
+}
+
+=head2 load_translations
+
+TODO: Move this to the Translate role
+
+=cut
+
+sub load_translations :Private {
+    my ($self, $c) = @_;
+
+    my @translations = $c->model('DB')->resultset('Language')->find({language_code => 'en'})->translations->all;
+
+    use Data::Dumper;
+    my $labels = {};
+
+    for my $translation (@translations){
+        $labels->{$translation->area}{$translation->name} = $translation->literal;
+    }
+
+    $c->stash->{labels} = $labels;
+}
+
 =head2 index
 
 =cut
 
-sub index :Path :Chained('auth') :PathPart('') :Args(0) {
+sub index :Path :Chained('web') :PathPart('') :Args(0) {
    my ($self, $c) = @_;
 
     $c->go('account/account_details');

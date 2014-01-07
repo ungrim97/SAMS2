@@ -20,12 +20,13 @@ Catalyst Controller.
 
 =cut
 
-sub account_details :Chained('auth') Args(0) {
+sub account_details :Local Chained('/web') Args(0) {
     my ($self, $c) = @_;
 
     $c->log->warn('Getting Account Details');
 
     my @countries = $c->model('DB')->resultset('Country')->all;
+    my @contact_titles = $c->model('DB')->resultset('ContactTitle')->all;
     $c->stash(
         # Subs only allows us to modify the current logged in user
         account     => $c->stash->{user},
@@ -33,7 +34,21 @@ sub account_details :Chained('auth') Args(0) {
             map +{ $_->country_code => $_->country_name}, @countries
         ],
         template => 'index.html',
+        contact_titles => [
+            map +{$_->title_id, $_->description}, @contact_titles,
+        ],
     );
+}
+
+=head2 update_account
+
+=cut
+
+sub update_account :Local Chained('/web') Args(0) {
+    my ($self, $c) = @_;
+
+    $c->log->warn('UPDATING ACCOUNT');
+    $c->model('DB')->resultset('Account')->update_account($c->req->params);
 }
 
 =head2 index

@@ -2,7 +2,7 @@
 <input type="<% $type %>" name="<% $name %>" 
     id="<% $id %>" class="<% $class %>" <% $on_focus %> <% $disabled_attr |n %> <% $readonly_attr |n %> <% $on_key_press |n %> 
     title="<% $title %>" value="<% $value %>" size="<% $size %>" <% $maxlength_attr |n %> 
-    <% $placeholder_attr |n%> <% $required_attr |n%> <% $onchange |n %> <% $multiple ? 'multiple' : () %>/>
+    <% $placeholder_attr |n%> <% $required_attr |n%> <% $onchange |n %> <% $multiple ? 'multiple' : () %> <% $hidden_attr |n %>/>
 <& '/comps/contextual_help.frag', id => $id &>
 <%doc>
     This produces a text entry widget for a form. This also doubles up as a
@@ -33,6 +33,7 @@
     $required => 0
     $placeholder => undef
     $readonly => ''
+    $hidden => ''
     $multiple => ''
 </%args>
 
@@ -46,6 +47,7 @@
     my $maxlength_attr = '';
     my $disabled_attr = '';
     my $readonly_attr = '';
+    my $hidden_attr = '';
 
     unless ($type) {
         $type = $is_password ? 'password' : 'text';
@@ -65,6 +67,9 @@
     }
     if ($readonly) {
         $readonly_attr = 'readonly="readonly" ';
+    }
+    if ($hidden) {
+        $hidden_attr = 'hidden="hidden"';
     }
 
     # Set up the onfocus event handler so that the text is cleared
