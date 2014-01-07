@@ -25,11 +25,11 @@
         disabled        => $is_readonly,
     &>
 
-    <&| /comps/label.frag, for => "account_name" &><% $labels->{account}{name} %></&>
+    <&| /comps/label.frag, for => "contact_name" &><% $labels->{account}{name} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'account_name',
+        name        => 'contact_name',
         value       => $account->contact_name,
         readonly    => $is_readonly,
         disabled    => $is_readonly
