@@ -74,18 +74,18 @@ sub account_details :Path('account/account_details') Chained('account') :PathPar
 sub update_account :Path('account/update_account') Chained('account') :PathPart('update_account') Args(0) {
     my ($self, $c) = @_;
 
-    $c->log->info('Updating account '.$c->req->param('account_id'));
-    my $account_rs = $c->model('DB')->resultset('Account');
+    my $account = $c->stash->{account};
+    $c->log->info('Updating account '.$account->account_id);
 
-    my $result = $account_rs->update_account(
+    my $result = $account->update_account(
         action  => 'update_'.($c->req->param('action')//'contact_details'),
-        account => $c->stash->{account},
+        account => $account,
         user    => $c->stash->{user},
         params  => $c->req->params,
     );
 
     if (ref $result eq 'SAMS::Error'){
-        $c->errors($result);
+        $c->error($result);
     } else {
         $c->stash->{account} = $result;
     }
