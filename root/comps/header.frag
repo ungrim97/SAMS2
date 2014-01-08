@@ -6,15 +6,10 @@
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta http-equiv="imagetoolbar" content="no" />
-<link rel="stylesheet" type="text/css" href="/static/css/jqModal.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/jq.datePicker.css" />
 
-<& /comps/jquery_ui_theme.frag &>
+<& /comps/include_css.frag &>
+<& /comps/include_js.frag &>
 
-<link rel="stylesheet" type="text/css" href="/static/css/jquery.treeview.css" />
-<link rel="stylesheet" type="text/css" href="/static/css/ams.css" />
-
-<& '/comps/include_js.frag' &>
 </head>
 
 <body <% $bodyClass %>>
