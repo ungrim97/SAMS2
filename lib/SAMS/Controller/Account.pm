@@ -51,7 +51,7 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(1){
 
     # All account/* pages are linked from index.html
     $c->stash(
-        template    => 'index.html',
+        template    => 'account_details.html',
         update_uri  => '/account/'.$account->account_id.'/update_account',
     );
 }
