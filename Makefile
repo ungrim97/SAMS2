@@ -13,20 +13,20 @@
 
 #     ABSTRACT => q[Catalyst based application]
 #     AUTHOR => [q[Michael Francis,,,]]
-#     BUILD_REQUIRES => { Test::WWW::Selenium::Catalyst=>q[0], Test::More=>q[0.88], Test::Class::Moose=>q[0], ExtUtils::MakeMaker=>q[6.36] }
+#     BUILD_REQUIRES => { Test::WWW::Selenium::Catalyst=>q[0], Test::Class::Moose=>q[0], ExtUtils::MakeMaker=>q[6.36], Test::More=>q[0.88] }
 #     CONFIGURE_REQUIRES => {  }
 #     DISTNAME => q[SAMS]
 #     EXE_FILES => [q[script/sams_cgi.pl], q[script/sams_create.pl], q[script/sams_deploy_schema.pl], q[script/sams_fastcgi.pl], q[script/sams_server.pl], q[script/sams_test.pl]]
 #     LICENSE => q[perl]
 #     NAME => q[SAMS]
 #     NO_META => q[1]
-#     PREREQ_PM => { Catalyst::Runtime=>q[5.90053], Catalyst::Plugin::Static::Simple=>q[0], Test::More=>q[0.88], Test::WWW::Selenium::Catalyst=>q[0], Moose=>q[0], ExtUtils::MakeMaker=>q[6.36], Catalyst::Action::RenderView=>q[0], Test::Class::Moose=>q[0], namespace::autoclean=>q[0], Data::Dumper=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], Config::General=>q[0] }
+#     PREREQ_PM => { Test::Class::Moose=>q[0], namespace::autoclean=>q[0], Config::General=>q[0], Test::More=>q[0.88], Moose=>q[0], Data::Dumper=>q[0], Catalyst::Runtime=>q[5.90053], Catalyst::Action::RenderView=>q[0], Test::WWW::Selenium::Catalyst=>q[0], Catalyst::Plugin::Static::Simple=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], ExtUtils::MakeMaker=>q[6.36] }
 #     TEST_REQUIRES => {  }
 #     VERSION => q[0.01]
 #     VERSION_FROM => q[lib/SAMS.pm]
-#     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
+#     dist => {  }
 #     realclean => { FILES=>q[MYMETA.yml] }
-#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t] }
+#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/controller_Account.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t] }
 
 # --- MakeMaker post_initialize section:
 
@@ -225,46 +225,46 @@ TO_INST_PM = lib/SAMS.pm \
 	lib/SAMS/View/HTML.pm \
 	lib/SAMS/View/JSON.pm
 
-PM_TO_BLIB = lib/SAMS/Problems/Item.pm \
-	blib/lib/SAMS/Problems/Item.pm \
-	lib/SAMS/Model/DB.pm.new \
-	blib/lib/SAMS/Model/DB.pm.new \
-	lib/SAMS/Model/DB.pm \
-	blib/lib/SAMS/Model/DB.pm \
-	lib/SAMS/Schema/Result/Language.pm \
-	blib/lib/SAMS/Schema/Result/Language.pm \
-	lib/SAMS/View/JSON.pm \
-	blib/lib/SAMS/View/JSON.pm \
-	lib/SAMS/Schema/Result/ContactTitle.pm \
-	blib/lib/SAMS/Schema/Result/ContactTitle.pm \
-	lib/SAMS.pm \
-	blib/lib/SAMS.pm \
-	lib/SAMS/Error.pm \
-	blib/lib/SAMS/Error.pm \
-	lib/SAMS/Schema/ResultSet/Account.pm \
-	blib/lib/SAMS/Schema/ResultSet/Account.pm \
-	lib/SAMS/Schema/Result/AccountType.pm \
-	blib/lib/SAMS/Schema/Result/AccountType.pm \
-	lib/SAMS/Controller/Root.pm \
-	blib/lib/SAMS/Controller/Root.pm \
-	lib/SAMS/Schema/Result/Country.pm \
-	blib/lib/SAMS/Schema/Result/Country.pm \
-	lib/SAMS/Schema/Result/Account.pm \
-	blib/lib/SAMS/Schema/Result/Account.pm \
-	lib/SAMS/Schema/Result/Translation.pm \
-	blib/lib/SAMS/Schema/Result/Translation.pm \
-	lib/SAMS/Problems.pm \
+PM_TO_BLIB = lib/SAMS/Problems.pm \
 	blib/lib/SAMS/Problems.pm \
+	lib/SAMS/Roles/Translate.pm \
+	blib/lib/SAMS/Roles/Translate.pm \
 	lib/SAMS/Schema.pm \
 	blib/lib/SAMS/Schema.pm \
+	lib/SAMS/Schema/ResultSet/Account.pm \
+	blib/lib/SAMS/Schema/ResultSet/Account.pm \
 	lib/SAMS/View/HTML.pm \
 	blib/lib/SAMS/View/HTML.pm \
 	lib/SAMS/Model/DB/Account.pm \
 	blib/lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/Schema/Result/Country.pm \
+	blib/lib/SAMS/Schema/Result/Country.pm \
 	lib/SAMS/Controller/Account.pm \
 	blib/lib/SAMS/Controller/Account.pm \
-	lib/SAMS/Roles/Translate.pm \
-	blib/lib/SAMS/Roles/Translate.pm
+	lib/SAMS/Schema/Result/Account.pm \
+	blib/lib/SAMS/Schema/Result/Account.pm \
+	lib/SAMS/Schema/Result/AccountType.pm \
+	blib/lib/SAMS/Schema/Result/AccountType.pm \
+	lib/SAMS.pm \
+	blib/lib/SAMS.pm \
+	lib/SAMS/Model/DB.pm \
+	blib/lib/SAMS/Model/DB.pm \
+	lib/SAMS/Schema/Result/ContactTitle.pm \
+	blib/lib/SAMS/Schema/Result/ContactTitle.pm \
+	lib/SAMS/Schema/Result/Translation.pm \
+	blib/lib/SAMS/Schema/Result/Translation.pm \
+	lib/SAMS/Model/DB.pm.new \
+	blib/lib/SAMS/Model/DB.pm.new \
+	lib/SAMS/Problems/Item.pm \
+	blib/lib/SAMS/Problems/Item.pm \
+	lib/SAMS/View/JSON.pm \
+	blib/lib/SAMS/View/JSON.pm \
+	lib/SAMS/Controller/Root.pm \
+	blib/lib/SAMS/Controller/Root.pm \
+	lib/SAMS/Schema/Result/Language.pm \
+	blib/lib/SAMS/Schema/Result/Language.pm \
+	lib/SAMS/Error.pm \
+	blib/lib/SAMS/Error.pm
 
 
 # --- MakeMaker platform_constants section:
@@ -325,7 +325,7 @@ ZIPFLAGS = -r
 COMPRESS = gzip --best
 SUFFIX = .gz
 SHAR = shar
-PREOP = $(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"
+PREOP = $(NOECHO) $(NOOP)
 POSTOP = $(NOECHO) $(NOOP)
 TO_UNIX = $(NOECHO) $(NOOP)
 CI = ci -u
@@ -486,38 +486,38 @@ POD2MAN = $(POD2MAN_EXE)
 
 
 manifypods : pure_all  \
-	script/sams_cgi.pl \
-	script/sams_create.pl \
-	script/sams_test.pl \
-	script/sams_server.pl \
 	script/sams_fastcgi.pl \
+	script/sams_server.pl \
+	script/sams_cgi.pl \
+	script/sams_test.pl \
+	script/sams_create.pl \
+	lib/SAMS/Controller/Account.pm \
+	lib/SAMS/Controller/Root.pm \
+	lib/SAMS/View/JSON.pm \
+	lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/View/HTML.pm \
+	lib/SAMS/Problems/Item.pm \
+	lib/SAMS/Roles/Translate.pm \
 	lib/SAMS.pm \
 	lib/SAMS/Problems.pm \
-	lib/SAMS/Model/DB.pm \
-	lib/SAMS/Problems/Item.pm \
-	lib/SAMS/View/JSON.pm \
-	lib/SAMS/Roles/Translate.pm \
-	lib/SAMS/Controller/Root.pm \
-	lib/SAMS/Controller/Account.pm \
-	lib/SAMS/View/HTML.pm \
-	lib/SAMS/Model/DB/Account.pm
+	lib/SAMS/Model/DB.pm
 	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
-	  script/sams_cgi.pl $(INST_MAN1DIR)/sams_cgi.pl.$(MAN1EXT) \
-	  script/sams_create.pl $(INST_MAN1DIR)/sams_create.pl.$(MAN1EXT) \
-	  script/sams_test.pl $(INST_MAN1DIR)/sams_test.pl.$(MAN1EXT) \
+	  script/sams_fastcgi.pl $(INST_MAN1DIR)/sams_fastcgi.pl.$(MAN1EXT) \
 	  script/sams_server.pl $(INST_MAN1DIR)/sams_server.pl.$(MAN1EXT) \
-	  script/sams_fastcgi.pl $(INST_MAN1DIR)/sams_fastcgi.pl.$(MAN1EXT) 
+	  script/sams_cgi.pl $(INST_MAN1DIR)/sams_cgi.pl.$(MAN1EXT) \
+	  script/sams_test.pl $(INST_MAN1DIR)/sams_test.pl.$(MAN1EXT) \
+	  script/sams_create.pl $(INST_MAN1DIR)/sams_create.pl.$(MAN1EXT) 
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	  lib/SAMS/Controller/Account.pm $(INST_MAN3DIR)/SAMS::Controller::Account.$(MAN3EXT) \
+	  lib/SAMS/Controller/Root.pm $(INST_MAN3DIR)/SAMS::Controller::Root.$(MAN3EXT) \
+	  lib/SAMS/View/JSON.pm $(INST_MAN3DIR)/SAMS::View::JSON.$(MAN3EXT) \
+	  lib/SAMS/Model/DB/Account.pm $(INST_MAN3DIR)/SAMS::Model::DB::Account.$(MAN3EXT) \
+	  lib/SAMS/View/HTML.pm $(INST_MAN3DIR)/SAMS::View::HTML.$(MAN3EXT) \
+	  lib/SAMS/Problems/Item.pm $(INST_MAN3DIR)/SAMS::Problems::Item.$(MAN3EXT) \
+	  lib/SAMS/Roles/Translate.pm $(INST_MAN3DIR)/SAMS::Roles::Translate.$(MAN3EXT) \
 	  lib/SAMS.pm $(INST_MAN3DIR)/SAMS.$(MAN3EXT) \
 	  lib/SAMS/Problems.pm $(INST_MAN3DIR)/SAMS::Problems.$(MAN3EXT) \
-	  lib/SAMS/Model/DB.pm $(INST_MAN3DIR)/SAMS::Model::DB.$(MAN3EXT) \
-	  lib/SAMS/Problems/Item.pm $(INST_MAN3DIR)/SAMS::Problems::Item.$(MAN3EXT) \
-	  lib/SAMS/View/JSON.pm $(INST_MAN3DIR)/SAMS::View::JSON.$(MAN3EXT) \
-	  lib/SAMS/Roles/Translate.pm $(INST_MAN3DIR)/SAMS::Roles::Translate.$(MAN3EXT) \
-	  lib/SAMS/Controller/Root.pm $(INST_MAN3DIR)/SAMS::Controller::Root.$(MAN3EXT) \
-	  lib/SAMS/Controller/Account.pm $(INST_MAN3DIR)/SAMS::Controller::Account.$(MAN3EXT) \
-	  lib/SAMS/View/HTML.pm $(INST_MAN3DIR)/SAMS::View::HTML.$(MAN3EXT) \
-	  lib/SAMS/Model/DB/Account.pm $(INST_MAN3DIR)/SAMS::Model::DB::Account.$(MAN3EXT) 
+	  lib/SAMS/Model/DB.pm $(INST_MAN3DIR)/SAMS::Model::DB.$(MAN3EXT) 
 
 
 
@@ -529,14 +529,38 @@ manifypods : pure_all  \
 
 EXE_FILES = script/sams_cgi.pl script/sams_create.pl script/sams_deploy_schema.pl script/sams_fastcgi.pl script/sams_server.pl script/sams_test.pl
 
-pure_all :: $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl $(INST_SCRIPT)/sams_test.pl $(INST_SCRIPT)/sams_server.pl $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_create.pl
+pure_all :: $(INST_SCRIPT)/sams_create.pl $(INST_SCRIPT)/sams_test.pl $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_server.pl $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl
 	$(NOECHO) $(NOOP)
 
 realclean ::
 	$(RM_F) \
-	  $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl \
-	  $(INST_SCRIPT)/sams_test.pl $(INST_SCRIPT)/sams_server.pl \
-	  $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_create.pl 
+	  $(INST_SCRIPT)/sams_create.pl $(INST_SCRIPT)/sams_test.pl \
+	  $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_server.pl \
+	  $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl 
+
+$(INST_SCRIPT)/sams_create.pl : script/sams_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_create.pl
+	$(CP) script/sams_create.pl $(INST_SCRIPT)/sams_create.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_create.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_create.pl
+
+$(INST_SCRIPT)/sams_test.pl : script/sams_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_test.pl
+	$(CP) script/sams_test.pl $(INST_SCRIPT)/sams_test.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_test.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_test.pl
+
+$(INST_SCRIPT)/sams_cgi.pl : script/sams_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_cgi.pl
+	$(CP) script/sams_cgi.pl $(INST_SCRIPT)/sams_cgi.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_cgi.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_cgi.pl
+
+$(INST_SCRIPT)/sams_server.pl : script/sams_server.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_server.pl
+	$(CP) script/sams_server.pl $(INST_SCRIPT)/sams_server.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_server.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_server.pl
 
 $(INST_SCRIPT)/sams_deploy_schema.pl : script/sams_deploy_schema.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_deploy_schema.pl
@@ -549,30 +573,6 @@ $(INST_SCRIPT)/sams_fastcgi.pl : script/sams_fastcgi.pl $(FIRST_MAKEFILE) $(INST
 	$(CP) script/sams_fastcgi.pl $(INST_SCRIPT)/sams_fastcgi.pl
 	$(FIXIN) $(INST_SCRIPT)/sams_fastcgi.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_fastcgi.pl
-
-$(INST_SCRIPT)/sams_test.pl : script/sams_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_test.pl
-	$(CP) script/sams_test.pl $(INST_SCRIPT)/sams_test.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_test.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_test.pl
-
-$(INST_SCRIPT)/sams_server.pl : script/sams_server.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_server.pl
-	$(CP) script/sams_server.pl $(INST_SCRIPT)/sams_server.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_server.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_server.pl
-
-$(INST_SCRIPT)/sams_cgi.pl : script/sams_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_cgi.pl
-	$(CP) script/sams_cgi.pl $(INST_SCRIPT)/sams_cgi.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_cgi.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_cgi.pl
-
-$(INST_SCRIPT)/sams_create.pl : script/sams_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_create.pl
-	$(CP) script/sams_create.pl $(INST_SCRIPT)/sams_create.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_create.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_create.pl
 
 
 
@@ -592,22 +592,22 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  core.[0-9][0-9] *perl.core \
-	  $(INST_ARCHAUTODIR)/extralibs.all pm_to_blib \
-	  $(INST_ARCHAUTODIR)/extralibs.ld core.[0-9] \
-	  MYMETA.yml $(BASEEXT).bso \
-	  pm_to_blib.ts $(BASEEXT).x \
-	  $(BASEEXT).exp perl.exe \
-	  core.*perl.*.? lib$(BASEEXT).def \
-	  MYMETA.json core.[0-9][0-9][0-9] \
-	  perlmain.c blibdirs.ts \
-	  core.[0-9][0-9][0-9][0-9] *$(OBJ_EXT) \
-	  perl perl$(EXE_EXT) \
-	  mon.out core \
-	  $(BOOTSTRAP) tmon.out \
-	  $(BASEEXT).def *$(LIB_EXT) \
-	  so_locations $(MAKE_APERL_FILE) \
-	  core.[0-9][0-9][0-9][0-9][0-9] 
+	  *$(LIB_EXT) $(BASEEXT).exp \
+	  tmon.out perl.exe \
+	  core.[0-9][0-9][0-9] lib$(BASEEXT).def \
+	  perlmain.c pm_to_blib \
+	  core.[0-9][0-9][0-9][0-9][0-9] so_locations \
+	  $(BASEEXT).x mon.out \
+	  $(INST_ARCHAUTODIR)/extralibs.ld $(BASEEXT).bso \
+	  core MYMETA.yml \
+	  $(BASEEXT).def core.[0-9][0-9] \
+	  core.*perl.*.? $(BOOTSTRAP) \
+	  pm_to_blib.ts *perl.core \
+	  MYMETA.json $(MAKE_APERL_FILE) \
+	  *$(OBJ_EXT) perl$(EXE_EXT) \
+	  core.[0-9] blibdirs.ts \
+	  $(INST_ARCHAUTODIR)/extralibs.all core.[0-9][0-9][0-9][0-9] \
+	  perl 
 	- $(RM_RF) \
 	  blib 
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
@@ -624,7 +624,7 @@ realclean purge ::  clean realclean_subdirs
 	- $(RM_F) \
 	  $(MAKEFILE_OLD) $(FIRST_MAKEFILE) 
 	- $(RM_RF) \
-	  $(DISTVNAME) MYMETA.yml 
+	  MYMETA.yml $(DISTVNAME) 
 
 
 # --- MakeMaker metafile section:
@@ -897,7 +897,7 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t
+TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/controller_Account.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -930,7 +930,7 @@ ppd :
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Action::RenderView" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::ConfigLoader" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Static::Simple" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Runtime" VERSION="5.90053" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE VERSION="5.90053" NAME="Catalyst::Runtime" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Data::Dumper" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" />' >> $(DISTNAME).ppd
@@ -945,26 +945,26 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  lib/SAMS/Problems/Item.pm blib/lib/SAMS/Problems/Item.pm \
-	  lib/SAMS/Model/DB.pm.new blib/lib/SAMS/Model/DB.pm.new \
-	  lib/SAMS/Model/DB.pm blib/lib/SAMS/Model/DB.pm \
-	  lib/SAMS/Schema/Result/Language.pm blib/lib/SAMS/Schema/Result/Language.pm \
-	  lib/SAMS/View/JSON.pm blib/lib/SAMS/View/JSON.pm \
-	  lib/SAMS/Schema/Result/ContactTitle.pm blib/lib/SAMS/Schema/Result/ContactTitle.pm \
-	  lib/SAMS.pm blib/lib/SAMS.pm \
-	  lib/SAMS/Error.pm blib/lib/SAMS/Error.pm \
-	  lib/SAMS/Schema/ResultSet/Account.pm blib/lib/SAMS/Schema/ResultSet/Account.pm \
-	  lib/SAMS/Schema/Result/AccountType.pm blib/lib/SAMS/Schema/Result/AccountType.pm \
-	  lib/SAMS/Controller/Root.pm blib/lib/SAMS/Controller/Root.pm \
-	  lib/SAMS/Schema/Result/Country.pm blib/lib/SAMS/Schema/Result/Country.pm \
-	  lib/SAMS/Schema/Result/Account.pm blib/lib/SAMS/Schema/Result/Account.pm \
-	  lib/SAMS/Schema/Result/Translation.pm blib/lib/SAMS/Schema/Result/Translation.pm \
 	  lib/SAMS/Problems.pm blib/lib/SAMS/Problems.pm \
+	  lib/SAMS/Roles/Translate.pm blib/lib/SAMS/Roles/Translate.pm \
 	  lib/SAMS/Schema.pm blib/lib/SAMS/Schema.pm \
+	  lib/SAMS/Schema/ResultSet/Account.pm blib/lib/SAMS/Schema/ResultSet/Account.pm \
 	  lib/SAMS/View/HTML.pm blib/lib/SAMS/View/HTML.pm \
 	  lib/SAMS/Model/DB/Account.pm blib/lib/SAMS/Model/DB/Account.pm \
+	  lib/SAMS/Schema/Result/Country.pm blib/lib/SAMS/Schema/Result/Country.pm \
 	  lib/SAMS/Controller/Account.pm blib/lib/SAMS/Controller/Account.pm \
-	  lib/SAMS/Roles/Translate.pm blib/lib/SAMS/Roles/Translate.pm 
+	  lib/SAMS/Schema/Result/Account.pm blib/lib/SAMS/Schema/Result/Account.pm \
+	  lib/SAMS/Schema/Result/AccountType.pm blib/lib/SAMS/Schema/Result/AccountType.pm \
+	  lib/SAMS.pm blib/lib/SAMS.pm \
+	  lib/SAMS/Model/DB.pm blib/lib/SAMS/Model/DB.pm \
+	  lib/SAMS/Schema/Result/ContactTitle.pm blib/lib/SAMS/Schema/Result/ContactTitle.pm \
+	  lib/SAMS/Schema/Result/Translation.pm blib/lib/SAMS/Schema/Result/Translation.pm \
+	  lib/SAMS/Model/DB.pm.new blib/lib/SAMS/Model/DB.pm.new \
+	  lib/SAMS/Problems/Item.pm blib/lib/SAMS/Problems/Item.pm \
+	  lib/SAMS/View/JSON.pm blib/lib/SAMS/View/JSON.pm \
+	  lib/SAMS/Controller/Root.pm blib/lib/SAMS/Controller/Root.pm \
+	  lib/SAMS/Schema/Result/Language.pm blib/lib/SAMS/Schema/Result/Language.pm \
+	  lib/SAMS/Error.pm blib/lib/SAMS/Error.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
@@ -976,25 +976,6 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 
 # End.
 # Postamble by Module::Install 1.06
-# --- Module::Install::Admin::Makefile section:
-
-realclean purge ::
-	$(RM_F) $(DISTVNAME).tar$(SUFFIX)
-	$(RM_F) MANIFEST.bak _build
-	$(PERL) "-Ilib" "-MModule::Install::Admin" -e "remove_meta()"
-	$(RM_RF) inc
-
-reset :: purge
-
-upload :: test dist
-	cpan-upload -verbose $(DISTVNAME).tar$(SUFFIX)
-
-grok ::
-	perldoc Module::Install
-
-distsign ::
-	cpansign -s
-
 # --- Module::Install::AutoInstall section:
 
 config :: installdeps
