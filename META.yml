@@ -4,7 +4,9 @@ author:
   - 'Michael Francis,,,'
 build_requires:
   ExtUtils::MakeMaker: 6.36
+  Test::Class::Moose: 0
   Test::More: 0.88
+  Test::WWW::Selenium::Catalyst: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.36
 distribution_type: module
@@ -25,6 +27,7 @@ requires:
   Catalyst::Plugin::Static::Simple: 0
   Catalyst::Runtime: 5.90053
   Config::General: 0
+  Data::Dumper: 0
   Moose: 0
   namespace::autoclean: 0
 resources:
