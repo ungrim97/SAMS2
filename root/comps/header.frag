@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
+    <title><% $labels->{titles}{application_title}%> : <% $title %></title>
 
-<title><& /comps/site_name.frag &>: <% $title %></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="imagetoolbar" content="no" />
 
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta http-equiv="imagetoolbar" content="no" />
-
-<& /comps/include_css.frag &>
-<& /comps/include_js.frag &>
+    <& /comps/include_css.frag &>
+    <& /comps/include_js.frag &>
 
 </head>
-
 <body <% $bodyClass %>>
-<div class="header">
-    <h1 class="logo">
-        <a href="/"><img src="/static/img/sams-logo.png" border="0" alt="<& /comps/site_name.frag &>" /></a>
-    </h1>
-</div>
+    <div class="header">
+        <h1 class="logo">
+            <a href="/"><img src="/static/img/sams-logo.png" border="0" alt="<% $labels->{titles}{application_title} %>" /></a>
+        </h1>
+    </div>
 
-<& header_title.frag &>
-<& navbar.frag, account => $account &>
+    <& header_title.frag, labels => $labels &>
+    <& navbar.frag, account => $account &>
+
 <!-- /////////////////////////////////////////////////// -->
 <!-- start main content here -->
 <!-- /////////////////////////////////////////////////// -->
-<div class="content">
+    <div class="content">
 
 <%args>
     $account => undef
+    $labels  => {}
 </%args>
 <%init>
-my $title = $m->scomp('REQUEST:title');
+my $title = $m->scomp('REQUEST:title', labels => $labels);
 $title =~ s/<.*?>//sg;
 
 #Give the body some classes so we can show & hide stuff using css and js

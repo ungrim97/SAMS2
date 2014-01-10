@@ -1,5 +1,5 @@
 <h2 class="pageHead">
-<& REQUEST:title &>
+<& REQUEST:title, %ARGS &>
 % my $subtitle = $m->scomp("REQUEST:subtitle");
 % if ($subtitle ne '') {
 &raquo;

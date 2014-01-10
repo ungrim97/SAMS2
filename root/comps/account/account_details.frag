@@ -8,7 +8,7 @@
     <span class="inputContainer" name='account_type'><% $account->account_type->description %></span>
 
     <&| /comps/label.frag, for => "account_id"&><% $labels->{account}{account_id} %></&>
-    <div class="inputContainer" name='account_id'><% $account->account_id %></div>
+    <span class="inputContainer" name='account_id'><% $account->account_id %></span>
 </div>
 
 <%args>
