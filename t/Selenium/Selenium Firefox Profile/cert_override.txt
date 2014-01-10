@@ -1,0 +1,3 @@
+# PSM Certificate Override Settings file
+# This is a generated file!  Do not edit.
+sams.mikef.dev.semantico.net:443	OID.2.16.840.1.101.3.4.2.1	B0:AF:F4:30:96:5E:E0:8E:92:9D:01:12:C8:CA:4A:39:48:AE:4A:64:90:30:3A:FB:F6:EB:D6:7C:84:8F:3F:A7	MU	AAAAAAAAAAAAAAAJAAAAEwDh1eDZw9ZQTTARMQ8wDQYDVQQDEwZ1YnVudHU=

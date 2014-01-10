@@ -19,7 +19,8 @@ requires 'Config::General'; # This should reflect the config file format you've 
                  # See Catalyst::Plugin::ConfigLoader for supported formats
 requires 'Data::Dumper';
 test_requires 'Test::More' => '0.88';
-test_requires 'Test::WWW::Mechanize::Catalyst';
+test_requires 'Test::WWW::Selenium::Catalys';
+test_requires 'Test::Class::Moose';
 catalyst;
 
 install_script glob('script/*.pl');
