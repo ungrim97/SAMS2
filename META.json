@@ -28,6 +28,7 @@
    "prereqs" : {
       "build" : {
          "requires" : {
+            "Data::Random" : "0",
             "ExtUtils::MakeMaker" : "6.36",
             "Test::Class::Moose" : "0",
             "Test::More" : "0.88",
