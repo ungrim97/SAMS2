@@ -98,7 +98,7 @@ sub information_navbar_tests {
     $self->sel->text_is('//li[4]/ul/li[1]/a' => $self->labels->{navbar}{information_help}, '  -> with correct label');
 }
 
-sub test_header {
+sub header_tests {
     my ($self) = @_;
 
     $self->sel->open_ok("/account/".$self->account->account_id."/account_details");
