@@ -14,7 +14,7 @@
         disabled        => $is_readonly,
     &>
 
-    <&| /comps/label.frag, for => "contact_name" &><% $labels->{account}{name} %></&>
+    <&| /comps/label.frag, for => "contact_name" &><% $labels->{contact}{name} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
