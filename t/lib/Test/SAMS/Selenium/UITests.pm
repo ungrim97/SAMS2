@@ -1,4 +1,4 @@
-package Test::SAMS::Selenium::Roles::UITests;
+package Test::SAMS::Selenium::UITests;
 use Test::More;
 use Moose::Role;
 
