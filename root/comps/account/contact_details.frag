@@ -3,17 +3,6 @@
 
     <p>Fields marked <span class="required_mark">*</span> are required.</p>
 
-    <&| /comps/label.frag, for => "account_id" &><% $labels->{account}{acount_id} %></&>
-    <& /comps/textbox.frag,
-        problems    => $problems,
-        class       => "searchme",
-        name        => 'account_id',
-        value       => $account->account_id,
-        readonly    => $is_readonly,
-        disabled    => $is_readonly,
-        hidden      => 1,
-    &>
-
     <&| /comps/label.frag, for => "contact_title_id" &><% $labels->{contact}{title} %></&>
     <& /comps/select.frag,
         problems        => $problems,
