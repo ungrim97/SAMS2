@@ -34,13 +34,13 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(1){
 
     if ($user->account_id != $account_id){
         $c->log->info("Attempting to locate account $account_id");
-        my $result = $c->model('DB::Account')->find_account({
+        my $result = $c->model('DB::Account')->find_account(search_args => {
                 account_id => $account_id
             });
 
         # Failure to find an the requested account for whatever reason
         # should render their errors on the index page.
-        if (ref $account eq 'SAMS::Error'){
+        if (ref $result eq 'SAMS::Error'){
             push @{$c->stash->{errors}}, $result;
             $c->stash->{template} = 'index.html';
             $c->detach;
