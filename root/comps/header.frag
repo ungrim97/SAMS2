@@ -24,10 +24,10 @@
 <!-- start main content here -->
 <!-- /////////////////////////////////////////////////// -->
     <div class="content">
-
+        <& /comps/highlight.frag, problems => $errors &>
 <%args>
- $error     => undef
- $user   => undef
+ $errors    => undef
+ $user      => undef
  $labels    => {}
 </%args>
 <%init>
