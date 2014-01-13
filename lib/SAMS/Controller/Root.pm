@@ -1,10 +1,9 @@
 package SAMS::Controller::Root;
 use Moose;
 use namespace::autoclean;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller' }
-
-with 'SAMS::Roles::Translate';
 
 #
 # Sets the actions in this controller to be registered with no prefix
@@ -94,8 +93,11 @@ Attempt to render a view, if needed.
 sub end : ActionClass('RenderView') {
     my ($self, $c) = @_;
 
+    $c->log->error("Error:\n".Dumper($_)) for @{$c->stash->{errors}};
     if (@{$c->error}){
-        $c->stash->{errors} = SAMS::Error->new('level' => 'Critical', 'error_message' => 'unkown error',);
+        $c->log->warn("Error:\n".Dumper($_)) for @{$c->error};
+
+        #$c->forward('send_technical_email');
         $c->stash->{template} = 'error.html';
     }
 }
