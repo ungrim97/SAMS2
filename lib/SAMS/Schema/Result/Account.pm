@@ -1,8 +1,9 @@
 package SAMS::Schema::Result::Account;
 use base 'DBIx::Class::Core';
 
-use SAMS::Error;
 use Data::Dumper;
+use SAMS::Error;
+use Try::Tiny;
 
 __PACKAGE__->table('accounts');
 __PACKAGE__->add_columns(
@@ -103,6 +104,8 @@ __PACKAGE__->belongs_to('contact_title', 'SAMS::Schema::Result::ContactTitle', '
 
 =head1 METHODS
 
+These are custom methods for perfoming on a single Result(Row) from the db.
+
 =head2 is_authorised ($action, $user)
 
 Method for determining if the current user is authorised to undertake action($action)
@@ -129,9 +132,10 @@ sub update_account {
     my ($self, %input) = @_;
     my $params = $input{params};
     my $user   = $input{user};
+    my $action = $input{action};
 
-    # Replace with action in params
-    my $action = $self->can('update_contact_details');
+    # TODO: Replace with action in params
+    my $action = $self->can($action);
 
     return SAMS::Error->new(
         level           => 'Error',
@@ -161,14 +165,20 @@ sub update_contact_details {
     # Remove any params that aren't account columns
     for my $param (keys $params){
         next unless $self->has_column($param);
-        $self->$param($params->{$param}) || return SAMS::Error->new(
-            level => 'Error',
-            error_message => "Unable to update $param."
-        );
+
+        $self->$param($params->{$param});
     }
 
-    $self->update();
+    try {
+        $self->update();
+    } catch {
+        return SAMS::Error->new(
+            level => 'Error',
+            error_message => "Unable to update account ".$self->account_id,
+            internal_error => $_,
+        );
+    };
+
     return $self;
 }
-
 1;
