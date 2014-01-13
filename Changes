@@ -1,6 +1,8 @@
 This file documents the revision history for Perl extension SAMS.
 
 0.01  2013-12-30 17:14:01
+    - SAM-2361: moved config file for Subs to local app dir
+    - SAM-2361: Set errors on account retrieval to return to index.html
     - SAM-2361: Removed hidden account_id from countact details form
     - Converted dist to use the Minilla release tool
     - SAM-2361: Reimplemented SAMS Subs index.html as account/*/account_details (account_details.html)
