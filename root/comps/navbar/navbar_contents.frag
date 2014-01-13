@@ -22,10 +22,11 @@ my @items = (
                 ],
 );
 
-if ($account){
+# Account navbar should always link to logged in $user
+if ($user){
     unshift @items, [
         'Account' => [
-            [ "Account Details", '/account/'.$account->account_id.'/account_details' ],
+            [ "Account Details", '/account/'.$user->account_id.'/account_details' ],
             [ "Subscriptions", "/subscriptions.html" ],
             [ "Credentials", "/credentials.html" ],
             [ "Account Preferences", "/account_preferences.html" ],
@@ -37,6 +38,6 @@ return @items;
 
 </%init>
 <%args>
-    $account => undef
+    $user => undef
 </%args>
 %# vim: set ai et sw=4 syntax=mason :

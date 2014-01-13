@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <title><% $labels->{titles}{application_title}%> : <% $title %></title>
+    <title><% $labels->{titles}{application_title} %> : <% $title %></title>
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="imagetoolbar" content="no" />
@@ -18,7 +18,7 @@
     </div>
 
     <& header_title.frag, labels => $labels &>
-    <& navbar.frag, account => $account &>
+    <& navbar.frag, %ARGS &>
 
 <!-- /////////////////////////////////////////////////// -->
 <!-- start main content here -->
@@ -26,8 +26,9 @@
     <div class="content">
 
 <%args>
-    $account => undef
-    $labels  => {}
+ $error     => undef
+ $user   => undef
+ $labels    => {}
 </%args>
 <%init>
 my $title = $m->scomp('REQUEST:title', labels => $labels);

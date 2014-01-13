@@ -4,10 +4,10 @@
 % }
 </ul>
 <%args>
-    $account => undef
+    $user => undef
 </%args>
 <%init>
-my @items = $m->comp('/comps/navbar/navbar_contents.frag', account => $account);
+my @items = $m->comp('/comps/navbar/navbar_contents.frag', user => $user);
 my $currPage;
 
 if ($m->comp_exists("REQUEST:navitem")) {
