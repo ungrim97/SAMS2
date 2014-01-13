@@ -1,6 +1,7 @@
 package SAMS::Controller::Account;
 use Moose;
 use namespace::autoclean;
+use Try::Tiny;
 
 BEGIN { extends 'Catalyst::Controller'; }
 
@@ -28,20 +29,29 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(1){
     my ($self, $c, $account_id) = @_;
 
     my $user = $c->stash->{user};
+
     my $account;
 
     if ($user->account_id != $account_id){
-        $account = $c->model('DB')->resultset('Account')->find($account_id);
-    } else {
-        $account = $user;
+        $c->log->info("Attempting to locate account $account_id");
+        my $result = $c->model('DB::Account')->find_account({
+                account_id => $account_id
+            });
+
+        # Failure to find an the requested account for whatever reason
+        # should render their errors on the index page.
+        if (ref $account eq 'SAMS::Error'){
+            push @{$c->stash->{errors}}, $result;
+            $c->stash->{template} = 'index.html';
+            $c->detach;
+        }
+
+        $account = $result;
     }
 
-    unless ($account){
-        $c->error(
-            SAMS::Error->new(level => 'Error', error_message => 'No Account found')
-        );
-        $c->detach;
-    };
+    # If we didn't detach in the if above then we have an account
+    # If we skipped it then we are using the current users details
+    $account //= $user;
 
     $c->log->info("Editing details for ".$account->account_name." (".$account->account_id.")");
     $c->stash->{account} = $account;
@@ -64,7 +74,6 @@ sub account_details :Path('account/account_details') Chained('account') :PathPar
     my ($self, $c) = @_;
 
     # MAIN PAGE FOR SUBSCRIBER SERVICE ACCOUNTS PAGES.
-
 }
 
 =head2 update_account
@@ -85,7 +94,7 @@ sub update_account :Path('account/update_account') Chained('account') :PathPart(
     );
 
     if (ref $result eq 'SAMS::Error'){
-        $c->error($result);
+        push @{$c->stash->{errors}}, $result;
     } else {
         $c->stash->{account} = $result;
     }
