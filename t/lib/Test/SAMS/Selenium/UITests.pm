@@ -68,7 +68,7 @@ sub report_navbar_tests {
             $self->sel->is_element_present_ok("//li[2]/ul/li[2]/ul/li[1]/a", 'Report COUNTER 3 subitem exists');
             $self->sel->text_is("//li[2]/ul/li[2]/ul/li[1]/a" => $self->labels->{navbar}{report_counter_3}, '  -> with correct label');
 
-            $self->sel->is_element_present_ok("//li[2]/ul/li[2]/ul/li[1]/a", 'Report COUNTER 4 subitem exists');
+            $self->sel->is_element_present_ok("//li[2]/ul/li[2]/ul/li[2]/a", 'Report COUNTER 4 subitem exists');
             $self->sel->text_is("//li[2]/ul/li[2]/ul/li[1]/a" => $self->labels->{navbar}{report_counter_4}, '  -> with correct label');
         };
     };
