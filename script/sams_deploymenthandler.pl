@@ -1,32 +1,64 @@
+#!/usr/bin/env perl
 use strict;
 use warnings;
 
-use feature ":5.10";
+use 5.18.1;
 
 use aliased 'DBIx::Class::DeploymentHandler' => 'DH';
-use FindBin;
-use lib "$FindBin::Bin/../lib";
-use SAMS::Schema;
+
 use Config::JFDI;
 use Data::Dumper;
+use FindBin;
+use Getopt::Long;
+use lib "$FindBin::Bin/../lib";
+
+use SAMS::Schema;
 
 my $config = Config::JFDI->new( name => 'sams' );
 my $config_hash  = $config->get;
 my $connect_info = $config_hash->{"Model::DB"}{"connect_info"};
-warn Dumper $connect_info;
 my $schema = SAMS::Schema->connect($connect_info);
+
+my ($action, $version);
+GetOptions(
+    'action|a=s' => \$action,
+    'version|v=i' => \$version,
+) || die help();
 
 my $dh = DH->new({
   schema           => $schema,
   databases        => 'PostgreSQL',
+  $version ? (to_version       => $version) : (),
 });
 
+given ( $action ) {
+    when ('install')            { install()             }
+    when ('upgrade')            { upgrade()             }
+    when ('downgrade')          { downgrade()           }
+    when ('prepare_install')    { prepare_install()     }
+    when ('prepare_upgrade')    { prepare_upgrade()     }
+    when ('prepare_downgrade')  { prepared_downgrade()  }
+    when ('current-version')    { current_version()     }
+    default                     { die help() }
+};
+
 sub install {
-  $dh->prepare_install;
-  $dh->install;
+  $dh->deploy();
 }
 
 sub upgrade {
+    $dh->deploy();
+}
+
+sub downgrade {
+    $dh->downgrade()
+}
+
+sub prepare_install {
+    $dh->prepare_deploy;
+}
+
+sub prepare_upgrade {
   die "Please update the version in Schema.pm"
     if ( $dh->version_storage->version_rs->search({version => $dh->schema_version})->count );
 
@@ -35,7 +67,16 @@ sub upgrade {
 
   $dh->prepare_deploy;
   $dh->prepare_upgrade;
-  $dh->upgrade;
+}
+
+sub prepare_downgrade {
+    die "Please update the version in Schema.pm"
+      if ( $dh->version_storage->version_rs->search({version => $dh->schema_version})->count );
+
+    die "We only support positive integers for versions around these parts."
+      unless $dh->schema_version =~ /^\d+$/;
+
+    $dh->prepare_downgrade;
 }
 
 sub current_version {
@@ -43,18 +84,21 @@ sub current_version {
 }
 
 sub help {
-say <<'OUT';
+my $usage = '
 usage:
-  install
-  upgrade
-  current-version
-OUT
+    script/sams_deploymenthandler.pl --action|-a action [--version|-v]
+
+    --action    -a  List the action desired to run on the DB defined in sams.conf/sams_local.conf
+                        install             Deploy $version to the DB
+                        upgrade             Upgrade to $version from current version
+                        downgrade           Downgrade to $version from current version
+                        prepare_upgrade     Write sql required to upgrade from current DB version to new schema version
+                        prepare_install     Write sql needed to deploy a new schema version
+                        prepare_downgrade   Write sql needed to downgrade from new schema to current DB
+
+    --version   -v  The version to reach
+';
+say $usage;
 }
 
-help unless $ARGV[0];
 
-given ( $ARGV[0] ) {
-    when ('install')         { install()         }
-    when ('upgrade')         { upgrade()         }
-    when ('current-version') { current_version() }
-}
