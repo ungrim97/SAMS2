@@ -9,7 +9,7 @@
         class           => "drop",
         name            => 'contact_title_id',
         options         => $contact_titles,
-        selectedlabel   => $account->contact_title->title_id,
+        selected_label  => $account->contact_title_id,
         readonly        => $is_readonly,
         disabled        => $is_readonly,
     &>
@@ -90,7 +90,7 @@
         name            => 'country_id',
         class           => 'drop',
         options         => $countries,
-        selectedlabel   => $account->country->country_id,
+        selected_label   => $account->country_id,
         problems        => $problems,
         readonly        => $is_readonly,
         disabled        => $is_readonly,
