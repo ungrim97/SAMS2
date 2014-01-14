@@ -31,6 +31,7 @@ GetOptions(
 my $dh = DH->new({
   schema           => $schema,
   databases        => 'PostgreSQL',
+  $version ? (to_version => $version) : (),
   force_overwrite  => $force_overwrite,
 });
 
@@ -42,13 +43,13 @@ given ( $action ) {
     when ('downgrade')          { downgrade()           }
     when ('prepare_install')    { prepare_install()     }
     when ('prepare_upgrade')    { prepare_upgrade()     }
-    when ('prepare_downgrade')  { prepared_downgrade()  }
+    when ('prepare_downgrade')  { prepare_downgrade()   }
     when ('current-version')    { current_version()     }
     default                     { die help() }
 };
 
 sub install {
-  $dh->deploy({version => $version});
+  $dh->install({version => $version});
 }
 
 sub upgrade {
@@ -86,11 +87,11 @@ sub prepare_downgrade {
     die "We only support positive integers for versions around these parts."
       unless $dh->schema_version =~ /^\d+$/;
 
-    my $from_version = $dh->version_storage->database_version;
+    my $to_version = $dh->version_storage->database_version;
     $dh->prepare_downgrade({
-        from_version => $from_version,
-        to_version   => $version,
-        version_set  => [$from_version, $version]
+        from_version => $version,
+        to_version   => $to_version,
+        version_set  => [$version, $to_version]
     });
 }
 
