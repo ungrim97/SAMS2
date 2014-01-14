@@ -20,16 +20,21 @@ my $connect_info = $config_hash->{"Model::DB"}{"connect_info"};
 my $schema = SAMS::Schema->connect($connect_info);
 
 my ($action, $version);
+my $force_overwrite = 0;
+
 GetOptions(
     'action|a=s' => \$action,
     'version|v=i' => \$version,
+    'force_overwrite|f' => \$force_overwrite,
 ) || die help();
 
 my $dh = DH->new({
   schema           => $schema,
   databases        => 'PostgreSQL',
-  $version ? (to_version       => $version) : (),
+  force_overwrite  => $force_overwrite,
 });
+
+$version //= $dh->schema_version;
 
 given ( $action ) {
     when ('install')            { install()             }
@@ -43,11 +48,11 @@ given ( $action ) {
 };
 
 sub install {
-  $dh->deploy();
+  $dh->deploy({version => $version});
 }
 
 sub upgrade {
-    $dh->deploy();
+    $dh->upgrade();
 }
 
 sub downgrade {
@@ -59,14 +64,19 @@ sub prepare_install {
 }
 
 sub prepare_upgrade {
-  die "Please update the version in Schema.pm"
-    if ( $dh->version_storage->version_rs->search({version => $dh->schema_version})->count );
+    die "Please update the version in Schema.pm"
+        if ( $dh->version_storage->version_rs->search({version => $dh->schema_version})->count );
 
-  die "We only support positive integers for versions around these parts."
-    unless $dh->schema_version =~ /^\d+$/;
+    die "We only support positive integers for versions around these parts."
+        unless $dh->schema_version =~ /^\d+$/;
+    my $from_version = $dh->version_storage->database_version;
 
-  $dh->prepare_deploy;
-  $dh->prepare_upgrade;
+    $dh->prepare_deploy;
+    $dh->prepare_upgrade({
+        from_version => $from_version,
+        to_version   => $version,
+        version_set  => [$from_version, $version],
+    });
 }
 
 sub prepare_downgrade {
@@ -76,7 +86,12 @@ sub prepare_downgrade {
     die "We only support positive integers for versions around these parts."
       unless $dh->schema_version =~ /^\d+$/;
 
-    $dh->prepare_downgrade;
+    my $from_version = $dh->version_storage->database_version;
+    $dh->prepare_downgrade({
+        from_version => $from_version,
+        to_version   => $version,
+        version_set  => [$from_version, $version]
+    });
 }
 
 sub current_version {
