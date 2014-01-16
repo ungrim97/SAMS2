@@ -1,23 +1,27 @@
+<%args>
+    $user => undef
+    $labels => {}
+</%args>
 <%init>
 my $counter_options = [
-                        ['COUNTER 3'        => "/report/counter.html" ],
-                        ['COUNTER 4'        => "/report/counter_star.html" ],
+                        [$labels->{navbar}{report_counter_3} => "/report/counter.html" ],
+                        [$labels->{navbar}{report_counter_4} => "/report/counter_star.html" ],
                        ];
 
 
 my @items = (
-                [ "Reports" => [ 
-                                [ "ICOLC", "/report/icolc.html" ],
-                                [ "COUNTER", $counter_options ]
+                [ $labels->{navbar}{reports} => [ 
+                                [ $labels->{navbar}{report_icolc}, "/report/icolc.html" ],
+                                [ $labels->{navbar}{report_counter}, $counter_options ]
                                ]
                 ],
-                [ 'Access Tokens' => [
-                                        [ "Access Token Activation", "/access_token_1.html" ]
+                [ $labels->{navbar}{access_tokens} => [
+                                        [ $labels->{navbar}{access_token_activate}, "/access_token_1.html" ]
                                      ]
                 ],
-                ['Information' => [
-                                    [ "Contact Us", "/contact.html" ],
-                                    [ "Help", "/help.html" ],
+                [ $labels->{navbar}{info} => [
+                                    [ $labels->{navbar}{info_contact}, "/contact.html" ],
+                                    [ $labels->{navbar}{info_help}, "/help.html" ],
                                   ]
                 ],
 );
@@ -25,11 +29,11 @@ my @items = (
 # Account navbar should always link to logged in $user
 if ($user){
     unshift @items, [
-        'Account' => [
-            [ "Account Details", '/account/'.$user->account_id.'/account_details' ],
-            [ "Subscriptions", "/subscriptions.html" ],
-            [ "Credentials", "/credentials.html" ],
-            [ "Account Preferences", "/account_preferences.html" ],
+        $labels->{navbar}{accounts} => [
+            [ $labels->{navbar}{account_details}, '/account/'.$user->account_id.'/account_details' ],
+            [ $labels->{navbar}{account_subscriptions}, "/subscriptions.html" ],
+            [ $labels->{navbar}{account_credentials}, "/credentials.html" ],
+            [ $labels->{navbar}{account_preferences}, "/account_preferences.html" ],
         ]
     ];
 }
@@ -37,7 +41,4 @@ if ($user){
 return @items;
 
 </%init>
-<%args>
-    $user => undef
-</%args>
 %# vim: set ai et sw=4 syntax=mason :

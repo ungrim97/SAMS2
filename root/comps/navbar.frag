@@ -7,7 +7,7 @@
     $user => undef
 </%args>
 <%init>
-my @items = $m->comp('/comps/navbar/navbar_contents.frag', user => $user);
+my @items = $m->comp('/comps/navbar/navbar_contents.frag', %ARGS);
 my $currPage;
 
 if ($m->comp_exists("REQUEST:navitem")) {
