@@ -226,7 +226,7 @@ Tests that should apply to every tab on the account page.
 =cut
 
 sub generic_account_layout_test {
-    my ($self) = @_;
+    my ($self, $with_error) = @_;
 
     subtest 'Generic Account Page layout tests' => sub {
         $self->header_tests;
@@ -236,12 +236,18 @@ sub generic_account_layout_test {
         $self->sel->text_is('//div/ul/li[1]/a' => $self->labels->{tabs}{account_details}, '  -> with correct label');
 
         $self->sel->is_element_present_ok('//div/ul/li[2]/a', 'Contact details tab exists');
-        $self->sel->text_is('//div/ul/li[2]/a' => $self->labels->{tabs}{contact_detaisl}, '  -> with correct label');
+        $self->sel->text_is('//div/ul/li[2]/a' => $self->labels->{tabs}{contact_details}, '  -> with correct label');
 
         $self->sel->is_element_present_ok("//div[\@id='save_changes']", 'Form submit button present');
         $self->sel->value_is("//div[\@id='save_changes']/input" => $self->labels->{buttons}{submit_changes}, '  -> with correct label');
+
+        $self->sel->is_element_present_ok("//div[\@id='problems']", 'Problems box is present');
+        if ($with_error){
+            $self->sel->is_visible_ok('//div[@id="problems"]', '  -> is visible');
+        } else {
+            ok($self->sel->is_visible('//div[@id="problems"]') == 0, '  -> is hidden');
+        }
     };
 }
-
 
 1;
