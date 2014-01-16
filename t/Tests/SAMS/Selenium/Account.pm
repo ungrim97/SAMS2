@@ -127,7 +127,7 @@ sub test_contact_details {
         my @countries = $self->db->resultset('Country')->all;
         for my $country (@countries){
             my $xpath = $xpath."/select[\@id='country_id']/option[".$country->country_id."]";
-            $self->sel->is_element_present_ok("$xpath", "Title ".$country->country_id." exists");
+            $self->sel->is_element_present_ok("$xpath", "Country ".$country->country_id." exists");
             $self->sel->value_is("$xpath" => $country->country_id, '  -> with correct value');
             $self->sel->text_is("$xpath" => $country->country_name, '  -> with correct literal');
         }
@@ -174,24 +174,49 @@ sub test_update_contact_details {
         for my $field (qw/contact_name contact_job_title street_1 street_2 city county/){
             my ($random_word) = rand_words();
 
-            $self->generic_account_layout_test;
-
             $self->sel->type_ok("$xpath/input[\@id='$field']" => $random_word, "Typed $random_word into $field");
-            $self->sel->click_ok("//input[\@value='Save Changes']", '  -> Submited ok');
-            $self->sel->wait_for_page_to_load_ok("30000");
-            $self->sel->click("link=Contact Details");
+            $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
+            $self->sel->wait_for_page_to_load_ok("3000");
+            $self->sel->click('link='.$self->labels->{tabs}{contact_details});
             $self->sel->value_is("$xpath/input[\@id='$field']" => $random_word, "Field $field updated correctly");
+
+            $self->generic_account_layout_test;
         }
     };
 
     subtest 'Dropdown selections' => sub {
-        # Select boxes coul error on strange override so we should ensure
+        # Select boxes could error on strange override so we should ensure
         # we catch any errors from that. Otherwise the list defines the allowable
         # values
 
-        for my $select (qw/contact_title_id country_id/){
-        }
-    }
+        subtest 'Country dropdown' => sub {
+            my @countries = $self->db->resultset('Country')->all;
+            my $max_countries = scalar @countries - 1;
+            my $random_element = int(rand($max_countries));
+
+            $self->sel->select_ok("$xpath/select[\@id='country_id']/" => "value=$random_element", "Selected country $random_element");
+            $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
+            $self->sel->wait_for_page_to_load_ok("3000");
+            $self->sel->click('link='.$self->labels->{tabs}{contact_details});
+            $self->sel->value_is("$xpath/select[\@id='country_id']" => $random_element, 'Country dropdown updated correctly');
+
+            $self->generic_account_layout_test;
+        };
+
+        subtest 'Contact Titles dropdown' => sub {
+            my @titles = $self->db->resultset('ContactTitle')->all;
+            my $max_titles = scalar @titles - 1;
+            my $random_element = int(rand($max_titles));
+
+            $self->sel->select_ok("$xpath/select[\@id='contact_title_id']", "value=$random_element", "Selected title $random_element");
+            $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
+            $self->sel->wait_for_page_to_load_ok("3000");
+            $self->sel->click("link=".$self->labels->{tabs}{contact_details});
+            $self->sel->value_is("$xpath/select[\@id='contact_title_id']" => $random_element, 'Contact Title dropdown updated correctly');
+
+            $self->generic_account_layout_test;
+        };
+    };
 }
 
 =head2 generic_account_layout_tests
