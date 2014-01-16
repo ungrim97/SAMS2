@@ -217,6 +217,24 @@ sub test_update_contact_details {
             $self->generic_account_layout_test;
         };
     };
+
+    subtest 'Email handling' => sub {
+        # Emails are the only thing on the form that can really be input wrong without turning of JS/HTML5
+        # Those things are handled in DB tests.
+        #
+        # The HTML5 email handler is inflexible compared to the RFC spec. Currently SAMS will allow RFC emails but the
+        # input fields allow only HTML5. This will likely change as customers want UTF-8 chars in their emails which
+        # HTML5 doesn't support
+
+        # Valid Email
+        $self->sel->type_ok("$xpath/input[\@id='email_address']", 'test@semantico.net', 'Valid email address input ok');
+        $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
+        $self->sel->wait_for_page_to_load_ok("3000");
+        $self->sel->click("link=".$self->labels->{tabs}{contact_details});
+        $self->sel->value_is("$xpath/input[\@id='email_address']" => 'test@semantico.net', "Updated email address correctly");
+
+        $self->generic_account_layout_test;
+    };
 }
 
 =head2 generic_account_layout_tests
