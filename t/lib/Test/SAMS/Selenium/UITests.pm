@@ -69,7 +69,7 @@ sub report_navbar_tests {
             $self->sel->text_is("//li[2]/ul/li[2]/ul/li[1]/a" => $self->labels->{navbar}{report_counter_3}, '  -> with correct label');
 
             $self->sel->is_element_present_ok("//li[2]/ul/li[2]/ul/li[2]/a", 'Report COUNTER 4 subitem exists');
-            $self->sel->text_is("//li[2]/ul/li[2]/ul/li[1]/a" => $self->labels->{navbar}{report_counter_4}, '  -> with correct label');
+            $self->sel->text_is("//li[2]/ul/li[2]/ul/li[2]/a" => $self->labels->{navbar}{report_counter_4}, '  -> with correct label');
         };
     };
 }
@@ -82,30 +82,27 @@ sub access_token_navbar_tests {
     $self->sel->text_is("//li[3]/span", $self->labels->{navbar}{access_tokens}, '  -> with correct label');
 
     $self->sel->is_element_present_ok('//li[3]/ul/li[1]/a', 'Access Token Activation subitem exists');
-    $self->sel->text_is("//li[3]/ul/li[1]/a" => $self->labels->{navbar}{access_tokens_activation}, '  -> with correct label');
+    $self->sel->text_is("//li[3]/ul/li[1]/a" => $self->labels->{navbar}{access_token_activate}, '  -> with correct label');
 }
 
 sub information_navbar_tests {
     my ($self) = @_;
 
     $self->sel->is_element_present_ok("//li[4]/span", 'Information NavBar item exists');
-    $self->sel->text_is("//li[4]/span", $self->labels->{navbar}{information}, '  -> with correct label');
+    $self->sel->text_is("//li[4]/span", $self->labels->{navbar}{info}, '  -> with correct label');
 
     $self->sel->is_element_present_ok("//li[4]/ul/li[1]/a", 'Information Contact Us subitem exists');
-    $self->sel->text_is('//li[4]/ul/li[1]/a' => $self->labels->{navbar}{information_contact_us}, '  -> with correct label');
+    $self->sel->text_is('//li[4]/ul/li[1]/a' => $self->labels->{navbar}{info_contact}, '  -> with correct label');
 
-    $self->sel->is_element_present_ok('//li[4]/ul/li[1]/a', 'Information Help subitem exists');
-    $self->sel->text_is('//li[4]/ul/li[1]/a' => $self->labels->{navbar}{information_help}, '  -> with correct label');
+    $self->sel->is_element_present_ok('//li[4]/ul/li[2]/a', 'Information Help subitem exists');
+    $self->sel->text_is('//li[4]/ul/li[2]/a' => $self->labels->{navbar}{info_help}, '  -> with correct label');
 }
 
 sub header_tests {
     my ($self) = @_;
 
-    $self->sel->open_ok("/account/".$self->account->account_id."/account_details");
     $self->sel->title_is($self->labels->{titles}{application_title}.' : '.$self->labels->{titles}{account_details_page});
-
     $self->sel->is_element_present_ok("//body/div/h1/a/img[\@alt='".$self->labels->{titles}{application_title}."']", 'Client logo present');
-    $self->sel->text_is('//body/h2[contains(@class, "pageHead")]', $self->labels->{titles}{account_details_page}, 'Page titel correct');
 }
 
 1;
