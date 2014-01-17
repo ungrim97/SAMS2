@@ -34,7 +34,9 @@ sub test_account_details {
 
     $self->sel->open_ok('/account/'.$self->account->account_id.'/account_details', 'Account page loaded ok');
 
-    $self->generic_account_layout_test;
+    $self->generic_account_layout_test({
+            page_title => $self->labels->{titles}{account_details_page},
+        });
 
     $self->sel->text_is("//div[\@id='account_details']/p[1]", "View or change your contact details or account information.");
     $self->sel->text_is("//div[\@id='account_details']/p[2]", "If you would like us to change your contact details for you, or if you wish to change credentials details, please Contact Us");
@@ -47,6 +49,14 @@ sub test_account_details {
 
     $self->sel->text_is("//div[\@id='account_details']/label[\@for='account_id']", $self->labels->{account}{account_id}, 'Correct Account ID label');
     $self->sel->text_is("//span[\@name='account_id']", $self->account->account_id, 'Account id correct');
+
+    subtest 'Invalid account/ Account not found' => sub {
+        $self->sel->open_ok('/account/test_no/account_details', 'Page loaded ok');
+        $self->generic_layout_test({
+                errors => [$self->labels->{error}{no_account_found}],
+                page_title => $self->labels->{titles}{splash_page},
+            });
+    };
 };
 
 =head2 test_contact_details
@@ -61,7 +71,9 @@ sub test_contact_details {
     $self->sel->open_ok('/account/'.$self->account->account_id.'/account_details', 'Account page loaded ok');
     $self->sel->click_ok('//a[contains(@href,"#contact_details")]', 'Selected Contact details tab');
 
-    $self->generic_account_layout_test;
+    $self->generic_account_layout_test({
+            page_title => $self->labels->{titles}{account_details_page},
+        });
 
     my $xpath = '//div[@id="contact_details"]';
     $self->sel->is_element_present_ok("$xpath/h4", 'Accout contact details sub header exists');
@@ -160,6 +172,10 @@ Test for the /account/*/update_details.
 
 These are functional tests for the updating of the account contact details.
 
+TODO: TESTS for When things go wrong
+    - Invalid/Non-existant account no
+    - User unauthorised to edit account.
+
 =cut
 
 sub test_update_contact_details {
@@ -180,7 +196,9 @@ sub test_update_contact_details {
             $self->sel->click('link='.$self->labels->{tabs}{contact_details});
             $self->sel->value_is("$xpath/input[\@id='$field']" => $random_word, "Field $field updated correctly");
 
-            $self->generic_account_layout_test;
+            $self->generic_account_layout_test({
+                    page_title => $self->labels->{titles}{account_details_page},
+                });
         }
     };
 
@@ -191,30 +209,32 @@ sub test_update_contact_details {
 
         subtest 'Country dropdown' => sub {
             my @countries = $self->db->resultset('Country')->all;
-            my $max_countries = scalar @countries - 1;
-            my $random_element = int(rand($max_countries));
+            my $country = $countries[int(rand($#countries))];
 
-            $self->sel->select_ok("$xpath/select[\@id='country_id']/" => "value=$random_element", "Selected country $random_element");
+            $self->sel->select_ok("$xpath/select[\@id='country_id']/" => 'value='.$country->country_id, "Selected country ".$country->country_name);
             $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
             $self->sel->wait_for_page_to_load_ok("3000");
             $self->sel->click('link='.$self->labels->{tabs}{contact_details});
-            $self->sel->value_is("$xpath/select[\@id='country_id']" => $random_element, 'Country dropdown updated correctly');
+            $self->sel->value_is("$xpath/select[\@id='country_id']" => $country->country_id, 'Country dropdown updated correctly');
 
-            $self->generic_account_layout_test;
+            $self->generic_account_layout_test({
+                    page_title => $self->labels->{titles}{account_details_page},
+                });
         };
 
         subtest 'Contact Titles dropdown' => sub {
             my @titles = $self->db->resultset('ContactTitle')->all;
-            my $max_titles = scalar @titles - 1;
-            my $random_element = int(rand($max_titles));
+            my $title = $titles[int(rand($#titles))];
 
-            $self->sel->select_ok("$xpath/select[\@id='contact_title_id']", "value=$random_element", "Selected title $random_element");
+            $self->sel->select_ok("$xpath/select[\@id='contact_title_id']", "value=".$title->title_id, "Selected title ".$title->description);
             $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
             $self->sel->wait_for_page_to_load_ok("3000");
             $self->sel->click("link=".$self->labels->{tabs}{contact_details});
-            $self->sel->value_is("$xpath/select[\@id='contact_title_id']" => $random_element, 'Contact Title dropdown updated correctly');
+            $self->sel->value_is("$xpath/select[\@id='contact_title_id']" => $title->title_id, 'Contact Title dropdown updated correctly');
 
-            $self->generic_account_layout_test;
+            $self->generic_account_layout_test({
+                    page_title => $self->labels->{titles}{account_details_page},
+                });
         };
     };
 
@@ -233,7 +253,9 @@ sub test_update_contact_details {
         $self->sel->click("link=".$self->labels->{tabs}{contact_details});
         $self->sel->value_is("$xpath/input[\@id='email_address']" => 'test@semantico.net', "Updated email address correctly");
 
-        $self->generic_account_layout_test;
+        $self->generic_account_layout_test({
+                page_title => $self->labels->{titles}{account_details_page},
+            });
     };
 }
 
@@ -244,11 +266,10 @@ Tests that should apply to every tab on the account page.
 =cut
 
 sub generic_account_layout_test {
-    my ($self, $with_error) = @_;
+    my ($self, $args) = @_;
 
     subtest 'Generic Account Page layout tests' => sub {
-        $self->header_tests;
-        $self->navbar_tests;
+        $self->generic_layout_test($args);
 
         $self->sel->is_element_present_ok("//div/ul/li[1]/a", 'Account details tab exists');
         $self->sel->text_is('//div/ul/li[1]/a' => $self->labels->{tabs}{account_details}, '  -> with correct label');
@@ -260,11 +281,6 @@ sub generic_account_layout_test {
         $self->sel->value_is("//div[\@id='save_changes']/input" => $self->labels->{buttons}{submit_changes}, '  -> with correct label');
 
         $self->sel->is_element_present_ok("//div[\@id='problems']", 'Problems box is present');
-        if ($with_error){
-            $self->sel->is_visible_ok('//div[@id="problems"]', '  -> is visible');
-        } else {
-            ok($self->sel->is_visible('//div[@id="problems"]') == 0, '  -> is hidden');
-        }
     };
 }
 

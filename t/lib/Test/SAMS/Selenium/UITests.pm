@@ -6,6 +6,19 @@ requires 'labels';
 requires 'sel';
 requires 'account';
 
+sub generic_layout_test {
+    my ($self, $args) = @_;
+
+    $self->navbar_tests;
+    $self->header_tests($args);
+
+    if ($args->{errors}){
+        $self->sel->is_visible_ok('//div[@id="problems"]', '  -> is visible');
+    } else {
+        ok($self->sel->is_visible('//div[@id="problems"]') == 0, '  -> is hidden');
+    }
+}
+
 sub navbar_tests {
     my ($self) = @_;
 
@@ -99,9 +112,9 @@ sub information_navbar_tests {
 }
 
 sub header_tests {
-    my ($self) = @_;
+    my ($self, $args) = @_;
 
-    $self->sel->title_is($self->labels->{titles}{application_title}.' : '.$self->labels->{titles}{account_details_page});
+    $self->sel->title_is($self->labels->{titles}{application_title}.' : '.$args->{page_title});
     $self->sel->is_element_present_ok("//body/div/h1/a/img[\@alt='".$self->labels->{titles}{application_title}."']", 'Client logo present');
 }
 
