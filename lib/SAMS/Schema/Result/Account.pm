@@ -115,8 +115,9 @@ returns 1 or 0
 =cut
 
 sub is_authorised {
+    my ($self, $action, $account) = @_;
 
-    return 1
+    return $self->account_id == $account->account_id;
 }
 
 =head2 update_account (%update_args, $update_user)
