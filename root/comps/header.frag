@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-    <title><% $labels->{titles}{application_title} %> : <% $title %></title>
+    <title><% $labels->{titles}{application_title}//'' %> : <% $title//'' %></title>
 
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="imagetoolbar" content="no" />
