@@ -39,7 +39,7 @@ sub find_account {
         $result = $self->find($input{search_args});
     };
 
-    $result //= SAMS::Error->new(error_message => 'No Account found');
+    $result //= SAMS::Error->new(error_code => 'errors.account_not_found');
 
     return $result;
 }

@@ -12,10 +12,17 @@ sub generic_layout_test {
     $self->navbar_tests;
     $self->header_tests($args);
 
-    if ($args->{errors}){
-        $self->sel->is_visible_ok('//div[@id="problems"]', '  -> is visible');
+    if (defined $args->{errors} && scalar @{$args->{errors}}){
+        my @errors = @{$args->{errors}};
+        $self->sel->is_visible_ok('//div[@id="problems"]', 'Error box is visible');
+        $self->sel->is_visible_ok('//div[@id="problems"]/span[1]', '  -> with error icon');
+        $self->sel->text_is('//div[@id="problems"]/span[2]' => 'Errors:', '  -> with "Errors:" text');
+
+        for my $error_no (0..$#errors){
+            $self->sel->text_is("//div[\@id='problems']/ul/li[$error_no + 1]" => $errors[$error_no], ' -> with correct error text');
+        }
     } else {
-        ok($self->sel->is_visible('//div[@id="problems"]') == 0, '  -> is hidden');
+        ok($self->sel->is_visible('//div[@id="problems"]') == 0, 'Error box is hidden');
     }
 }
 
