@@ -23,6 +23,21 @@ This is the root action for the account/ namespace. Its main use is as a chain
 base for actions in the account/* namespace. Should contain handling of
 stash population for all actions in this namespace.
 
+All page actions here should chain of account which in turn chains of auth->web which handles
+authorisation and request based transactions such as translations.
+
+Its main role is to get an account via the model based on the url path arg /account/*.
+This is the account that the user is editing not necessarily the logged in user.
+
+We don't need to inflate any of the sub objects here as all the data we need
+is on the main account object
+
+Errors in account retrieval, either because the account doesn't exist or the user doesn't have
+permission to view the account should return the user to the main page (TODO: Maybe the previous page)
+with an error stating why. 
+
+ALL LOGIC ON HOW AN ACCOUNT IS FOUND SHOULD BE DEALT WITH IN THE MODELS RESULTSET
+
 =cut
 
 sub account :Chained('/web') PathPart('account') CaptureArgs(1){
@@ -68,6 +83,9 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(1){
 
 =head2 account_details
 
+This is the landing page for the account_details navbar link. As all this page does is display the account
+and the contact details in two tabs there is nothing to do as account loading occurs in the account sub above
+
 =cut
 
 sub account_details :Path('account/account_details') Chained('account') :PathPart('account_details') Args(0) {
@@ -77,6 +95,13 @@ sub account_details :Path('account/account_details') Chained('account') :PathPar
 }
 
 =head2 update_account
+
+Call update account on the current account object and let it handle the logic
+of how that is supposed to proceed.
+
+Should recieve either a SAMS::Error object or an updated account object for display.
+
+NO ACTUALL LOGIC FOR HOW AN UPDATE OCCURS SHOULD GO HERE.
 
 =cut
 
@@ -105,6 +130,10 @@ sub update_account :Path('account/update_account') Chained('account') :PathPart(
 This sub should populate the stash with all data needed for the various dropdowns needed on all
 account/* pages
 
+Drop Downs are:
+    List of Country ID's => Country Name
+    List of Contact Title ID's => Title Description
+
 =cut
 
 sub populate_contact_dropdowns :Private {
@@ -122,6 +151,20 @@ sub populate_contact_dropdowns :Private {
         ],
     );
 }
+
+=head1 USER DOCS
+
+The account details page provides the user with the ability to view an account and the contact details associated
+with it. In many cases these details will be for their account. But for Consortia/Parent accounts they may be able
+to view other accounts. If the user has write permission to that account then the contact details are completely editable.
+
+A user may only view their own account or a child account. Editablility of these accounts is controlled from the SAMS Admin Interface
+but it is usually the case that if a user can view an account then they are able to edit it. To prevent a user editing an account
+set the users account to read only administrator.
+
+The required fields needed for editing are definable by the client JavaScript. Email address and Name are always required fields
+if any fields are entered. No Server side validation occurs for any field except the email format. This is mostly due to the fact that HTML5 email validation
+fails to correctly recognise valid/invalid email addresses. Its check is based purely on the presence of an @ symbol.
 
 =encoding utf8
 
