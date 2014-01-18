@@ -1,8 +1,11 @@
 <div id="problems" <% $hidden %> class="problems ui-widget ui-state-error ui-corner-all" >
-    <span class="inline_icon ui-icon ui-icon-alert">Errors:</span>
+    <span class="inline_icon ui-icon ui-icon-alert"></span>
+    <span>Errors:</span>
+    <ul>
 % for my $problem (@$problems) {
-    <span class="errors"><% $problem->error_message %></span>
+        <li><% $problem->level%>: <% $problem->error_message %></li>
 % }
+    </ul>
 </div>
 <%args>
   $problems => undef
