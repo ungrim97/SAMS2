@@ -24,7 +24,7 @@ __PACKAGE__->add_columns(
         data_type     => 'char',
         size          => 3
     },
-    langauge_id => {
+    language_id => {
         data_type => 'integer',
         is_numeric  => 1,
         is_foreign_key => 1,
