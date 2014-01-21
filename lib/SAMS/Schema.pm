@@ -5,7 +5,7 @@ use 5.008005;
 use Moose;
 use MooseX::MarkAsMethods autoclean => 1;
 
-our $VERSION = 1;
+our $VERSION = 2;
 
 extends 'DBIx::Class::Schema';
 

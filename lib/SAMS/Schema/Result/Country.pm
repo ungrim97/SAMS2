@@ -24,6 +24,11 @@ __PACKAGE__->add_columns(
         data_type     => 'char',
         size          => 3
     },
+    langauge_id => {
+        data_type => 'integer',
+        is_numeric  => 1,
+        is_foreign_key => 1,
+    },
     last_update_time => {
         data_type           => 'timestamp with time zone',
         default_value       => \'now()',
@@ -55,6 +60,16 @@ __PACKAGE__->has_many(
     {
         cascade_copy    => 0,
         cascade_delete  => 0,
+    },
+);
+
+__PACKAGE__->belongs_to(
+    'language', 'SAMS::Schema::Result::Language', 'language_id',
+    {
+        is_deferrable => 1,
+        join_type     => 'LEFT',
+        on_delete     => 'NO ACTION',
+        on_update     => 'NO ACTION',
     },
 );
 
