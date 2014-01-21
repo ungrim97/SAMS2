@@ -1,32 +1,50 @@
 package SAMS::Schema::Result::AccountType;
+
+
+use strict;
+use warnings;
+
 use base 'DBIx::Class::Core';
 
-__PACKAGE__->table('account_types');
+__PACKAGE__->load_components('InflateColumn::DateTime');
+__PACKAGE__->table('account_type');
 __PACKAGE__->add_columns(
-    account_type_id => {
-        data_type => 1,
-        is_auto_increment => 1,
-        is_numeric => 1,
-    },
-    description => {
-        data_type => 'text',
-    },
-    last_update_user => {
-        data_type => 'int',
-        is_numeric => 1,
-        is_foreign_key => 1,
-        is_nullable     => 1,
-    },
-    last_update_time => {
-        data_type => 'timestamp with time zone',
-        is_nullable => 1,
-        default_value => \'now()',
-    },
+  'account_type_id' => {
+    data_type           => 'integer',
+    is_auto_increment   => 1,
+    is_numeric          => 1,
+  },
+  'description' => {
+      data_type     => 'text',
+  },
+  'is_account_group' => {
+      data_type     => 'boolean',
+      default_value => \'false',
+  },
+  'is_subscription_group' => {
+      data_type     => 'boolean',
+      default_value => \'false',
+  },
+  'last_update_id' => {
+      data_type     => 'text',
+      is_nullable   => 1,
+  },
+  'last_update_time' => {
+    data_type     => 'timestamp with time zone',
+    default_value => \'now()',
+    is_nullable   => 1,
+  },
 );
 
 __PACKAGE__->set_primary_key('account_type_id');
+__PACKAGE__->add_unique_constraint('account_type_description_key', ['description']);
 
-__PACKAGE__->belongs_to('update_user', 'SAMS::Schema::Result::Account', 'last_update_user');
-__PACKAGE__->has_many('accounts', 'SAMS::Schema::Result::Account', 'account_type_id');
+__PACKAGE__->has_many(
+    'accounts', 'SAMS::Schema::Result::Account', 'account_type_id',
+    {
+        cascade_copy    => 0,
+        cascade_delete  => 0,
+    },
+);
 
 1;
