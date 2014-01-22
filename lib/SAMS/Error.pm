@@ -21,4 +21,8 @@ has error_code => (
     isa => 'Str',
 );
 
+has internal_error => (
+    is => 'rw',
+    isa => 'Str|Undef',
+);
 1;
