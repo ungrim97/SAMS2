@@ -1,7 +1,20 @@
 package SAMS::Schema::Result::Account;
 
+=head1 NAME
+
+SAMS::Schema::Result::Account - Account Result Class
+
+=head1 DESCRIPTION
+
+This class represents a single account row object. Its accessors are
+based on the Column names in the SAMS DB.
+
+=cut
+
 use strict;
 use warnings;
+
+use SAMS::Error;
 
 use base 'DBIx::Class::Core';
 
@@ -152,12 +165,20 @@ __PACKAGE__->add_columns(
     },
 );
 
+=head1 CONSTRAINTS
+
+=cut
+
 __PACKAGE__->set_primary_key('acc_id');
 __PACKAGE__->add_unique_constraint( 'account_if_acc_id_key', ['if_acc_id'] );
 __PACKAGE__->add_unique_constraint( 'account_msd_customer_id_key',
     ['msd_customer_id'] );
 __PACKAGE__->add_unique_constraint( 'account_oed_sid_key',  ['oed_sid'] );
 __PACKAGE__->add_unique_constraint( 'account_vista_id_key', ['vista_id'] );
+
+=head1 RELATIONSHIPS
+
+=cut
 
 __PACKAGE__->has_many(
     'attribute_groups',
@@ -478,5 +499,78 @@ __PACKAGE__->has_many(
         cascade_delete => 0,
     },
 );
+
+=head1 METHODS
+
+These are custom methods for perfoming on a single Result(Row) from the db.
+
+=head2 is_authorised ($action, $user)
+
+Method for determining if the current user is authorised to undertake action($action)
+
+returns 1 or 0
+
+=cut
+
+sub is_authorised {
+    my ($self, $action, $account) = @_;
+
+    return $self->account_id == $account->account_id;
+}
+
+=head2 update_account (%update_args, $update_user)
+
+Main input for updating account. Will hand of to other smaller methods for
+individual logic on updating certain records.
+
+return either an updated account($self) or a SAMS::Error
+
+=cut
+
+sub update_account {
+    my ($self, %input) = @_;
+    my $params = $input{params};
+    my $user   = $input{user};
+    my $action = $input{action};
+
+    # TODO: Replace with action in params
+    $action = $self->can($action);
+
+    return SAMS::Error->new(
+        level           => 'Error',
+        error_message   => 'No Account to update',
+    ) unless $self->account_id;
+
+    return SAMS::Error->new(
+        level           => 'Error',
+        error_message   => 'User not authorised to edit account '.$self->account_id,
+    ) unless $user->is_authorised(update => $self);
+
+    $self->$action($params, $user);
+}
+
+=head2 update_contact_details (\%update_params, $update_user)
+
+Routine for handling the logic around update account contact details.
+Any specific on how contact details should be updated on the account should go here.
+
+returns either an updated account($self) or a SAMS::Error object
+
+=cut
+
+sub update_contact_details {
+    my ($self, $params, $user) = @_;
+
+    # Remove any params that aren't account columns
+    for my $param (keys $params){
+        next unless $self->has_column($param);
+
+        $self->$param($params->{$param});
+    }
+
+    $self->update();
+
+    return $self;
+}
 
 1;
