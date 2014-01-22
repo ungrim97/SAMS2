@@ -49,9 +49,12 @@ sub account :Chained('/web') PathPart('account') CaptureArgs(1){
 
     if ($user->account_id != $account_id){
         $c->log->info("Attempting to locate account $account_id");
-        my $result = $c->model('DB::Account')->find_account(search_args => {
-                account_id => $account_id
-            });
+        my $result = $c->model('DB::Account')->find_account(
+            user        => $user,
+            search_args => {
+                acc_id => $account_id
+            }
+        );
 
         # Failure to find an the requested account for whatever reason
         # should render their errors on the index page.
@@ -132,7 +135,6 @@ account/* pages
 
 Drop Downs are:
     List of Country ID's => Country Name
-    List of Contact Title ID's => Title Description
 
 =cut
 
@@ -140,14 +142,10 @@ sub populate_contact_dropdowns :Private {
     my ($self, $c) = @_;
 
     my @countries = $c->model('DB')->resultset('Country')->all;
-    my @contact_titles = $c->model('DB')->resultset('ContactTitle')->all;
 
     $c->stash(
         countries   => [
-            map +{ $_->country_id => $_->country_name}, @countries
-        ],
-        contact_titles => [
-            map +{$_->title_id, $_->description}, @contact_titles,
+            map +{ $_->country_id => $_->name}, @countries
         ],
     );
 }

@@ -34,12 +34,19 @@ for custom relationship inflation ect
 sub find_account {
     my ($self, %input) = @_;
 
+    my $user = $input{user};
     my $result;
     try {
         $result = $self->find($input{search_args});
     };
 
-    $result //= SAMS::Error->new(error_code => 'errors.account_not_found');
+    unless ($result){
+        return SAMS::Error->new(error_message => 'Unable to locate account');
+    }
+
+    unless ($user->is_authorised(view => $result)){
+        $result = SAMS::Error->new(error_message => 'User '.$user->account_name.' not authorised to view account '.$result->account_id);
+    }
 
     return $result;
 }
