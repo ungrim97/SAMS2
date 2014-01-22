@@ -6,6 +6,8 @@ requires 'Config::General';
 requires 'Data::Dumper';
 requires 'Moose';
 requires 'namespace::autoclean';
+requires 'DBIx::Class';
+requires 'HTML::Mason';
 
 on build => sub {
     requires 'Data::Random';
