@@ -9,6 +9,7 @@ __PACKAGE__->load_components('InflateColumn::DateTime');
 __PACKAGE__->table('account');
 __PACKAGE__->add_columns(
     'acc_id' => {
+        accessor          => 'account_id',
         data_type         => 'integer',
         auto_nextval      => 1,
         sequence          => 'account_acc_id_seq',
@@ -37,7 +38,10 @@ __PACKAGE__->add_columns(
         is_nullable       => 1,
         is_auto_increment => 1,
     },
-    'organisation' => { data_type => 'text', },
+    'organisation' => {
+        accessor    => 'account_name',
+        data_type   => 'text',
+    },
     'vista_id'     => {
         data_type   => 'bigint',
         is_nullable => 1,
@@ -83,6 +87,10 @@ __PACKAGE__->add_columns(
         is_foreign_key => 1,
         is_nullable    => 1,
         is_numeric     => 1,
+    },
+    'contact_name'  => {
+        data_type   => 'text',
+        is_nullable => 1,
     },
     'contact_given_name' => {
         data_type   => 'text',

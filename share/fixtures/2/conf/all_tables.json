@@ -1,0 +1,341 @@
+{
+   "belongs_to" : {
+      "fetch" : 0
+   },
+   "might_have" : {
+      "fetch" : 0
+   },
+   "sets" : [
+      {
+         "quantity" : "all",
+         "class" : "OauthServerRefreshToken"
+      },
+      {
+         "class" : "SubscriptionTokenBatch",
+         "quantity" : "all"
+      },
+      {
+         "class" : "OauthClientServer",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "CredentialOauth"
+      },
+      {
+         "class" : "OauthServerAccessToken",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "ProductEditionSku"
+      },
+      {
+         "quantity" : "all",
+         "class" : "ProductEditionSkuPurchasePrice"
+      },
+      {
+         "quantity" : "all",
+         "class" : "Consortium"
+      },
+      {
+         "class" : "SubscriptionToken",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SavedReportArg"
+      },
+      {
+         "class" : "ProductContent",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "CredentialShibboleth"
+      },
+      {
+         "class" : "OauthServerClient",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SessionCredentialShibboleth"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SessionCredentialLibcard"
+      },
+      {
+         "class" : "OrgSize",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SessionHistory",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "MonthlyStatsConsortia"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SessionSummary"
+      },
+      {
+         "class" : "InvoicePayment",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "OauthServerAuthorizationGrant"
+      },
+      {
+         "class" : "AccountType",
+         "quantity" : "all"
+      },
+      {
+         "class" : "AuthorisationHistory",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SavedReportSchedule"
+      },
+      {
+         "class" : "SessionCredentialOauth",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SubscriptionContentUnit",
+         "quantity" : "all"
+      },
+      {
+         "class" : "Invoice",
+         "quantity" : "all"
+      },
+      {
+         "class" : "CustomSubscriptionField",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "ProductEdition"
+      },
+      {
+         "quantity" : "all",
+         "class" : "Translation"
+      },
+      {
+         "class" : "SessionCredentialsView",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "ContentUnitType"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionAttributeGroup"
+      },
+      {
+         "quantity" : "all",
+         "class" : "CredentialLibcard"
+      },
+      {
+         "quantity" : "all",
+         "class" : "NamedUser"
+      },
+      {
+         "quantity" : "all",
+         "class" : "OauthServerPermission"
+      },
+      {
+         "class" : "CredentialReferrer",
+         "quantity" : "all"
+      },
+      {
+         "class" : "DailyStatsConsortia",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SessionCredentialReferrer",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "Language"
+      },
+      {
+         "class" : "PublicationMedium",
+         "quantity" : "all"
+      },
+      {
+         "class" : "CredentialUserpassReset",
+         "quantity" : "all"
+      },
+      {
+         "class" : "Platform",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "CredentialIp"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionInvoice"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubsDuration"
+      },
+      {
+         "quantity" : "all",
+         "class" : "CredentialUserpass"
+      },
+      {
+         "class" : "EcommerceTransactionStatus",
+         "quantity" : "all"
+      },
+      {
+         "class" : "DbUpdate",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "Session"
+      },
+      {
+         "quantity" : "all",
+         "class" : "PlatformContent"
+      },
+      {
+         "quantity" : "all",
+         "class" : "EcommerceTransaction"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionIp"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionPreference"
+      },
+      {
+         "quantity" : "all",
+         "class" : "Country"
+      },
+      {
+         "class" : "MonthlyStat",
+         "quantity" : "all"
+      },
+      {
+         "class" : "InvoicePaymentType",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SitePreference",
+         "quantity" : "all"
+      },
+      {
+         "class" : "GroupName",
+         "quantity" : "all"
+      },
+      {
+         "class" : "GroupMember",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionTokenSubscription"
+      },
+      {
+         "quantity" : "all",
+         "class" : "InvoiceLineItem"
+      },
+      {
+         "class" : "ContentUnit",
+         "quantity" : "all"
+      },
+      {
+         "class" : "Site",
+         "quantity" : "all"
+      },
+      {
+         "class" : "AccountAttributeGroup",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SessionCredentialUserpass"
+      },
+      {
+         "quantity" : "all",
+         "class" : "NamedUserConfig"
+      },
+      {
+         "class" : "CustomAccountField",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionTokenBatchSubscriptionPreference"
+      },
+      {
+         "class" : "Account",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SessionCredentialIp",
+         "quantity" : "all"
+      },
+      {
+         "class" : "PublisherPreference",
+         "quantity" : "all"
+      },
+      {
+         "class" : "ProductPreference",
+         "quantity" : "all"
+      },
+      {
+         "class" : "AccountPreference",
+         "quantity" : "all"
+      },
+      {
+         "class" : "SubscriptionType",
+         "quantity" : "all"
+      },
+      {
+         "class" : "Currency",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionAttribute"
+      },
+      {
+         "class" : "AccountAttribute",
+         "quantity" : "all"
+      },
+      {
+         "class" : "Subscription",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "SubscriptionProductEdition"
+      },
+      {
+         "class" : "SavedReport",
+         "quantity" : "all"
+      },
+      {
+         "quantity" : "all",
+         "class" : "DailyStat"
+      }
+   ],
+   "has_many" : {
+      "fetch" : 0
+   }
+}

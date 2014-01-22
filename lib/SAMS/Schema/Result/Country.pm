@@ -28,6 +28,7 @@ __PACKAGE__->add_columns(
         data_type => 'integer',
         is_numeric  => 1,
         is_foreign_key => 1,
+        is_nullable     => 1,
     },
     last_update_time => {
         data_type           => 'timestamp with time zone',
