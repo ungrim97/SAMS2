@@ -4,12 +4,11 @@
     <p>Fields marked <span class="required_mark">*</span> are required.</p>
 
     <&| /comps/label.frag, for => "contact_title_id" &><% $labels->{contact}{title} %></&>
-    <& /comps/select.frag,
+    <& /comps/textbox.frag,
         problems        => $problems,
-        class           => "drop",
-        name            => 'contact_title_id',
-        options         => $contact_titles,
-        selected_label  => $account->contact_title_id,
+        class           => "searchme",
+        name            => 'contact_title',
+        value           => $account->contact_title,
         readonly        => $is_readonly,
         disabled        => $is_readonly,
     &>
@@ -34,106 +33,106 @@
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "street_1" &><% $labels->{contact}{street_1} %></&>
+    <&| /comps/label.frag, for => "contact_address_2" &><% $labels->{contact}{street_1} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'street_1',
-        value       => $account->street_1,
+        name        => 'contact_address1',
+        value       => $account->contact_address_1,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "street_2" &><% $labels->{contact}{street_2} %></&>
+    <&| /comps/label.frag, for => "contact_address_2" &><% $labels->{contact}{street_2} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'street_2',
-        value       => $account->street_2,
+        name        => 'contact_address_2',
+        value       => $account->contact_address_2,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "city" &><% $labels->{contact}{city} %></&>
+    <&| /comps/label.frag, for => "contact_city" &><% $labels->{contact}{city} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'city',
-        value       => $account->city,
+        name        => 'contact_city',
+        value       => $account->contact_city,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "county" &><% $labels->{contact}{county} %></&>
+    <&| /comps/label.frag, for => "contact_county" &><% $labels->{contact}{county} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'county',
-        value       => $account->county,
+        name        => 'contact_county',
+        value       => $account->contact_county,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "postcode" &><% $labels->{contact}{postcode} %></&>
+    <&| /comps/label.frag, for => "contact_postcode" &><% $labels->{contact}{postcode} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'postcode',
-        value       => $account->postcode,
+        name        => 'contact_postcode',
+        value       => $account->contact_postcode,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "country_id", required => 1 &><% $labels->{contact}{country} %></&>
+    <&| /comps/label.frag, for => "contact_country_id", required => 1 &><% $labels->{contact}{country} %></&>
     <& /comps/select.frag ,
         title           => 'Country',
-        name            => 'country_id',
+        name            => 'contact_country_id',
         class           => 'drop',
         options         => $countries,
-        selected_label   => $account->country_id,
+        selected_label   => $account->contact_country_id,
         problems        => $problems,
         readonly        => $is_readonly,
         disabled        => $is_readonly,
         required        => 1
     &>
 
-    <&| /comps/label.frag, for => "contact_number" &><% $labels->{contact}{phone_number} %></&>
+    <&| /comps/label.frag, for => "contact_telephone" &><% $labels->{contact}{phone_number} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'contact_number',
-        value       => $account->contact_number,
+        name        => 'contact_telephone',
+        value       => $account->contact_telephone,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "mobile number" &><% $labels->{contact}{mobile_number} %></&>
+    <&| /comps/label.frag, for => "contact_mobile_telephone" &><% $labels->{contact}{mobile_number} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'mobile_number',
-        value       => $account->mobile_number,
+        name        => 'contact_mobile_telephone',
+        value       => $account->contact_mobile_telephone,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "fax_number" &><% $labels->{contact}{fax_number} %></&>
+    <&| /comps/label.frag, for => "contact_fax" &><% $labels->{contact}{fax_number} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'fax_number',
-        value       => $account->fax_number,
+        name        => 'contact_fax',
+        value       => $account->contact_fax,
         readonly    => $is_readonly,
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "email_address", required => 1 &><% $labels->{contact}{email_address} || 'foo' %></&>
+    <&| /comps/label.frag, for => "contact_email", required => 1 &><% $labels->{contact}{email_address} || 'foo' %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'email_address',
+        name        => 'contact_email',
         type        => 'email',
-        value       => $account->email_address,
+        value       => $account->contact_email,
         readonly    => $is_readonly,
         disabled    => $is_readonly,
         required    => 1,

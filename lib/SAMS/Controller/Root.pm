@@ -33,7 +33,7 @@ sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
 
     unless ($c->stash->{user} && $c->stash->{is_authorised}){
         #$c->forward('Controller::Auth');
-        $c->stash->{user} = $c->model('DB')->resultset('Account')->find({account_id => 1});
+        $c->stash->{user} = $c->model('DB')->resultset('Account')->find(1);
         $c->stash->{is_readonly} = 0;
     }
 }
