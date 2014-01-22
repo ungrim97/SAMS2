@@ -19,7 +19,7 @@ SAMS::Controller::Root - Root Controller for SAMS
 
 =head1 DESCRIPTION
 
-[enter your description here]
+Core actions for chaining all pages off.
 
 =head1 METHODS
 
@@ -31,9 +31,17 @@ sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
     # $c->stash->{user} should always be the logged in user.
     # $c->stash->{account} will contain the account being modified/looked at
 
-    unless ($c->stash->{user} && $c->stash->{is_authorised}){
+    unless ($c->stash->{user}){
         #$c->forward('Controller::Auth');
-        $c->stash->{user} = $c->model('DB')->resultset('Account')->find(1);
+        my $user = $c->model('DB::Account')->find(1);
+
+        unless ($user){
+            push @{$c->error}, SAMS::Error->new(error_message => 'Unable to authorise user', error_level => 'Critacal');
+            $c->template('login.html');
+            $c->detach;
+        }
+
+        $c->stash->{user} = $user;
         $c->stash->{is_readonly} = 0;
     }
 }
