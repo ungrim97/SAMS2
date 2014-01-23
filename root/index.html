@@ -1,33 +1,10 @@
-<%method title>Account Search</%method>
-<%method navitem>Account Search</%method>
-<%method page_id>account_search</%method>
+<%method navitem><% $labels->{titles}{splash_page} %><%args>$labels => {}</%args></%method>
+<%method page_id>index</%method>
+<%method title><% $labels->{titles}{splash_page} %><%args>$labels => {}</%args></%method>
 
-<div id="problems" class="problems ui-widget ui-state-error ui-corner-all" style="display: none">
-    <span class="inline_icon ui-icon ui-icon-alert"></span>
-    <span class="message"></span>
-</div>
 <div class="tab_wrapper">
-    <& "/comps/subnavbar.frag", livepage => $sub_page, submenu_items => \@submenu_items &>
-    <div id="search_options">
-        <& "/comps/account_search.frag", problems => $problems, %ARGS &>
-    </div>
-    <div id="search_results">
-        <& "/comps/account_listing.frag" &>
-    </div>
+
 </div>
-
 <%args>
-    $sub_page => 'search_options'
-    $account_search_fields => {}
-    $account_types => {}
-    $subscription_types =>{}
-    $subscription_status => {}
+    $labels => {}
 </%args>
-<%init>
-my $problems = SAMS::Problems->new();
-my @submenu_items = (  );
-push (@submenu_items, ['Search Options' => "#search_options"]);
-push (@submenu_items, ['Search Results' => "#search_results"]);
-
-</%init>
-%# vim: set ai et sw=4 syntax=mason :

@@ -1,0 +1,63 @@
+%# @(#) $Id$
+<%init>
+
+
+# Pass the request obj to plugin error handler so it can check/redirect
+# where required.
+#SAMS::Plugin::ErrorHandler->setup( $r, $m, $stg->{base_url}, $SEMANTICO::ACM::ACSFilter::session{ _session_id } );
+
+
+# Override this if needed.  We have to specify the default as Apache might not
+# have been able to do it for us.
+#$r->content_type( 'text/html' ) unless $r->content_type;
+#if ($SEMANTICO::ACM::ACSFilter::session{__status} eq 'live')  {
+#    $r->user($SEMANTICO::ACM::ACSFilter::session{__credusername})
+#} else {
+#    $r->user(undef);
+#}
+
+#$usersession = SEMANTICO::UserSession->new( tmp_dir => $stg->{tmpdir} );
+
+# XXX HACK
+#if ($r->uri =~ m/favicon.ico/) {
+#    $m->call_next;
+#    $m->abort;
+#}
+#
+#if ($r->content_type !~ m!^text/html! &&
+#    $r->content_type !~ m!^application/json!)  {
+#    $m->call_next;
+#    $m->abort;
+#}
+#
+#if ($r->uri =~ m/subscription_groups_by_product.html/) {
+#    $m->comp("/comps/api_init.frag");
+#    $m->call_next;
+#    $m->abort;
+#}
+#
+#$r->push_handlers(PerlCleanupHandler => \&Class::DBI::clear_object_index);
+
+my $raw = $m->comp_exists( 'REQUEST:raw_content' );
+</%init>
+
+<%cleanup>
+#SAMS::Plugin::ErrorHandler->redirect;
+</%cleanup>
+
+<%perl>
+#$m->comp ("/comps/api_init.frag");
+#$m->comp ("/comps/help/init.frag") unless $raw;
+$m->comp ("/comps/header.frag",%ARGS) unless $raw;
+$m->call_next;
+#$m->comp ("/comps/footer.frag") unless $raw;
+</%perl>
+
+<%method page_id>common</%method>
+<%method navitem>\
+#%if ($r->uri eq '/'){
+#Account Search\
+#%}
+</%method>
+<%method subtitle></%method>
+%# vim: set ai et sw=4 syntax=mason :

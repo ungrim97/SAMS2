@@ -1,0 +1,70 @@
+div.jqmWindow {
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+div.jqmWindow div {
+    margin: 0;
+    padding: 0;
+}
+
+div.jqmWindow div.modal_top {
+    clear: both;
+}
+
+div.jqmWindow div.modal_middle {
+    float: right;
+    clear: both;
+}
+
+div.jqmWindow div.modal_left {
+    float: left;
+    clear: left;
+}
+
+div.jqmWindow div.modal_right {
+    float: right;
+}
+
+div.jqmWindow div.modal_bottom {
+    float: right;
+    clear: both;
+}
+
+div.jqmWindow div.button_right {
+    float: right;
+    margin-left: 1em;
+}
+
+div.jqmWindow div.button_left {
+    float: left;
+    margin-right: 1em;
+}
+
+div.jqmWindow h4 {
+    float: left;
+    margin-bottom: 0.5em;
+}
+
+div.jqmWindow hr {
+    clear: both;
+}
+
+div.jqmWindow ul,
+div.jqmWindow ol,
+div.jqmWindow dl{
+    clear: both;
+}
+
+div.jqmWindow div.modal_help,
+div.jqmWindow div.modal_close {
+    float: right; 
+    cursor: pointer; 
+    padding-left: 2px; 
+    padding-right: 2px; 
+}
+
+div.jqmWindow div.modal_close {
+	padding-top: 2px;
+}

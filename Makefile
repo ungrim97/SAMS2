@@ -1,7 +1,7 @@
 # This Makefile is for the SAMS extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 6.72 (Revision: 67200) from the contents of
+# 6.66 (Revision: 66600) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -13,27 +13,27 @@
 
 #     ABSTRACT => q[Catalyst based application]
 #     AUTHOR => [q[Michael Francis,,,]]
-#     BUILD_REQUIRES => { Test::More=>q[0.88], ExtUtils::MakeMaker=>q[6.36] }
+#     BUILD_REQUIRES => { Test::WWW::Selenium::Catalyst=>q[0], Test::Class::Moose=>q[0], ExtUtils::MakeMaker=>q[6.36], Test::More=>q[0.88] }
 #     CONFIGURE_REQUIRES => {  }
 #     DISTNAME => q[SAMS]
-#     EXE_FILES => [q[script/sams_cgi.pl], q[script/sams_create.pl], q[script/sams_fastcgi.pl], q[script/sams_server.pl], q[script/sams_test.pl]]
+#     EXE_FILES => [q[script/sams_cgi.pl], q[script/sams_create.pl], q[script/sams_deploy_schema.pl], q[script/sams_fastcgi.pl], q[script/sams_server.pl], q[script/sams_test.pl]]
 #     LICENSE => q[perl]
 #     NAME => q[SAMS]
 #     NO_META => q[1]
-#     PREREQ_PM => { namespace::autoclean=>q[0], Catalyst::Plugin::Static::Simple=>q[0], ExtUtils::MakeMaker=>q[6.36], Catalyst::Plugin::ConfigLoader=>q[0], Catalyst::Action::RenderView=>q[0], Test::More=>q[0.88], Config::General=>q[0], Catalyst::Runtime=>q[5.90053], Moose=>q[0] }
+#     PREREQ_PM => { Test::Class::Moose=>q[0], namespace::autoclean=>q[0], Config::General=>q[0], Test::More=>q[0.88], Moose=>q[0], Data::Dumper=>q[0], Catalyst::Runtime=>q[5.90053], Catalyst::Action::RenderView=>q[0], Test::WWW::Selenium::Catalyst=>q[0], Catalyst::Plugin::Static::Simple=>q[0], Catalyst::Plugin::ConfigLoader=>q[0], ExtUtils::MakeMaker=>q[6.36] }
 #     TEST_REQUIRES => {  }
 #     VERSION => q[0.01]
 #     VERSION_FROM => q[lib/SAMS.pm]
-#     dist => { PREOP=>q[$(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"] }
+#     dist => {  }
 #     realclean => { FILES=>q[MYMETA.yml] }
-#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t] }
+#     test => { TESTS=>q[t/01app.t t/02pod.t t/03podcoverage.t t/controller_Account.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t] }
 
 # --- MakeMaker post_initialize section:
 
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/lib/perl/5.14/Config.pm).
+# These definitions are from config.sh (via /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1/x86_64-linux/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
 CC = cc
@@ -44,19 +44,19 @@ DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
 LD = cc
-LDDLFLAGS = -shared -L/usr/local/lib -fstack-protector
+LDDLFLAGS = -shared -O2 -L/usr/local/lib -fstack-protector
 LDFLAGS =  -fstack-protector -L/usr/local/lib
 LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
 OSNAME = linux
-OSVERS = 3.2.0-37-generic
+OSVERS = 3.2.0-58-generic
 RANLIB = :
-SITELIBEXP = /usr/local/share/perl/5.14.2
-SITEARCHEXP = /usr/local/lib/perl/5.14.2
+SITELIBEXP = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1
+SITEARCHEXP = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/x86_64-linux
 SO = so
-VENDORARCHEXP = /usr/lib/perl5
-VENDORLIBEXP = /usr/share/perl5
+VENDORARCHEXP = 
+VENDORLIBEXP = 
 
 
 # --- MakeMaker constants section:
@@ -78,60 +78,60 @@ INST_BIN = blib/bin
 INST_LIB = blib/lib
 INST_MAN1DIR = blib/man1
 INST_MAN3DIR = blib/man3
-MAN1EXT = 1p
-MAN3EXT = 3pm
+MAN1EXT = 1
+MAN3EXT = 3
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /usr
-SITEPREFIX = /usr/local
-VENDORPREFIX = /usr
-INSTALLPRIVLIB = /usr/share/perl/5.14
+PERLPREFIX = /home/mikef/perl5/perlbrew/perls/perl-5.18.1
+SITEPREFIX = /home/mikef/perl5/perlbrew/perls/perl-5.18.1
+VENDORPREFIX = 
+INSTALLPRIVLIB = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /usr/local/share/perl/5.14.2
+INSTALLSITELIB = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
-INSTALLVENDORLIB = /usr/share/perl5
+INSTALLVENDORLIB = 
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /usr/lib/perl/5.14
+INSTALLARCHLIB = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1/x86_64-linux
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /usr/local/lib/perl/5.14.2
+INSTALLSITEARCH = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/site_perl/5.18.1/x86_64-linux
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = /usr/lib/perl5
+INSTALLVENDORARCH = 
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /usr/bin
+INSTALLBIN = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /usr/local/bin
+INSTALLSITEBIN = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
-INSTALLVENDORBIN = /usr/bin
+INSTALLVENDORBIN = 
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /usr/bin
+INSTALLSCRIPT = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /usr/local/bin
+INSTALLSITESCRIPT = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
-INSTALLVENDORSCRIPT = /usr/bin
+INSTALLVENDORSCRIPT = 
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /usr/share/man/man1
+INSTALLMAN1DIR = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /usr/local/man/man1
+INSTALLSITEMAN1DIR = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
-INSTALLVENDORMAN1DIR = /usr/share/man/man1
+INSTALLVENDORMAN1DIR = 
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /usr/share/man/man3
+INSTALLMAN3DIR = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/man/man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /usr/local/man/man3
+INSTALLSITEMAN3DIR = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
-INSTALLVENDORMAN3DIR = /usr/share/man/man3
+INSTALLVENDORMAN3DIR = 
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
 PERL_LIB =
-PERL_ARCHLIB = /usr/lib/perl/5.14
+PERL_ARCHLIB = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1/x86_64-linux
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/lib/perl/5.14/CORE
-PERL = /usr/bin/perl "-Iinc"
-FULLPERL = /usr/bin/perl "-Iinc"
+PERL_INC = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1/x86_64-linux/CORE
+PERL = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin/perl "-Iinc"
+FULLPERL = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin/perl "-Iinc"
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -144,9 +144,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /usr/local/share/perl/5.14.2/ExtUtils/MakeMaker.pm
-MM_VERSION  = 6.72
-MM_REVISION = 67200
+MAKEMAKER   = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/lib/5.18.1/ExtUtils/MakeMaker.pm
+MM_VERSION  = 6.66
+MM_REVISION = 66600
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -174,7 +174,15 @@ MAN1PODS = script/sams_cgi.pl \
 	script/sams_server.pl \
 	script/sams_test.pl
 MAN3PODS = lib/SAMS.pm \
-	lib/SAMS/Controller/Root.pm
+	lib/SAMS/Controller/Account.pm \
+	lib/SAMS/Controller/Root.pm \
+	lib/SAMS/Model/DB.pm \
+	lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/Problems.pm \
+	lib/SAMS/Problems/Item.pm \
+	lib/SAMS/Roles/Translate.pm \
+	lib/SAMS/View/HTML.pm \
+	lib/SAMS/View/JSON.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIB)$(DFSEP)Config.pm $(PERL_INC)$(DFSEP)config.h
@@ -197,16 +205,70 @@ PERL_ARCHIVE_AFTER =
 
 
 TO_INST_PM = lib/SAMS.pm \
-	lib/SAMS/Controller/Root.pm
+	lib/SAMS/Controller/Account.pm \
+	lib/SAMS/Controller/Root.pm \
+	lib/SAMS/Error.pm \
+	lib/SAMS/Model/DB.pm \
+	lib/SAMS/Model/DB.pm.new \
+	lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/Problems.pm \
+	lib/SAMS/Problems/Item.pm \
+	lib/SAMS/Roles/Translate.pm \
+	lib/SAMS/Schema.pm \
+	lib/SAMS/Schema/Result/Account.pm \
+	lib/SAMS/Schema/Result/AccountType.pm \
+	lib/SAMS/Schema/Result/ContactTitle.pm \
+	lib/SAMS/Schema/Result/Country.pm \
+	lib/SAMS/Schema/Result/Language.pm \
+	lib/SAMS/Schema/Result/Translation.pm \
+	lib/SAMS/Schema/ResultSet/Account.pm \
+	lib/SAMS/View/HTML.pm \
+	lib/SAMS/View/JSON.pm
 
-PM_TO_BLIB = lib/SAMS/Controller/Root.pm \
-	blib/lib/SAMS/Controller/Root.pm \
+PM_TO_BLIB = lib/SAMS/Problems.pm \
+	blib/lib/SAMS/Problems.pm \
+	lib/SAMS/Roles/Translate.pm \
+	blib/lib/SAMS/Roles/Translate.pm \
+	lib/SAMS/Schema.pm \
+	blib/lib/SAMS/Schema.pm \
+	lib/SAMS/Schema/ResultSet/Account.pm \
+	blib/lib/SAMS/Schema/ResultSet/Account.pm \
+	lib/SAMS/View/HTML.pm \
+	blib/lib/SAMS/View/HTML.pm \
+	lib/SAMS/Model/DB/Account.pm \
+	blib/lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/Schema/Result/Country.pm \
+	blib/lib/SAMS/Schema/Result/Country.pm \
+	lib/SAMS/Controller/Account.pm \
+	blib/lib/SAMS/Controller/Account.pm \
+	lib/SAMS/Schema/Result/Account.pm \
+	blib/lib/SAMS/Schema/Result/Account.pm \
+	lib/SAMS/Schema/Result/AccountType.pm \
+	blib/lib/SAMS/Schema/Result/AccountType.pm \
 	lib/SAMS.pm \
-	blib/lib/SAMS.pm
+	blib/lib/SAMS.pm \
+	lib/SAMS/Model/DB.pm \
+	blib/lib/SAMS/Model/DB.pm \
+	lib/SAMS/Schema/Result/ContactTitle.pm \
+	blib/lib/SAMS/Schema/Result/ContactTitle.pm \
+	lib/SAMS/Schema/Result/Translation.pm \
+	blib/lib/SAMS/Schema/Result/Translation.pm \
+	lib/SAMS/Model/DB.pm.new \
+	blib/lib/SAMS/Model/DB.pm.new \
+	lib/SAMS/Problems/Item.pm \
+	blib/lib/SAMS/Problems/Item.pm \
+	lib/SAMS/View/JSON.pm \
+	blib/lib/SAMS/View/JSON.pm \
+	lib/SAMS/Controller/Root.pm \
+	blib/lib/SAMS/Controller/Root.pm \
+	lib/SAMS/Schema/Result/Language.pm \
+	blib/lib/SAMS/Schema/Result/Language.pm \
+	lib/SAMS/Error.pm \
+	blib/lib/SAMS/Error.pm
 
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 6.72
+MM_Unix_VERSION = 6.66
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -263,7 +325,7 @@ ZIPFLAGS = -r
 COMPRESS = gzip --best
 SUFFIX = .gz
 SHAR = shar
-PREOP = $(PERL) -I. "-MModule::Install::Admin" -e "dist_preop(q($(DISTVNAME)))"
+PREOP = $(NOECHO) $(NOOP)
 POSTOP = $(NOECHO) $(NOOP)
 TO_UNIX = $(NOECHO) $(NOOP)
 CI = ci -u
@@ -429,8 +491,16 @@ manifypods : pure_all  \
 	script/sams_cgi.pl \
 	script/sams_test.pl \
 	script/sams_create.pl \
+	lib/SAMS/Controller/Account.pm \
 	lib/SAMS/Controller/Root.pm \
-	lib/SAMS.pm
+	lib/SAMS/View/JSON.pm \
+	lib/SAMS/Model/DB/Account.pm \
+	lib/SAMS/View/HTML.pm \
+	lib/SAMS/Problems/Item.pm \
+	lib/SAMS/Roles/Translate.pm \
+	lib/SAMS.pm \
+	lib/SAMS/Problems.pm \
+	lib/SAMS/Model/DB.pm
 	$(NOECHO) $(POD2MAN) --section=1 --perm_rw=$(PERM_RW) \
 	  script/sams_fastcgi.pl $(INST_MAN1DIR)/sams_fastcgi.pl.$(MAN1EXT) \
 	  script/sams_server.pl $(INST_MAN1DIR)/sams_server.pl.$(MAN1EXT) \
@@ -438,8 +508,16 @@ manifypods : pure_all  \
 	  script/sams_test.pl $(INST_MAN1DIR)/sams_test.pl.$(MAN1EXT) \
 	  script/sams_create.pl $(INST_MAN1DIR)/sams_create.pl.$(MAN1EXT) 
 	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) \
+	  lib/SAMS/Controller/Account.pm $(INST_MAN3DIR)/SAMS::Controller::Account.$(MAN3EXT) \
 	  lib/SAMS/Controller/Root.pm $(INST_MAN3DIR)/SAMS::Controller::Root.$(MAN3EXT) \
-	  lib/SAMS.pm $(INST_MAN3DIR)/SAMS.$(MAN3EXT) 
+	  lib/SAMS/View/JSON.pm $(INST_MAN3DIR)/SAMS::View::JSON.$(MAN3EXT) \
+	  lib/SAMS/Model/DB/Account.pm $(INST_MAN3DIR)/SAMS::Model::DB::Account.$(MAN3EXT) \
+	  lib/SAMS/View/HTML.pm $(INST_MAN3DIR)/SAMS::View::HTML.$(MAN3EXT) \
+	  lib/SAMS/Problems/Item.pm $(INST_MAN3DIR)/SAMS::Problems::Item.$(MAN3EXT) \
+	  lib/SAMS/Roles/Translate.pm $(INST_MAN3DIR)/SAMS::Roles::Translate.$(MAN3EXT) \
+	  lib/SAMS.pm $(INST_MAN3DIR)/SAMS.$(MAN3EXT) \
+	  lib/SAMS/Problems.pm $(INST_MAN3DIR)/SAMS::Problems.$(MAN3EXT) \
+	  lib/SAMS/Model/DB.pm $(INST_MAN3DIR)/SAMS::Model::DB.$(MAN3EXT) 
 
 
 
@@ -449,34 +527,22 @@ manifypods : pure_all  \
 
 # --- MakeMaker installbin section:
 
-EXE_FILES = script/sams_cgi.pl script/sams_create.pl script/sams_fastcgi.pl script/sams_server.pl script/sams_test.pl
+EXE_FILES = script/sams_cgi.pl script/sams_create.pl script/sams_deploy_schema.pl script/sams_fastcgi.pl script/sams_server.pl script/sams_test.pl
 
-pure_all :: $(INST_SCRIPT)/sams_fastcgi.pl $(INST_SCRIPT)/sams_server.pl $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_test.pl $(INST_SCRIPT)/sams_create.pl
+pure_all :: $(INST_SCRIPT)/sams_create.pl $(INST_SCRIPT)/sams_test.pl $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_server.pl $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl
 	$(NOECHO) $(NOOP)
 
 realclean ::
 	$(RM_F) \
-	  $(INST_SCRIPT)/sams_fastcgi.pl $(INST_SCRIPT)/sams_server.pl \
-	  $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_test.pl \
-	  $(INST_SCRIPT)/sams_create.pl 
+	  $(INST_SCRIPT)/sams_create.pl $(INST_SCRIPT)/sams_test.pl \
+	  $(INST_SCRIPT)/sams_cgi.pl $(INST_SCRIPT)/sams_server.pl \
+	  $(INST_SCRIPT)/sams_deploy_schema.pl $(INST_SCRIPT)/sams_fastcgi.pl 
 
-$(INST_SCRIPT)/sams_fastcgi.pl : script/sams_fastcgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_fastcgi.pl
-	$(CP) script/sams_fastcgi.pl $(INST_SCRIPT)/sams_fastcgi.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_fastcgi.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_fastcgi.pl
-
-$(INST_SCRIPT)/sams_server.pl : script/sams_server.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_server.pl
-	$(CP) script/sams_server.pl $(INST_SCRIPT)/sams_server.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_server.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_server.pl
-
-$(INST_SCRIPT)/sams_cgi.pl : script/sams_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_cgi.pl
-	$(CP) script/sams_cgi.pl $(INST_SCRIPT)/sams_cgi.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_cgi.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_cgi.pl
+$(INST_SCRIPT)/sams_create.pl : script/sams_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_create.pl
+	$(CP) script/sams_create.pl $(INST_SCRIPT)/sams_create.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_create.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_create.pl
 
 $(INST_SCRIPT)/sams_test.pl : script/sams_test.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
 	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_test.pl
@@ -484,11 +550,29 @@ $(INST_SCRIPT)/sams_test.pl : script/sams_test.pl $(FIRST_MAKEFILE) $(INST_SCRIP
 	$(FIXIN) $(INST_SCRIPT)/sams_test.pl
 	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_test.pl
 
-$(INST_SCRIPT)/sams_create.pl : script/sams_create.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
-	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_create.pl
-	$(CP) script/sams_create.pl $(INST_SCRIPT)/sams_create.pl
-	$(FIXIN) $(INST_SCRIPT)/sams_create.pl
-	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_create.pl
+$(INST_SCRIPT)/sams_cgi.pl : script/sams_cgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_cgi.pl
+	$(CP) script/sams_cgi.pl $(INST_SCRIPT)/sams_cgi.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_cgi.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_cgi.pl
+
+$(INST_SCRIPT)/sams_server.pl : script/sams_server.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_server.pl
+	$(CP) script/sams_server.pl $(INST_SCRIPT)/sams_server.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_server.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_server.pl
+
+$(INST_SCRIPT)/sams_deploy_schema.pl : script/sams_deploy_schema.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_deploy_schema.pl
+	$(CP) script/sams_deploy_schema.pl $(INST_SCRIPT)/sams_deploy_schema.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_deploy_schema.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_deploy_schema.pl
+
+$(INST_SCRIPT)/sams_fastcgi.pl : script/sams_fastcgi.pl $(FIRST_MAKEFILE) $(INST_SCRIPT)$(DFSEP).exists $(INST_BIN)$(DFSEP).exists
+	$(NOECHO) $(RM_F) $(INST_SCRIPT)/sams_fastcgi.pl
+	$(CP) script/sams_fastcgi.pl $(INST_SCRIPT)/sams_fastcgi.pl
+	$(FIXIN) $(INST_SCRIPT)/sams_fastcgi.pl
+	-$(NOECHO) $(CHMOD) $(PERM_RWX) $(INST_SCRIPT)/sams_fastcgi.pl
 
 
 
@@ -508,25 +592,24 @@ clean_subdirs :
 
 clean :: clean_subdirs
 	- $(RM_F) \
-	  *$(LIB_EXT) core \
-	  core.[0-9] $(INST_ARCHAUTODIR)/extralibs.all \
-	  core.[0-9][0-9] $(BASEEXT).bso \
-	  pm_to_blib.ts MYMETA.json \
-	  core.[0-9][0-9][0-9][0-9] MYMETA.yml \
-	  $(BASEEXT).x $(BOOTSTRAP) \
-	  perl$(EXE_EXT) tmon.out \
-	  *$(OBJ_EXT) pm_to_blib \
-	  $(INST_ARCHAUTODIR)/extralibs.ld blibdirs.ts \
-	  core.[0-9][0-9][0-9][0-9][0-9] *perl.core \
-	  core.*perl.*.? $(MAKE_APERL_FILE) \
-	  $(BASEEXT).def perl \
-	  core.[0-9][0-9][0-9] mon.out \
-	  lib$(BASEEXT).def perlmain.c \
-	  perl.exe so_locations \
-	  $(BASEEXT).exp 
+	  *$(LIB_EXT) $(BASEEXT).exp \
+	  tmon.out perl.exe \
+	  core.[0-9][0-9][0-9] lib$(BASEEXT).def \
+	  perlmain.c pm_to_blib \
+	  core.[0-9][0-9][0-9][0-9][0-9] so_locations \
+	  $(BASEEXT).x mon.out \
+	  $(INST_ARCHAUTODIR)/extralibs.ld $(BASEEXT).bso \
+	  core MYMETA.yml \
+	  $(BASEEXT).def core.[0-9][0-9] \
+	  core.*perl.*.? $(BOOTSTRAP) \
+	  pm_to_blib.ts *perl.core \
+	  MYMETA.json $(MAKE_APERL_FILE) \
+	  *$(OBJ_EXT) perl$(EXE_EXT) \
+	  core.[0-9] blibdirs.ts \
+	  $(INST_ARCHAUTODIR)/extralibs.all core.[0-9][0-9][0-9][0-9] \
+	  perl 
 	- $(RM_RF) \
 	  blib 
-	- $(NOECHO) $(RM_F) $(MAKEFILE_OLD)
 	- $(MV) $(FIRST_MAKEFILE) $(MAKEFILE_OLD) $(DEV_NULL)
 
 
@@ -568,7 +651,7 @@ manifest :
 	$(PERLRUN) "-MExtUtils::Manifest=mkmanifest" -e mkmanifest
 
 veryclean : realclean
-	$(RM_F) *~ */*~ *.orig */*.orig *.bak */*.bak *.old */*.old
+	$(RM_F) *~ */*~ *.orig */*.orig *.bak */*.bak *.old */*.old 
 
 
 
@@ -583,7 +666,6 @@ tardist : $(DISTVNAME).tar$(SUFFIX)
 
 uutardist : $(DISTVNAME).tar$(SUFFIX)
 	uuencode $(DISTVNAME).tar$(SUFFIX) $(DISTVNAME).tar$(SUFFIX) > $(DISTVNAME).tar$(SUFFIX)_uu
-	$(NOECHO) $(ECHO) 'Created $(DISTVNAME).tar$(SUFFIX)_uu'
 
 $(DISTVNAME).tar$(SUFFIX) : distdir
 	$(PREOP)
@@ -591,7 +673,6 @@ $(DISTVNAME).tar$(SUFFIX) : distdir
 	$(TAR) $(TARFLAGS) $(DISTVNAME).tar $(DISTVNAME)
 	$(RM_RF) $(DISTVNAME)
 	$(COMPRESS) $(DISTVNAME).tar
-	$(NOECHO) $(ECHO) 'Created $(DISTVNAME).tar$(SUFFIX)'
 	$(POSTOP)
 
 zipdist : $(DISTVNAME).zip
@@ -601,14 +682,12 @@ $(DISTVNAME).zip : distdir
 	$(PREOP)
 	$(ZIP) $(ZIPFLAGS) $(DISTVNAME).zip $(DISTVNAME)
 	$(RM_RF) $(DISTVNAME)
-	$(NOECHO) $(ECHO) 'Created $(DISTVNAME).zip'
 	$(POSTOP)
 
 shdist : distdir
 	$(PREOP)
 	$(SHAR) $(DISTVNAME) > $(DISTVNAME).shar
 	$(RM_RF) $(DISTVNAME)
-	$(NOECHO) $(ECHO) 'Created $(DISTVNAME).shar'
 	$(POSTOP)
 
 
@@ -653,7 +732,7 @@ distmeta : create_distdir metafile
 
 # --- MakeMaker distsignature section:
 distsignature : create_distdir
-	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) }' \
+	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) } ' \
 	  -e '    or print "Could not add SIGNATURE to MANIFEST: $$$${'\''@'\''}\n"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
 	cd $(DISTVNAME) && cpansign -s
@@ -800,7 +879,7 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = /usr/bin/perl
+FULLPERL      = /home/mikef/perl5/perlbrew/perls/perl-5.18.1/bin/perl
 
 $(MAP_TARGET) :: static $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
@@ -818,7 +897,7 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
-TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t
+TEST_FILES = t/01app.t t/02pod.t t/03podcoverage.t t/controller_Account.t t/model_DB.t t/selenium.t t/view_HTML.t t/view_JSON.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
@@ -851,11 +930,12 @@ ppd :
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Action::RenderView" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::ConfigLoader" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Plugin::Static::Simple" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Catalyst::Runtime" VERSION="5.90053" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE VERSION="5.90053" NAME="Catalyst::Runtime" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Config::General" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Data::Dumper" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="Moose::" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <REQUIRE NAME="namespace::autoclean" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.14" />' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-5.18" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
@@ -865,8 +945,26 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
+	  lib/SAMS/Problems.pm blib/lib/SAMS/Problems.pm \
+	  lib/SAMS/Roles/Translate.pm blib/lib/SAMS/Roles/Translate.pm \
+	  lib/SAMS/Schema.pm blib/lib/SAMS/Schema.pm \
+	  lib/SAMS/Schema/ResultSet/Account.pm blib/lib/SAMS/Schema/ResultSet/Account.pm \
+	  lib/SAMS/View/HTML.pm blib/lib/SAMS/View/HTML.pm \
+	  lib/SAMS/Model/DB/Account.pm blib/lib/SAMS/Model/DB/Account.pm \
+	  lib/SAMS/Schema/Result/Country.pm blib/lib/SAMS/Schema/Result/Country.pm \
+	  lib/SAMS/Controller/Account.pm blib/lib/SAMS/Controller/Account.pm \
+	  lib/SAMS/Schema/Result/Account.pm blib/lib/SAMS/Schema/Result/Account.pm \
+	  lib/SAMS/Schema/Result/AccountType.pm blib/lib/SAMS/Schema/Result/AccountType.pm \
+	  lib/SAMS.pm blib/lib/SAMS.pm \
+	  lib/SAMS/Model/DB.pm blib/lib/SAMS/Model/DB.pm \
+	  lib/SAMS/Schema/Result/ContactTitle.pm blib/lib/SAMS/Schema/Result/ContactTitle.pm \
+	  lib/SAMS/Schema/Result/Translation.pm blib/lib/SAMS/Schema/Result/Translation.pm \
+	  lib/SAMS/Model/DB.pm.new blib/lib/SAMS/Model/DB.pm.new \
+	  lib/SAMS/Problems/Item.pm blib/lib/SAMS/Problems/Item.pm \
+	  lib/SAMS/View/JSON.pm blib/lib/SAMS/View/JSON.pm \
 	  lib/SAMS/Controller/Root.pm blib/lib/SAMS/Controller/Root.pm \
-	  lib/SAMS.pm blib/lib/SAMS.pm 
+	  lib/SAMS/Schema/Result/Language.pm blib/lib/SAMS/Schema/Result/Language.pm \
+	  lib/SAMS/Error.pm blib/lib/SAMS/Error.pm 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
@@ -878,32 +976,13 @@ pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 
 # End.
 # Postamble by Module::Install 1.06
-# --- Module::Install::Admin::Makefile section:
-
-realclean purge ::
-	$(RM_F) $(DISTVNAME).tar$(SUFFIX)
-	$(RM_F) MANIFEST.bak _build
-	$(PERL) "-Ilib" "-MModule::Install::Admin" -e "remove_meta()"
-	$(RM_RF) inc
-
-reset :: purge
-
-upload :: test dist
-	cpan-upload -verbose $(DISTVNAME).tar$(SUFFIX)
-
-grok ::
-	perldoc Module::Install
-
-distsign ::
-	cpansign -s
-
 # --- Module::Install::AutoInstall section:
 
 config :: installdeps
 	$(NOECHO) $(NOOP)
 
 checkdeps ::
-	$(PERL) ./Makefile.PL --checkdeps
+	$(PERL) Makefile.PL --checkdeps
 
 installdeps ::
 	$(NOECHO) $(NOOP)
@@ -912,14 +991,14 @@ installdeps_notest ::
 	$(NOECHO) $(NOOP)
 
 upgradedeps ::
-	$(PERL) ./Makefile.PL --config= --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90053,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Moose,0,namespace::autoclean,0,Config::General,0
+	$(PERL) Makefile.PL --config= --upgradedeps=Test::More,0.88,Test::WWW::Selenium::Catalyst,0,Test::Class::Moose,0,Catalyst::Runtime,5.90053,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Moose,0,namespace::autoclean,0,Config::General,0,Data::Dumper,0
 
 upgradedeps_notest ::
-	$(PERL) ./Makefile.PL --config=notest,1 --upgradedeps=Test::More,0.88,Catalyst::Runtime,5.90053,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Moose,0,namespace::autoclean,0,Config::General,0
+	$(PERL) Makefile.PL --config=notest,1 --upgradedeps=Test::More,0.88,Test::WWW::Selenium::Catalyst,0,Test::Class::Moose,0,Catalyst::Runtime,5.90053,Catalyst::Plugin::ConfigLoader,0,Catalyst::Plugin::Static::Simple,0,Catalyst::Action::RenderView,0,Moose,0,namespace::autoclean,0,Config::General,0,Data::Dumper,0
 
 listdeps ::
 	@$(PERL) -le "print for @ARGV" 
 
 listalldeps ::
-	@$(PERL) -le "print for @ARGV" Test::More Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Moose namespace::autoclean Config::General
+	@$(PERL) -le "print for @ARGV" Test::More Test::WWW::Selenium::Catalyst Test::Class::Moose Catalyst::Runtime Catalyst::Plugin::ConfigLoader Catalyst::Plugin::Static::Simple Catalyst::Action::RenderView Moose namespace::autoclean Config::General Data::Dumper
 

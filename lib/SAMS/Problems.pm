@@ -50,6 +50,7 @@ I<Class Method>.  Constructor.
 
 sub new {
     my $class = shift;
+    warn 'SAMS::Problems is DEPRICATED. See SAMS::Error';
     return bless { }, $class;
 }
 

@@ -1,0 +1,42 @@
+<%method navitem><% $labels->{titles}{account_details_page} %><%args>$labels => {}</%args></%method>
+<%method page_id>account_details</%method>
+<%method title><% $labels->{titles}{account_details_page} %><%args>$labels => {}</%args></%method>
+
+<form method="post" action=<% $update_uri %>>
+
+<div class="tab_wrapper">
+
+% # Define tab elements
+<& /comps/subnavbar.frag, submenu_items => \@submenu_items &>
+
+<& /comps/account/account_details.frag, %ARGS &>
+<& /comps/account/contact_details.frag, %ARGS &>
+
+</div>
+
+% unless( $is_readonly ) {
+<div class="action-toolbar ui-widget ui-widget-header ui-corner-all" id="save_changes">
+    <& "/comps/submit.frag",
+        class => "submit",
+        value => $labels->{buttons}{submit_changes} // "Save",
+    &>
+</div>
+% }
+
+</form>
+
+<%args>
+    $account        => undef
+    $countries      => []
+    $is_readonly    => 1
+    $labels         => {}
+    $update_uri     => '/'
+</%args>
+<%init>
+    return unless $account;
+
+    my @submenu_items;
+    push @submenu_items, [ 'Account Details'    => "#account_details" ], [ 'Contact Details'    => "#contact_details" ];
+</%init>
+
+%# vim: set ai et sw=4 syntax=mason :

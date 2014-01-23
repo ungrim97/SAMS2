@@ -1,6 +1,7 @@
 package SAMS::Controller::Root;
 use Moose;
 use namespace::autoclean;
+use Data::Dumper;
 
 BEGIN { extends 'Catalyst::Controller' }
 
@@ -18,70 +19,71 @@ SAMS::Controller::Root - Root Controller for SAMS
 
 =head1 DESCRIPTION
 
-[enter your description here]
+Core actions for chaining all pages off.
 
 =head1 METHODS
 
-=head2 index
-
-The root page (/)
-
 =cut
 
-sub index :Path(/) Args(0) {
-    my ( $self, $c ) = @_;
+sub auth :Chained(/) :PathPart('') :CaptureArgs(0) {
+    my ($self, $c) = @_;
 
-    $c->stash->{account_search_fields} = {
-            organisation        => $self->translate('organisation'),
-            acc_id              => $self->translate('acc_id'),
-            subs_id             => $self->translate('subs_id'),
-            organisation_id     => $self->translate('organisation_id'),
-            entity_id           => $self->translate('entity_id'),
-            contact_name        => $self->translate('contact_name'),
-            contact_forename    => $self->translate('contact_forename'),
-            alternative_subs_id => $self->translate('alternative_subs_id'),
-            msd_order_id        => $self->translate('msd_order_id'),
-            if_acc_id           => $self->translate('if_acc_id'),
-            notes               => $self->translate('notes'),
-            city                => $self->translate('city'),
-            county              => $self->translate('county'),
-            msd_customer_id     => $self->translate('msd_customer_id'),
-            oed_sid             => $self->translate('oed_sid'),
-            email               => $self->translate('email'),
-            username            => $self->translate('username'),
-            ip_address          => $self->translate('ip_address'),
-            referrer            => $self->translate('referrer'),
-    };
-    $c->stash->{account_types} = {
-            institution     => $self->translate('institution'),
-    };
-    $c->stash->{subscription_types} = {
-            trial       => $self->translate('trial'),
-            full        => $self->translate('full'),
-            gratis      => $self->translate('gratis'),
-    };
-    $c->stash->{subscription_status} = {
-            ok          => $self->translate('ok'),
-            expired     => $self->translate('expired'),
-    };
-    $c->stash->{template} = 'index.html';;
+    # $c->stash->{user} should always be the logged in user.
+    # $c->stash->{account} will contain the account being modified/looked at
+
+    unless ($c->stash->{user}){
+        #$c->forward('Controller::Auth');
+        my $user = $c->model('DB::Account')->find(1);
+
+        unless ($user){
+            push @{$c->error}, SAMS::Error->new(error_message => 'Unable to authorise user', error_level => 'Critacal');
+            $c->template('login.html');
+            $c->detach;
+        }
+
+        $c->stash->{user} = $user;
+        $c->stash->{is_readonly} = 0;
+    }
 }
 
-=head2 translate
+=head2 web
 
-A private routine for getting text from a database to allow for translatable lables
-
-TODO: This need to be a) moved to a translation role. and b) connected to a model
+Actions that need to be populated prior to *every* request such as auth and translations
 
 =cut
 
-sub translate :Private {
-    my ($self, $label) = @_;
+sub web :Chained('auth') :PathPart('') :CaptureArgs(0) {
+    my ($self, $c) = @_;
 
-    # should call $c->model('DB')->search({$label}) probably but the model isn't set up yet
-    # for now just use the label we recieved
+    $c->forward('load_translations');
+}
 
-    return $label;
+=head2 load_translations
+
+TODO: Move this to the Translate role
+
+=cut
+
+sub load_translations :Private {
+    my ($self, $c) = @_;
+
+    my @translations = $c->model('DB')->resultset('Language')->find({language_code => 'en'})->translations->all;
+
+    my $labels = {};
+
+    for my $translation (@translations){
+        $labels->{$translation->area}{$translation->name} = $translation->literal;
+    }
+
+    $c->stash->{labels} = $labels;
+}
+
+
+sub index :Path PathPart('') :Args(0){
+    my ($self, $c) = @_;
+    $c->forward('auth');
+    $c->forward('web');
+    $c->stash(template => 'index.html');
 }
 
 =head2 default
@@ -102,7 +104,17 @@ Attempt to render a view, if needed.
 
 =cut
 
-sub end : ActionClass('RenderView') {}
+sub end : ActionClass('RenderView') {
+    my ($self, $c) = @_;
+
+    $c->log->error("Error:\n".Dumper($_)) for @{$c->stash->{errors}};
+    if (@{$c->error}){
+        $c->log->warn("Error:\n".Dumper($_)) for @{$c->error};
+
+        #$c->forward('send_technical_email');
+        $c->stash->{template} = 'error.html';
+    }
+}
 
 =head1 AUTHOR
 

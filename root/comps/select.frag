@@ -17,16 +17,16 @@
 <& .option_groups,
     option_groups   => $option_groups,
     options         => $options,
-    selectedlabel   => $selectedlabel,
+    selected_label   => $selected_label,
     multiple        => $multiple,
-    selectedlabels  => $selectedlabels
+    selected_labels  => $selected_labels
 &>
 % } else {
 <& .options,
     options         => $options,
-    selectedlabel   => $selectedlabel,
+    selected_label   => $selected_label,
     multiple        => $multiple,
-    selectedlabels  => $selectedlabels
+    selected_labels  => $selected_labels
 &>
 % }
 
@@ -38,7 +38,7 @@ Display a select list.
 The contents of the list are constructed from $options, which is an array of hashrefs where the value is the key and the label is the
 value. It is probably a mistake to pass options in this fashion, but it can't be changed for legacy reasons. This means that if a
 hashref contains more than one key an exception is thrown.
-Note. The arguments include $selectedlabel and $selectedlabels - these actually refer to the value that is selected rather than
+Note. The arguments include $selected_label and $selected_labels - these actually refer to the value that is selected rather than
 the label. I'm unable to correct this error because so much code depends on this mistake...
 EXAMPLE OF USAGE
 <& /comps/select.frag ,
@@ -46,7 +46,7 @@ EXAMPLE OF USAGE
  name=>'select_name',
  class => 'dropdown',
  options => [ { 1 => 'hamandeggs' },  { 2 => 'fishandchips' } , { 3 => 'peasncheese' } ],
- selectedlabel => 3,
+ selected_label => 3,
 &>
 </%doc>
 <%args>
@@ -56,8 +56,8 @@ $id => $name
 $class
 $option_groups => []
 $options
-$selectedlabel => ''
-$selectedlabels => []
+$selected_label => ''
+$selected_labels => []
 $problems => ''
 $submitonenter => 0
 $javascript => ''
@@ -129,9 +129,9 @@ foreach my $option (@{$options}) {
 <%def .option_groups>
 <%args>
     $option_groups
-    $selectedlabel
+    $selected_label
     $multiple => 0
-    $selectedlabels => []
+    $selected_labels => []
 </%args>
 <%init>
 foreach my $option_group (@$option_groups) {
@@ -142,7 +142,7 @@ foreach my $option_group (@$option_groups) {
     my $value = $keys[0];
     my $options = $option_group->{$value};
     $m->print(qq{<optgroup label="$value">});
-    $m->comp(".options", options => $options, selected_label => $selectedlabel, multiple => $multiple, selected_labels => $selectedlabels);
+    $m->comp(".options", options => $options, selected_label => $selected_label, multiple => $multiple, selected_labels => $selected_labels);
     $m->print(qq{</optgroup>});
 }
 </%init>

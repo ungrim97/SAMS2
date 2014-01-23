@@ -1,25 +1,46 @@
-<!-- $Id$ -->
-<%init>
-
-use Digest::MD5 qw(md5_hex);
-my @items = $m->comp('/comps/navbar_contents.frag');
-my $currPage = $m->scomp("REQUEST:navitem") || $m->scomp("REQUEST:title");
-
-</%init>
 <ul class="navbar">
 % foreach my $item (@items) {
-<& .nav_item, currPage => $currPage, item => $item, depth => 1 &>
+    <& .nav_item, currPage => $currPage, item => $item, depth => 1 &>
 % }
 </ul>
-%#--------------------------------------------------------------------- 
+<%args>
+    $user => undef
+</%args>
+<%init>
+my @items = $m->comp('/comps/navbar/navbar_contents.frag', %ARGS);
+my $currPage;
+
+if ($m->comp_exists("REQUEST:navitem")) {
+    $currPage = $m->scomp("REQUEST:navitem");
+}
+elsif ($m->comp_exists("REQUEST:title")){
+    $currPage = $m->scomp("REQUEST:title");
+}
+else{
+    return;
+}
+</%init>
+
 <%def .nav_item>
+<li <% $liClass|n %>>
+% if (ref $item[1] eq 'ARRAY'){
+    <span class="headerText <% $span_class%>"><% $item[0] %><span class="inline_icon ui-icon ui-icon-triangle-1-n"></span></span>
+    <ul>
+% foreach (@{$item[1]}) {
+    <& .nav_item, currPage => $currPage, item => $_ , depth => $depth + 1&>
+% }
+    </ul>
+% }else{
+    <a href="<% $item[1] %>"><% $item[0] %></a>
+% }
+</li>
+
 <%args>
 $currPage
 @item
 $depth
 </%args>
-<%perl>
-
+<%init>
 # this compares the title from the nav bar list (above) with the navitem method
 # of the compenent (will use the title if navitem is not defined). 
 # If the same it's 'topnavactive'
@@ -31,29 +52,6 @@ $liClass = join(" ", "header",$liClass,"level_$depth") if ref $item[1] eq 'ARRAY
 $liClass = "class=\"$liClass\"" if $liClass;
 
 my $span_class = $depth == 1 ? 'ui-widget-header' : '';
-
-</%perl>
-<li <% $liClass|n %>>
-% if (ref $item[1] eq 'ARRAY') {
-    <span id="nav<% md5_hex($item[0]) %>" class="headerText <% $span_class%>"><span class="inline_icon ui-icon ui-icon-triangle-1-n"></span><% $item[0] %></span>
-    <ul>
-% foreach (@{$item[1]}) {
-%  ##
-%  # navigation bar item may be set to 'undef' e.g. in readonly mode
-%  if ( defined $_ && $_ ){
-    <& .nav_item, currPage => $currPage, item => $_ , depth => $depth + 1&>
-%  }
-% }
-    </ul>
-% } else {
-    <a href="<% $item[1] %>"><% $item[0] %></a>
-% }
-</li>
-
+</%init>
 </%def>
-%# Local Variables:
-%# mode: cperl
-%# cperl-indent-level: 4
-%# indent-tabs-mode: nil
-%# End:
 %# vim: set ai et sw=4 syntax=mason :

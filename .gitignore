@@ -1,0 +1,10 @@
+/SAMS-*
+/.build
+/_build_params
+/Build
+/Build.bat
+!Build/
+!META.json
+!LICENSE
+cover_db/
+sams_local.conf

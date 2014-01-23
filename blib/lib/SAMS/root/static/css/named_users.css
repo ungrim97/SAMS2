@@ -1,0 +1,218 @@
+/* Named User Modal DIVs */
+
+div.named_users_modal{
+    height:32em;
+    *height: 33em;
+    width:55em;
+}
+
+div#subscription_ips{
+    height:25em;
+}
+
+div#upload_named_users{
+    width:40em;
+}
+
+div.named_users_modal#upload_subscription_ips{
+    width:40em;
+}
+
+div.named_users_modal div.modal_top,
+div.named_users_modal div.modal_middle,
+div.named_users_modal div.modal_bottom{
+    width:55em;
+}
+
+div.named_users_modal#upload_named_users div.modal_top,
+div.named_users_modal#upload_named_users div.modal_middle,
+div.named_users_modal#upload_named_users div.modal_bottom,
+div.named_users_modal#upload_subscription_ips div.modal_top,
+div.named_users_modal#upload_subscription_ips div.modal_middle,
+div.named_users_modal#upload_subscription_ips div.modal_bottom{
+    width:auto;
+}
+
+
+
+div.named_users_modal div.modal_left{
+    width:25em;
+    padding-right:1.5em;
+}
+
+div.named_users_modal div.modal_right{
+    width:27em;
+}
+
+div.named_users_modal div.modal_middle{
+    height:23em;
+}
+
+div.named_users_modal div.modal_bottom{
+    height: 3em;
+}
+
+div#subscription_ips div.modal_middle{
+    height: 20em;
+}
+
+div#upload_named_users div.modal_top,
+div#upload_named_users div.modal_middle,
+div#upload_subscription_ips div.modal_top,
+div#upload_subscription_ips div.modal_middle,{
+    width:36em;
+}
+
+
+div#named_users div#search_results_summary,
+div#named_users div#named_users_update_summary,
+div#upload_named_users div#upload_named_users_import_summary{
+    float:left;
+    clear:left;
+    width:25em;
+    height:1.5em;
+}
+
+div#named_users select#named_user_account_search_results,
+div#named_users select#named_users_current_named_users,
+div#named_users select#named_users_current_named_user_admins,
+div#upload_named_users ul#upload_named_user_validate_results,
+div#upload_subscription_ips ul#upload_subscription_ips_validate_results{
+    border: solid 1px gray;
+    background-color: white;
+    overflow-y: scroll;
+    height:17em;
+    *height:16em;
+    width: 25em;
+    margin: 0;
+    padding: 0;
+}
+
+div#upload_named_users ul#upload_named_user_validate_results,
+div#upload_subscription_ips ul#upload_subscription_ips_validate_results{
+    width:40em;
+    height: 19em;
+}
+
+div#named_users select#named_user_account_search_results,
+div#named_users select#named_users_current_named_users,
+div#named_users select#named_users_current_named_user_admins{
+    height:14em;
+    width: 24.5em;
+}
+
+div#named_users select#named_users_current_named_users,
+div#named_users select#named_users_current_named_user_admins{
+    float:right;
+}
+
+div#subscription_ips select#subscription_ips_current_ips{
+    height: 14em;
+    width: 25em;
+}
+
+div#subscription_ips h4 {
+    clear:left;
+}
+
+div#subscription_ips input#subscription_ip_value{
+  width: 18.5em;
+}
+
+div#subscription_ips textarea#subscription_ips_notes{
+    height: 11em;
+    width: 25em;
+}
+
+
+div#upload_named_users ul#upload_named_user_validate_results li span,
+div#upload_subscription_ips ul#upload_subscription_ips_validate_results li span{
+    margin-left: 0.125em;
+    margin-right: 0.125em;
+}
+
+input#adopt_selected_accounts{
+    float:left;
+    clear:left;
+    margin-top:-1em;
+}
+
+input#remove_named_users{
+    margin-top: 0.5em;
+    *margin-top: -1em;
+}
+
+
+div#named_users strong.search_results_page_link{
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+div#named_users div.search_results_pagination{
+    width:auto;
+    height:1.5em;
+    float:right;
+}
+
+div#named_users,
+div#subscription_ips{
+    top: 14%;
+    left: 44%;
+}
+
+div#upload_named_users,
+div#upload_subscription_ips{
+    top: 14%;
+    left: 54%;
+}
+
+/* CSS Class anyone? */
+div#named_users_help,
+div#upload_named_users_help,
+div#subscription_ips_help,
+div#upload_subscription_ips_help{
+    z-index: 8000;
+    width: 50em;
+    height: 25em;
+    top: 14%;
+    left: 47%;
+}
+
+div#named_users_help div.modal_middle,
+div#upload_named_users_help div.modal_middle,
+div#subscription_ips_help div.modal_middle,
+div#upload_subscription_ips_help div.modal_middle{
+    overflow-y: scroll;
+    height: 83%;
+}
+
+div#upload_named_users input.inputfile,
+div#upload_subscription_ips input.inputfile{
+    width: 16em;
+}
+
+div#subscription_ips_whois{
+    z-index: 6000;
+    width: 50em;
+    top: 24%;
+    left: 52%;
+}
+
+div#subscription_ips_whois div#subscription_ips_whois_text{
+    height: 23em;
+    width: 100%;
+    font-size: small;
+    overflow-y: scroll;
+}
+
+
+div#max_users_container{
+    float:right;
+    clear:left;
+    width:17em;
+}
+
+div#max_users_container input#max_users{
+    margin-right: 2em;
+}
+

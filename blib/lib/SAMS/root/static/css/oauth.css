@@ -1,0 +1,145 @@
+/*
+ * CSS for the OAuth Resource Servers and the OAuth Credentials.
+ */
+
+ /************************
+ * OAUTH RESOURCE SERVER *
+ ************************/
+
+/*
+ * The original design for this can be found at:
+ * https://jira.semantico.com/browse/AKA-14
+ */
+
+/*
+ * Each entry is formed of two parts - a compact list version and an expanded
+ * version. The one NOT to show will have the hidden class.
+ */
+body.oauth .oauth_client_server .hidden {
+    display: none;
+}
+
+/*
+ * Each row will be shaded with rounded corners with some padding between it
+ * and the next row.
+ */
+body.oauth .oauth_client_server {
+    background-color: #F7F7F7;
+    border-radius: 8px;
+}
+
+/*
+ * The short versions are all single rows, so they can be fixed height.
+ */
+body.oauth .oauth_client_server .short {
+    padding: 1em;
+    margin: 1em 0;
+    height: 4em;
+}
+
+/*
+ * The different parts of the row need to line up. Fixed height hacks ftw.
+ */
+body.oauth .oauth_client_server .short div {
+    float: left;
+}
+body.oauth .oauth_client_server .short div.name,
+body.oauth .oauth_client_server .short div.button-wrapper {
+    margin: 1em 3em;
+    height: 2em;
+    width: 4em;
+    line-height: 2em;
+}
+
+/*
+ * The image needs to be fixed size, and this is shared by both short and long.
+ * The fixed size is applied to both the div and the image itself.
+ */
+body.oauth .oauth_client_server .short .image,
+body.oauth .oauth_client_server .long .image {
+    border: 1px #7D7D7D solid;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    height: 4em;
+    width: 4em;
+}
+body.oauth .oauth_client_server .short .image img,
+body.oauth .oauth_client_server .long .image img {
+    height: 4em;
+    width: 4em;
+}
+
+/*
+ * Long version needs to maintain the padding but can't really be fixed height
+ * anymore.
+ */
+body.oauth .oauth_client_server .long {
+    margin: 1em 0;
+    padding: 1em;
+}
+
+/*
+ * The long version puts the image to the left of all of the fields.
+ */
+body.oauth .oauth_client_server .long .image {
+    float: left;
+}
+body.oauth .oauth_client_server .long .name,
+body.oauth .oauth_client_server .long .image-url,
+body.oauth .oauth_client_server .long .client-id,
+body.oauth .oauth_client_server .long .client-secret {
+    margin: 1em 0 1em 6em;
+}
+body.oauth .oauth_client_server .long div label {
+    float: left;
+    width: 10em;
+}
+body.oauth .oauth_client_server .long div input {
+    width: 25em;
+}
+body.oauth .oauth_client_server .long div select {
+    width: 10em;
+}
+body.oauth .oauth_client_server .long .button-wrapper input {
+    width: auto;
+}
+
+/*
+ * The button wrapper is the last element in the long display, so it needs to
+ * drop the bottom margin (as the enclosing div has padding).
+ */
+body.oauth .oauth_client_server .long .button-wrapper {
+    margin: 1em 0 0 6em;
+}
+
+
+
+
+
+#credentials #oauth table td input {
+    margin: 4px 0;
+}
+#credentials #oauth tr.delete {
+    background-color: #EAEAEA;
+}
+
+#credentials #oauth table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#credentials #oauth table th,
+#credentials #oauth table td {
+    text-align: center;
+    vertical-align: top;
+}
+#credentials #oauth div.button-wrapper {
+    border: none;
+    width: 10em;
+    margin: 0 auto;
+}
+#credentials #oauth table td input.delbtn {
+    width: 10em;
+}
+#credentials #oauth input.addbtn {
+    margin-left: 2em;
+}
