@@ -28,7 +28,7 @@ has db => (
 sub _build_db {
     my ($self) = @_;
 
-    return SAMS::Schema->connect('dbi:Pg:dbname=mikef-sams-2', 'mikef');
+    return SAMS::Schema->connect('dbi:Pg:dbname=mikef-sams-3', 'mikef');
 }
 
 1;

@@ -33,11 +33,11 @@
         disabled    => $is_readonly
     &>
 
-    <&| /comps/label.frag, for => "contact_address_2" &><% $labels->{contact}{street_1} %></&>
+    <&| /comps/label.frag, for => "contact_address_1" &><% $labels->{contact}{street_1} %></&>
     <& /comps/textbox.frag,
         problems    => $problems,
         class       => "searchme",
-        name        => 'contact_address1',
+        name        => 'contact_address_1',
         value       => $account->contact_address_1,
         readonly    => $is_readonly,
         disabled    => $is_readonly

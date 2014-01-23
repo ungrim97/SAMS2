@@ -84,18 +84,8 @@ sub test_contact_details {
 
     $self->sel->is_element_present_ok("$xpath/label[1]", 'Has Contact Title Label');
     $self->sel->text_is("$xpath/label[1]" => $self->labels->{contact}{title}, '  -> with correct literal');
-    $self->sel->is_element_present_ok("$xpath/select[\@id='contact_title_id']" , 'Contact Title dropdown exists');
-    $self->sel->value_is("$xpath/select[\@id='contact_title_id']" => $self->account->contact_title_id, '  -> with correct selected value');
-
-    subtest 'Contact Titles dropdown' => sub {
-        my @contact_titles = $self->db->resultset('ContactTitle')->all;
-        for my $contact_title (@contact_titles){
-            my $xpath = $xpath."/select[\@id='contact_title_id']/option[".$contact_title->title_id."]";
-            $self->sel->is_element_present_ok("$xpath", "Title ".$contact_title->title_id." exists");
-            $self->sel->value_is("$xpath" => $contact_title->title_id, '  -> with correct value');
-            $self->sel->text_is("$xpath" => $contact_title->description, '  -> with correct literal');
-        }
-    };
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_title']" , 'Contact Title dropdown exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_title']" => $self->account->contact_title, '  -> with correct selected value');
 
     $self->sel->is_element_present_ok("$xpath/label[2]", 'Contact name label exists');
     $self->sel->text_is("$xpath/label[2]" => $self->labels->{contact}{name}, '  -> with correct literal');
@@ -109,61 +99,62 @@ sub test_contact_details {
 
     $self->sel->is_element_present_ok("$xpath/label[4]", 'Address Line 1 label exists');
     $self->sel->text_is("$xpath/label[4]" => $self->labels->{contact}{street_1}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='street_1']", 'Address Line 1 textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='street_1']" => $self->account->street_1, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_address_1']", 'Address Line 1 textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_address_1']" => $self->account->contact_address_1, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[5]", 'Address Line 2 label exists');
     $self->sel->text_is("$xpath/label[5]" => $self->labels->{contact}{street_2}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='street_2']", 'Address Line 2 textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='street_2']" => $self->account->street_2, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_address_2']", 'Address Line 2 textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_address_2']" => $self->account->contact_address_2, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[6]", 'City label exists');
     $self->sel->text_is("$xpath/label[6]" => $self->labels->{contact}{city}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='city']", 'City textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='city']" => $self->account->city, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_city']", 'City textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_city']" => $self->account->contact_city, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[7]", 'County label exists');
     $self->sel->text_is("$xpath/label[7]" => $self->labels->{contact}{county}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='county']", 'County textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='county']" => $self->account->county, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_county']", 'County textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_county']" => $self->account->contact_county, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[8]", 'Postcode lable exists');
     $self->sel->text_is("$xpath/label[8]" => $self->labels->{contact}{postcode}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='postcode']", 'Postcode textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='postcode']" => $self->account->postcode, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_postcode']", 'Postcode textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_postcode']" => $self->account->contact_postcode, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[9]", 'Contries label exists');
     $self->sel->text_is("$xpath/label[9]" => $self->labels->{contact}{country}.' *', '  -> With correct literal');
+    $self->sel->value_is("$xpath/select[\@id='contact_country_id']" => $self->account->contact_country_id, '  -> with correct selected value');
 
     subtest 'Countries dropdown' => sub {
         my @countries = $self->db->resultset('Country')->all;
         for my $country (@countries){
-            my $xpath = $xpath."/select[\@id='country_id']/option[".$country->country_id."]";
+            my $xpath = $xpath."/select[\@id='contact_country_id']/option[\@value='".$country->country_id."']";
             $self->sel->is_element_present_ok("$xpath", "Country ".$country->country_id." exists");
             $self->sel->value_is("$xpath" => $country->country_id, '  -> with correct value');
-            $self->sel->text_is("$xpath" => $country->country_name, '  -> with correct literal');
+            $self->sel->text_is("$xpath" => $country->name, '  -> with correct literal');
         }
     };
 
     $self->sel->is_element_present_ok("$xpath/label[10]", 'Contact Number label exists');
     $self->sel->text_is("$xpath/label[10]" => $self->labels->{contact}{phone_number}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_number']", 'Contact Number textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='contact_number']" => $self->account->contact_number, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_telephone']", 'Contact Number textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_telephone']" => $self->account->contact_number, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[11]", 'Mobile Number label exists');
     $self->sel->text_is("$xpath/label[11]" => $self->labels->{contact}{mobile_number}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='mobile_number']", 'Mobile Number textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='mobile_number']" => $self->account->mobile_number, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_mobile_telephone']", 'Mobile Number textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_mobile_telephone']" => $self->account->mobile_number, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[12]", 'Fax Number label exists');
     $self->sel->text_is("$xpath/label[12]" => $self->labels->{contact}{fax_number}, '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='fax_number']", 'Fax Number textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='fax_number']" => $self->account->fax_number, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_fax']", 'Fax Number textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_fax']" => $self->account->fax_number, '  -> with correct value' );
 
     $self->sel->is_element_present_ok("$xpath/label[13]", 'Email Address label exists');
     $self->sel->text_is("$xpath/label[13]" => $self->labels->{contact}{email_address}.' *', '  -> With correct literal');
-    $self->sel->is_element_present_ok("$xpath/input[\@id='email_address']", 'Email Address textbox exists');
-    $self->sel->value_is("$xpath/input[\@id='email_address']" => $self->account->email_address, '  -> with correct value' );
+    $self->sel->is_element_present_ok("$xpath/input[\@id='contact_email']", 'Email Address textbox exists');
+    $self->sel->value_is("$xpath/input[\@id='contact_email']" => $self->account->email_address, '  -> with correct value' );
 }
 
 =head2 test_update_contact_details
@@ -187,7 +178,8 @@ sub test_update_contact_details {
     subtest 'Text Field' => sub {
         # Text fields have no constraints on their values. Any text is allowable so no errors should
         # be displayed.
-        for my $field (qw/contact_name contact_job_title street_1 street_2 city county/){
+        for my $field (qw/contact_name contact_job_title contact_address_1 contact_address_2 contact_city contact_county contact_title
+                          contact_telephone contact_mobile_telephone contact_fax/){
             my ($random_word) = rand_words();
 
             $self->sel->type_ok("$xpath/input[\@id='$field']" => $random_word, "Typed $random_word into $field");
@@ -211,26 +203,11 @@ sub test_update_contact_details {
             my @countries = $self->db->resultset('Country')->all;
             my $country = $countries[int(rand($#countries))];
 
-            $self->sel->select_ok("$xpath/select[\@id='country_id']/" => 'value='.$country->country_id, "Selected country ".$country->country_name);
+            $self->sel->select_ok("$xpath/select[\@id='contact_country_id']/" => 'value='.$country->country_id, "Selected country ".$country->name);
             $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
             $self->sel->wait_for_page_to_load_ok("3000");
             $self->sel->click('link='.$self->labels->{tabs}{contact_details});
-            $self->sel->value_is("$xpath/select[\@id='country_id']" => $country->country_id, 'Country dropdown updated correctly');
-
-            $self->generic_account_layout_test({
-                    page_title => $self->labels->{titles}{account_details_page},
-                });
-        };
-
-        subtest 'Contact Titles dropdown' => sub {
-            my @titles = $self->db->resultset('ContactTitle')->all;
-            my $title = $titles[int(rand($#titles))];
-
-            $self->sel->select_ok("$xpath/select[\@id='contact_title_id']", "value=".$title->title_id, "Selected title ".$title->description);
-            $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
-            $self->sel->wait_for_page_to_load_ok("3000");
-            $self->sel->click("link=".$self->labels->{tabs}{contact_details});
-            $self->sel->value_is("$xpath/select[\@id='contact_title_id']" => $title->title_id, 'Contact Title dropdown updated correctly');
+            $self->sel->value_is("$xpath/select[\@id='contact_country_id']" => $country->country_id, 'Country dropdown updated correctly');
 
             $self->generic_account_layout_test({
                     page_title => $self->labels->{titles}{account_details_page},
@@ -247,11 +224,11 @@ sub test_update_contact_details {
         # HTML5 doesn't support
 
         # Valid Email
-        $self->sel->type_ok("$xpath/input[\@id='email_address']", 'test@semantico.net', 'Valid email address input ok');
+        $self->sel->type_ok("$xpath/input[\@id='contact_email']", 'test@semantico.net', 'Valid email address input ok');
         $self->sel->click_ok('//input[@value="'.$self->labels->{buttons}{submit_changes}.'"]', '  -> Submited ok');
         $self->sel->wait_for_page_to_load_ok("3000");
         $self->sel->click("link=".$self->labels->{tabs}{contact_details});
-        $self->sel->value_is("$xpath/input[\@id='email_address']" => 'test@semantico.net', "Updated email address correctly");
+        $self->sel->value_is("$xpath/input[\@id='contact_email']" => 'test@semantico.net', "Updated email address correctly");
 
         $self->generic_account_layout_test({
                 page_title => $self->labels->{titles}{account_details_page},

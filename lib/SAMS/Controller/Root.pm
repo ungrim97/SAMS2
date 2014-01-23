@@ -69,7 +69,6 @@ sub load_translations :Private {
 
     my @translations = $c->model('DB')->resultset('Language')->find({language_code => 'en'})->translations->all;
 
-    use Data::Dumper;
     my $labels = {};
 
     for my $translation (@translations){
@@ -79,6 +78,13 @@ sub load_translations :Private {
     $c->stash->{labels} = $labels;
 }
 
+
+sub index :Path PathPart('') :Args(0){
+    my ($self, $c) = @_;
+    $c->forward('auth');
+    $c->forward('web');
+    $c->stash(template => 'index.html');
+}
 
 =head2 default
 
