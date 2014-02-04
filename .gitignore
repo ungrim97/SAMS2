@@ -3,6 +3,7 @@
 /_build_params
 /Build
 /Build.bat
+/local
 !Build/
 !META.json
 !LICENSE
