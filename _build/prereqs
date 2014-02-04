@@ -1,0 +1,12 @@
+do{ my $x = {
+  'conflicts' => {},
+  'requires' => {
+    'File::ShareDir' => '1.00'
+  },
+  'recommends' => {},
+  'build_requires' => {
+    'ExtUtils::CBuilder' => 0
+  },
+  'test_requires' => {}
+};
+$x; }

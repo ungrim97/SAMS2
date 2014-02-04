@@ -1,0 +1,141 @@
+do{ my $x = [
+  {
+    'ARGV' => []
+  },
+  {},
+  {
+    'install_base_relpaths' => {},
+    'extra_linker_flags' => [],
+    'debug' => undef,
+    'config' => undef,
+    'installdirs' => 'site',
+    'c_source' => [],
+    'debugger' => undef,
+    'bundle_inc' => [],
+    'pod_files' => undef,
+    'bindoc_dirs' => [
+      'blib/script'
+    ],
+    'dist_author' => undef,
+    'create_readme' => undef,
+    'mb_version' => '0.4204',
+    'mymetafile' => 'MYMETA.yml',
+    'program_name' => undef,
+    'dist_suffix' => undef,
+    'script_files' => [
+      'script/sams_cgi.pl',
+      'script/sams_create.pl',
+      'script/sams_deploy_schema.pl',
+      'script/sams_deploymenthandler.pl',
+      'script/sams_fastcgi.pl',
+      'script/sams_server.pl',
+      'script/sams_test.pl'
+    ],
+    'config_dir' => '_build',
+    'meta_merge' => {},
+    'create_license' => undef,
+    'dist_version' => '0.01',
+    'recurse_into' => [],
+    'use_rcfile' => 1,
+    'quiet' => undef,
+    'scripts' => undef,
+    'metafile2' => 'META.json',
+    'build_elements' => [
+      'PL',
+      'support',
+      'pm',
+      'xs',
+      'share_dir',
+      'pod',
+      'script'
+    ],
+    'build_class' => 'MyBuilder',
+    'license' => 'perl',
+    'pollute' => undef,
+    'dist_version_from' => 'lib/SAMS.pm',
+    'autosplit' => undef,
+    'dist_abstract' => undef,
+    'build_bat' => 0,
+    'dynamic_config' => 0,
+    'PL_files' => {},
+    'name' => 'SAMS',
+    'test_requires' => {},
+    'cpan_client' => 'cpan',
+    'use_tap_harness' => 0,
+    'has_config_data' => undef,
+    'bundle_inc_preload' => [],
+    'needs_compiler' => 1,
+    'xs_files' => undef,
+    'configure_requires' => {
+      'Module::Build' => '0.38'
+    },
+    'extra_manify_args' => undef,
+    'prereq_action_types' => [
+      'requires',
+      'build_requires',
+      'test_requires',
+      'conflicts',
+      'recommends'
+    ],
+    'get_options' => {},
+    'dist_name' => 'SAMS',
+    'auto_configure_requires' => 1,
+    '_added_to_INC' => [
+      '/home/mikef/Programming/Perl/SAMS/_build/lib'
+    ],
+    'share_dir' => {
+      'dist' => [
+        'share'
+      ]
+    },
+    'pureperl_only' => 0,
+    'orig_dir' => '/home/mikef/Programming/Perl/SAMS',
+    'include_dirs' => [],
+    'allow_mb_mismatch' => 0,
+    'metafile' => 'META.yml',
+    'test_file_exts' => [
+      '.t'
+    ],
+    'allow_pureperl' => 0,
+    'base_dir' => '/home/mikef/Programming/Perl/SAMS',
+    'create_packlist' => 1,
+    'install_base' => undef,
+    'release_status' => 'stable',
+    'magic_number' => undef,
+    'requires' => {
+      'File::ShareDir' => '1.00'
+    },
+    'build_script' => 'Build',
+    'meta_add' => {},
+    'tap_harness_args' => {},
+    'install_path' => {},
+    'test_files' => 't/',
+    'libdoc_dirs' => [
+      'blib/lib',
+      'blib/arch'
+    ],
+    'sign' => undef,
+    'recursive_test_files' => 1,
+    'blib' => 'blib',
+    'recommends' => {},
+    'conflicts' => {},
+    'build_requires' => {
+      'ExtUtils::CBuilder' => 0
+    },
+    'create_makefile_pl' => undef,
+    'mymetafile2' => 'MYMETA.json',
+    'pm_files' => undef,
+    'perl' => '/home/mikef/perl5/perlbrew/perls/perl-5.18.2/bin/perl',
+    'original_prefix' => {},
+    'html_css' => '',
+    'prefix' => undef,
+    '_have_c_compiler' => 1,
+    'verbose' => undef,
+    'destdir' => undef,
+    'prefix_relpaths' => {},
+    'install_sets' => {},
+    'module_name' => 'SAMS',
+    'extra_compiler_flags' => []
+  }
+];
+$x; }

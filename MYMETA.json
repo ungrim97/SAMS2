@@ -29,6 +29,7 @@
       "build" : {
          "requires" : {
             "Data::Random" : "0",
+            "ExtUtils::CBuilder" : "0",
             "ExtUtils::MakeMaker" : "6.36",
             "Test::Class::Moose" : "0",
             "Test::More" : "0.88",
@@ -53,39 +54,18 @@
       "runtime" : {
          "requires" : {
             "Catalyst::Action::RenderView" : "0",
-            "Catalyst::Model::DBIC::Schema" : "0",
             "Catalyst::Plugin::ConfigLoader" : "0",
             "Catalyst::Plugin::Static::Simple" : "0",
             "Catalyst::Runtime" : "5.90053",
-            "Catalyst::View::JSON" : "0",
-            "Catalyst::View::Mason" : "0",
             "Config::General" : "0",
-            "DBD::Pg" : "0",
-            "DBIx::Class" : "0",
-            "DBIx::Class::Migration" : "0",
             "Data::Dumper" : "0",
-            "HTML::Mason" : "0",
-            "JSON" : "0",
-            "Locale::Object::Language" : "0",
+            "File::ShareDir" : "1.00",
             "Moose" : "0",
-            "MooseX::MarkAsMethods" : "0",
-            "MooseX::NonMoose" : "0",
             "namespace::autoclean" : "0"
          }
       }
    },
    "release_status" : "unstable",
-   "resources" : {
-      "bugtracker" : {
-         "web" : "https://github.com/ungrim97/SAMS2/issues"
-      },
-      "homepage" : "https://github.com/ungrim97/SAMS2",
-      "repository" : {
-         "type" : "git",
-         "url" : "git://github.com/ungrim97/SAMS2",
-         "web" : "https://github.com/ungrim97/SAMS2"
-      }
-   },
    "version" : "0.01",
    "x_contributors" : [
       "Mike Francis <ungrim97@gmail.com>"
