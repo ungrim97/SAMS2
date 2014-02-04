@@ -6,7 +6,6 @@ use Locale::Object::Country;
 
 sub {
     my ($schema, $version) = @_;
-    my $n = 0;
     my @rows;
     for my $country_name (all_country_names()){
         # Contries must have a name and a Alpha 3 country code
@@ -21,11 +20,11 @@ sub {
         my $language = $schema->resultset('Language')->find({language_code => $primary_language->code_alpha2});
         next unless $language;
 
-        push @rows, [++$n, $country->code_alpha3, $country->name, $language->language_id];
+        push @rows, [$country->code_alpha3, $country->name, $language->language_id, $country->code_alpha3 eq 'usa' ? 'USA' :'ROW'];
     };
 
     $schema->resultset('Country')->populate([
-            ['country_id', 'country_code', 'country_name', 'language_id'],
+            ['country_id', 'name', 'language_id', 'territory'],
             @rows,
         ]);
 }
